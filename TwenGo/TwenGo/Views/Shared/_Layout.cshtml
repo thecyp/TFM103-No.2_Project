@@ -26,13 +26,11 @@
     <div id="menu-slideout" class="slideout-menu hidden-md-up">
         <div class="mobile-menu">
             <ul id="mobile-menu" class="menu">
-                <li><a asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
-                <li><a asp-area="" asp-controller="AboutUs" asp-action="index">About Us</a></li>
-                <li><a asp-area="" asp-controller="Shop" asp-action="index">Shop</a></li>
-                <li><a asp-area="" asp-controller="ShopDetail" asp-action="index">Shop Detail</a></li>
-                <li><a asp-area="" asp-controller="Cart" asp-action="index">Cart</a></li>
-                <li><a asp-area="" asp-controller="Cart" asp-action="OrderDetail">Order</a></li>
-                <li><a asp-area="" asp-controller="Contact" asp-action="index">Contact Us</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="index">首頁</a></li>
+                <li><a asp-area="" asp-controller="AboutUs" asp-action="index">關於我們</a></li>
+                <li><a asp-area="" asp-controller="Shop" asp-action="index">購物</a></li>
+                <li><a asp-area="" asp-controller="Cart" asp-action="index">購物車</a></li>
+                <li><a asp-area="" asp-controller="Contact" asp-action="index">聯絡我們</a></li>
             </ul>
         </div>
     </div>
@@ -42,22 +40,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="topbar-text">
-                            <span>Work time: Monday - Friday: 08AM-06PM</span>
-                            <span>Saturday - Sunday: 10AM-06PM</span>
+                            <span>客服時間: 週一 - 週五: 08AM-06PM</span>
+                            <span>週六 - 週日: 10AM-06PM</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="topbar-menu">
                             <ul class="topbar-menu">
-                                <li class="dropdown">
-                                    <a href="#">Languages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">Français</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Register</a></li>
+                                <li><a href="#">登入</a></li>
+                                <li><a href="#">註冊</a></li>
                             </ul>
                         </div>
                     </div>
@@ -70,7 +61,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <form>
-                                <input type="search" class="top-search-input" name="s" placeholder="What are you looking for?" />
+                                <input type="search" class="top-search-input" name="s" placeholder="產品關鍵字搜索" />
                             </form>
                         </div>
                     </div>
@@ -87,13 +78,11 @@
                         <div class="header-right">
                             <nav class="menu">
                                 <ul class="main-menu">
-                                    <li><a asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
-                                    <li><a asp-area="" asp-controller="AboutUs" asp-action="index">About Us</a></li>
-                                    <li><a asp-area="" asp-controller="Shop" asp-action="index">Shop</a></li>
-                                    <li><a asp-area="" asp-controller="ShopDetail" asp-action="index">Shop Detail</a></li>
-                                    <li><a asp-area="" asp-controller="Cart" asp-action="index">Cart</a></li>
-                                    <li><a asp-area="" asp-controller="Cart" asp-action="OrderDetail">Order</a></li>
-                                    <li><a asp-area="" asp-controller="Contact" asp-action="index">Contact Us</a></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="index">首頁</a></li>
+                                    <li><a asp-area="" asp-controller="AboutUs" asp-action="index">關於我們</a></li>
+                                    <li><a asp-area="" asp-controller="Shop" asp-action="index">購物</a></li>
+                                    <li><a asp-area="" asp-controller="Cart" asp-action="index">購物車</a></li>
+                                    <li><a asp-area="" asp-controller="Contact" asp-action="index">聯絡我們</a></li>
                                 </ul>
                             </nav>
                             <div class="btn-wrap">
@@ -123,12 +112,12 @@
                                             </li>
                                         </ul>
                                         <p class="total">
-                                            <strong>Subtotal:</strong>
+                                            <strong>小計:</strong>
                                             <span class="amount">$21.00</span>
                                         </p>
                                         <p class="buttons">
-                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">View cart</a>
-                                            <a asp-area="" asp-controller="Cart" asp-action="OrderDetail" class="checkout">Checkout</a>
+                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
+                                            <a asp-area="" asp-controller="Cart" asp-action="OrderDetail" class="checkout">立即購買</a>
                                         </p>
                                     </div>
                                 </div>
