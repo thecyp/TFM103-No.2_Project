@@ -34,14 +34,18 @@
 				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 			}
 		};
-		
-		if( !isMobile.any() ) {
-			if ($(this).scrollTop() > 51) {
-				$('.header').addClass('scrolling-menu');
-			} else {
-				$('.header').removeClass('scrolling-menu');
+
+		if (window.location.pathname != "/Member/CustomerRegister") {
+			if (!isMobile.any()) {
+				if ($(this).scrollTop() > 51) {
+					$('.header').addClass('scrolling-menu');
+				} else {
+					$('.header').removeClass('scrolling-menu');
+				}
 			}
-		}
+        }
+
+		
 	});
 	
 	$(document).ready(function($) {

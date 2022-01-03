@@ -10,50 +10,48 @@ using TwenGo.ViewModels;
 
 namespace TwenGo.Controllers
 {
-    public class HomeController : Controller
+    public class MemberController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<MemberController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        
+        public MemberController(ILogger<MemberController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
 
-        public IActionResult Privacy()
+        public IActionResult CustomerRegister()
         {
+            
             return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
+           
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(string Name)
+        public IActionResult CustomerRegister(CustomerViewModel customer)
         {
-
-            return RedirectToAction(nameof(Index));
+            //TwenGoContext  AAA= new TwenGoContext();
+            
+           return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Login()
+        public IActionResult SupplierRegister()
         {
+
             return View();
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(string Name)
+        public IActionResult SupplierRegister(int id)
         {
-
             return RedirectToAction(nameof(Index));
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

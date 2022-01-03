@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Data;
+using TwenGo.Models;
 
 namespace TwenGo
 {
@@ -30,6 +31,12 @@ namespace TwenGo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<TwenGoContext>(option =>
+            option.UseSqlServer(
+                Configuration.GetConnectionString("TwenGoConnection")
+                ));
+            
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
