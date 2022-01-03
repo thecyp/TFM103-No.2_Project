@@ -1,6 +1,5 @@
-using System;
 
-namespace TwenGo.Models
+namespace TwenGo.Models.ViewModels
 {
     public class ErrorViewModel
     {

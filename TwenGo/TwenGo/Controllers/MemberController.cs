@@ -1,22 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using TwenGo.Models;
-using TwenGo.ViewModels;
+using TwenGo.Models.Repository;
+using TwenGo.Models.Repository.Entity;
+using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
     public class MemberController : Controller
     {
+        private readonly TwenGoContext _db;
+        private readonly UserManager<Users> _userManager;
+        private readonly IPasswordHasher<Users> passwordHasher;
         private readonly ILogger<MemberController> _logger;
 
-        
-        public MemberController(ILogger<MemberController> logger)
+
+        public MemberController(ILogger<MemberController> logger, TwenGoContext twenGoContext,UserManager<Users> userManager,IPasswordHasher<Users> passwordHasher)
         {
+            _db = twenGoContext;
+            _userManager = userManager;
+            this.passwordHasher = passwordHasher;
             _logger = logger;
         }
 
@@ -31,11 +37,37 @@ namespace TwenGo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CustomerRegister(CustomerViewModel customer)
+        public async Task<IActionResult> CustomerRegisterAsync(CustomerViewModel customer)
         {
-            //TwenGoContext  AAA= new TwenGoContext();
-            
-           return RedirectToAction(nameof(Index));
+            var data = new Users()
+            {
+                Address = customer.Address,
+                Email = customer.Email,
+                Id = Guid.NewGuid().ToString(),
+                Phone = customer.Phone,
+                Town = customer.Town,
+                City = customer.City,
+                UserName = customer.Email,
+                IdentityNumber = customer.IdentityNumber,
+                NormalizedEmail = customer.Email,
+                PhoneNumber = customer.CellPhone,
+                CellPhone = customer.CellPhone,
+                NormalizedUserName = customer.CustomerName,                
+                UserOfCustomer = new UserOfCustomer() { 
+                    Gender = customer.Gender,
+                    CustomerPicture = "",
+                    Birthday = customer.Birthday                   
+                }
+            };
+            var result = await _userManager.CreateAsync(data,customer.C_Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         public IActionResult SupplierRegister()
