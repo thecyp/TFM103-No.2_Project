@@ -1,0 +1,51 @@
+﻿<h1>商品上架</h1>
+<div id="app">
+    <form enctype="multipart/form-data" action="~/Product/upload" method="post">
+        <div>
+            <label>商品名稱</label>
+            <input type="text" name="ProductName" />
+        </div>
+        <select name="CategoryID">
+            <option v-for="item in categories" :value="item.categoryID">{{item.categoryName}}</option>
+        </select>
+        <div>
+            <label>商品敘述</label>
+            <textarea name="Description"></textarea>
+        </div>
+        <div>
+            <label>商品定價 </label>
+            <input type="number" name="Price" />
+        </div>
+        <div>
+            <label>商品數量</label>
+            <input type="number" name="Quantity" />
+        </div>
+        <div>
+            <label>上傳圖片</label>
+            <input type="file" name="pic" id="inputpic" />
+        </div>
+        <button>上傳</button>
+    </form>
+</div>
+<script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+            categories: []
+        }, 
+        mounted: function () {
+            let self = this;
+            fetch('https://localhost:44390/api/categories')
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (myjson) {
+                    for (let i = 0; i < myjson.length; i++) {
+                        self.categories.push(myjson[i])
+                    }
+            })
+        }
+    })
+
+
+</script>

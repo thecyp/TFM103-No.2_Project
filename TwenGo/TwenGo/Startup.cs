@@ -66,6 +66,14 @@ namespace TwenGo
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:backstage}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
         }
     }
 }
