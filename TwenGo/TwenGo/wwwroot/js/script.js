@@ -35,7 +35,7 @@
 			}
 		};
 
-		if (window.location.pathname != "/Member/CustomerRegister") {
+		if (window.location.pathname != "/Member/CustomerRegister" ) {
 			if (!isMobile.any()) {
 				if ($(this).scrollTop() > 51) {
 					$('.header').addClass('scrolling-menu');

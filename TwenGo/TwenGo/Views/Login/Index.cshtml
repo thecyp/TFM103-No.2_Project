@@ -1,58 +1,164 @@
-﻿<style>
-    .divider:after,
-    .divider:before {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: #eee;
+﻿@model TwenGo.Models.ViewModels.CustomerViewModel
+
+<style>
+
+    .panel h2 {
+        color: #444444;
+        font-size: 18px;
+        margin: 0 0 8px 0;
     }
 
-    .h-custom {
-        height: calc(100% - 73px);
+    .panel p {
+        color: #777777;
+        font-size: 14px;
+        margin-bottom: 30px;
+        line-height: 24px;
     }
 
-    @@media (max-width: 450px) {
-        .h-custom {
-            height: 100%;
+    .login-form .form-control {
+        background: #f7f7f7 none repeat scroll 0 0;
+        border: 1px solid #5fBD74;
+        border-radius: 4px;
+        font-size: 14px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .main-div {
+        background: #ffffff none repeat scroll 0 0;
+        border-radius: 1px;
+        margin: 10px auto 30px;
+        max-width: 38%;
+        padding: 50px 70px 70px 71px;
+        border-color: #5fBD74;
+        border-style: solid;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 10px;
+    }
+
+    .login-form {
+        text-align: center;
+    }
+
+    .forgot a {
+        color: #777777;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+
+    .login-form .btn.btn-primary {
+        background: #5fBD74 none repeat scroll 0 0;
+        border-color: #ffffff;
+        color: #ffffff;
+        font-size: 14px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+    }
+
+    .forgot {
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .botto-text {
+        color: #ffffff;
+        font-size: 14px;
+        margin: auto;
+    }
+
+    .login-form .btn.btn-primary.reset {
+        background: #ff9900 none repeat scroll 0 0;
+    }
+
+    .back {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+        .back a {
+            color: #444444;
+            font-size: 13px;
+            text-decoration: none;
         }
+
+    .btn-facebook {
+        background-color: #405D9D;
+        color: #fff;
     }
+
+    a:hover {
+        text-decoration: none !important;
+        color: #000000;
+    }
+
+    .divider-text {
+        position: relative;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .divider-text span {
+            padding: 7px;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .divider-text:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            top: 55%;
+            left: 0;
+            z-index: 1;
+        }
 </style>
 
-<form action="~/Login/Login" method="post">
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-        <input name="email" type="email" id="form3Example3" class="form-control form-control-lg"
-               placeholder="Enter a valid email address" />
-        <label class="form-label" for="form3Example3">Email address</label>
-    </div>
 
-    <!-- Password input -->
-    <div class="form-outline mb-3">
-        <input name="pwd" type="password" id="form3Example4" class="form-control form-control-lg"
-               placeholder="Enter password" />
-        <label class="form-label" for="form3Example4">Password</label>
-    </div>
 
-    <div class="d-flex justify-content-between align-items-center">
-        <!-- Checkbox -->
-        <div class="form-check mb-0">
-            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-            <label class="form-check-label" for="form2Example3">
-                Remember me
-            </label>
+<body id="LoginForm">
+    <div class="container">
+
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>會員登入</h2>
+                </div>
+                <form id="Login" action="~/Login/Login" method="post">
+
+                    <div class="form-group">
+                        <input name="Login_Email" type="Email" class="form-control" id="inputEmail" placeholder="請輸入電子信箱">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <input name="Pwd" type="password" class="form-control" id="inputPassword" placeholder="請輸入密碼">
+
+                    </div>
+                    <div class="forgot">
+                        <a href="reset.html">忘記密碼?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登入</button>
+                    <br />
+
+                </form>
+                <p class="divider-text">
+                    <span class="bg-white">OR</span>
+                </p>
+                <p>
+                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login in facebook</a>
+                </p>
+            </div>
+
         </div>
-        <a href="#!" class="text-body">Forgot password?</a>
     </div>
 
-    <div class="text-center text-lg-start mt-4 pt-2">
-        <button type="submit" class="btn btn-primary btn-lg"
-                style="padding-left: 2.5rem; padding-right: 2.5rem;">
-            Login
-        </button>
-        <p class="small fw-bold mt-2 pt-1 mb-0">
-            Don't have an account? <a href="#!"
-                                      class="link-danger">Register</a>
-        </p>
-    </div>
 
-</form>
+</body>

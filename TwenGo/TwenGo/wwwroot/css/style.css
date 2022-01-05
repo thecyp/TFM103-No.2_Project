@@ -841,7 +841,7 @@ form .row .form-wrap {
     transition: all 0.5s;
 }
 .header.scrolling-menu {
-    position: fixed;
+    position: static;
     background: #fff;
     top: 0;
     left: 0;
@@ -850,13 +850,13 @@ form .row .form-wrap {
     box-shadow: 0 10px 20px rgba(0,0,0,.15);
     z-index: 999;
 }
-.header.header-3.scrolling-menu,
-.header.header-4.scrolling-menu {
-    position: fixed;
-    background: #000;
-    top: 0;
-    left: 0;
-}
+    .header.header-3.scrolling-menu,
+    .header.header-4.scrolling-menu {
+        position: static;
+        background: #000;
+        top: 0;
+        left: 0;
+    }
 .top-search {
     width: 100%;
     background-color: #5fbd74;

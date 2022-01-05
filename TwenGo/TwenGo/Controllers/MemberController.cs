@@ -56,7 +56,7 @@ namespace TwenGo.Controllers
                 NormalizedEmail = customer.Email,
                 PhoneNumber = customer.CellPhone,
                 CellPhone = customer.CellPhone,
-                
+               
                 NormalizedUserName = customer.Email,
                 UserOfCustomer = new UserOfCustomer()
                 {
@@ -65,8 +65,10 @@ namespace TwenGo.Controllers
                     Birthday = customer.Birthday
                 }
             };
+           
+
             var result = await _userManager.CreateAsync(data,customer.C_Password);
-            if (result.Succeeded)
+            if (result.Succeeded )
             {
                 return RedirectToAction("Index", "Home");
             }
