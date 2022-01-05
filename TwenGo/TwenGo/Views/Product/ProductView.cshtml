@@ -15,15 +15,17 @@
                     <img :src="item.picturePath" class="card-img-top">
                     <h2 class="card-title">{{item.productName}}</h2>
                     <p class="card-text">{{item.description}}</p>
-                    <p class="card-text">類別:{{item.categoryID}}</p>
+                    <p class="card-text">類別:{{item.categoryName}}</p>
                     <p class="card-text">庫存:{{item.quantity}}</p>
                     <p class="card-text">定價:{{item.price}}元</p>
-                    <a href="#" class="btn-dark">編輯</a>
-                    <a href="#" class="btn-dark">DELETE</a>
-                    <form asp-action="Delete">
+
+                    @*<a href="#" class="btn-dark">編輯</a>
+                    <a href="#" class="btn-dark">DELETE</a>*@
+
+                    @*<form asp-action="Delete">
                         <input type="hidden" asp-for="ProductID" />
                         <input type="submit" value="刪除" class="btn-danger" />
-                    </form>
+                    </form>*@
                   
                     <button v-on:click="show">開團</button>
                     <div id="dialog">

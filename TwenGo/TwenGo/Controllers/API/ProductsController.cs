@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TwenGo.Data;
 
+
 namespace TwenGo.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -83,11 +84,11 @@ namespace TwenGo.Controllers.API
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
         }
 
-        // DELETE: api/Products/5
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(Product id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var delete = await _context.Products.FindAsync(id.ProductID);
+            var delete = await _context.Products.FindAsync(id);
             if (delete == null)
             {
                 return NotFound();
@@ -97,6 +98,23 @@ namespace TwenGo.Controllers.API
 
             return NoContent();
         }
+
+        // DELETE: api/Products/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteProduct1(string id)
+        //{
+
+        //    return Ok(id);
+        //}
+
+
+        //// DELETE: api/Products/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteProduct(int id)
+        //{
+
+        //    return Ok(id);
+        //}
 
         //[HttpPost("delete/{id}")]
         //public IEnumerable<Product> DeProduct(Product id)
