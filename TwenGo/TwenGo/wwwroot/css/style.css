@@ -293,8 +293,8 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
     border-radius: 3px;
     color: #666;
     padding: 7px 15px;
-    outline: none;
-    width: 100%;
+    outline:none;
+    width:60%;
 }
 input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"] {
     height: 40px;
@@ -861,7 +861,7 @@ form .row .form-wrap {
     width: 100%;
     background-color: #5fbd74;
     color: #fff;
-    display: none;
+    display: normal;
 }
 .top-search form {
     padding-left: 30px;
@@ -914,7 +914,7 @@ header.header-1 nav.menu li.top-search-btn,
 header.header-2 nav.menu li.top-search-btn,
 header.header-3 nav.menu li.top-search-btn,
 header.header-4 nav.menu li.top-search-btn {
-    display: inline-block;
+    display: normal;
 	position: relative;
 }
 header.header-1 .header-left {

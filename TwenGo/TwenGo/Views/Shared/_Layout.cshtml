@@ -69,8 +69,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form>
-                                <input type="search" class="top-search-input" name="s" placeholder="What are you looking for?" />
+                            <form asp-controller="Shop" asp-action="Index">
+                                    <input type="text" class="top-search-input" name="SearchString" />
+                                    <button class="btn btn-warning" type="submit" >搜尋</button>
                             </form>
                         </div>
                     </div>
