@@ -39,6 +39,7 @@ namespace TwenGo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CustomerRegisterAsync(CustomerViewModel customer)
         {
+           
             var data = new Users()
             {
                 Address = customer.Address,
@@ -47,16 +48,21 @@ namespace TwenGo.Controllers
                 Phone = customer.Phone,
                 Town = customer.Town,
                 City = customer.City,
-                UserName = customer.Email,
+
+
+                UserName = customer.CustomerName,
+                
                 IdentityNumber = customer.IdentityNumber,
                 NormalizedEmail = customer.Email,
                 PhoneNumber = customer.CellPhone,
                 CellPhone = customer.CellPhone,
-                NormalizedUserName = customer.CustomerName,                
-                UserOfCustomer = new UserOfCustomer() { 
+                
+                NormalizedUserName = customer.Email,
+                UserOfCustomer = new UserOfCustomer()
+                {
                     Gender = customer.Gender,
                     CustomerPicture = "",
-                    Birthday = customer.Birthday                   
+                    Birthday = customer.Birthday
                 }
             };
             var result = await _userManager.CreateAsync(data,customer.C_Password);
@@ -66,7 +72,7 @@ namespace TwenGo.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Error","Member");
             }
         }
 
@@ -79,9 +85,42 @@ namespace TwenGo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SupplierRegister(int id)
+        public async Task<IActionResult> SupplierRegisterAsync(SupplierViewModel supplier)
         {
-            return RedirectToAction(nameof(Index));
+            var data = new Users()
+            {
+                Address = supplier.Address,
+                Email = supplier.SupplierEmail,
+                Id = Guid.NewGuid().ToString(),
+                Phone = supplier.Phone,
+                Town = supplier.Town,
+                City = supplier.City,
+
+
+                UserName = supplier.RepresentativeName,
+
+                IdentityNumber = supplier.RepresentativeIdentityNumber,
+                NormalizedEmail = supplier.SupplierEmail,
+                PhoneNumber = supplier.CellPhone,
+                CellPhone = supplier.CellPhone,
+
+                NormalizedUserName = supplier.SupplierEmail,
+                UserOfSuppliers = new UserOfSuppliers()
+                {
+                    CompanyName = supplier.CompanyName,
+                    TaxIDNumber = supplier.TaxIDNumber,
+                    Capital = supplier.Capital
+                }
+            };
+            var result = await _userManager.CreateAsync(data, supplier.Password_S);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Member");
+            }
         }
 
 

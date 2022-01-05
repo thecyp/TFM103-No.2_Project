@@ -43,7 +43,9 @@
 					$('.header').removeClass('scrolling-menu');
 				}
 			}
-        }
+		}
+
+		
 
 		
 	});

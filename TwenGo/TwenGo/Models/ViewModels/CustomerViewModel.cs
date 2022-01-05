@@ -9,11 +9,7 @@ namespace TwenGo.Models.ViewModels
 {
     public class CustomerViewModel
     {
-        [Key]
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//自動編號
-        [Display(Name = "買家編號")]
-        public int CustomerID { get; set; }
+        
 
         [MaxLength(25)]
         [Required(ErrorMessage = "請輸入{0}")]
@@ -27,7 +23,7 @@ namespace TwenGo.Models.ViewModels
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
 
-
+        [MaxLength(30)]
         [DataType(DataType.Password)]//默認生成的是密碼框而不是文字框
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "密碼")]

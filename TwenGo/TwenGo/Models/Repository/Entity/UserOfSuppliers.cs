@@ -7,6 +7,7 @@ namespace TwenGo.Models.Repository.Entity
     public class UserOfSuppliers
     {
         [Key,ForeignKey("Users")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string UserId { get; set; }
 
         [Required]

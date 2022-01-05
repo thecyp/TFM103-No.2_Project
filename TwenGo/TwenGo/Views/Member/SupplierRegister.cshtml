@@ -1,5 +1,5 @@
-﻿
-@model TwenGo.Models.ViewModels.CustomerViewModel
+﻿@model TwenGo.Models.ViewModels.SupplierViewModel
+
 <style>
     .divider-text {
         position: relative;
@@ -25,17 +25,11 @@
             z-index: 1;
         }
 
-    .btn-facebook {
-        background-color: #405D9D;
-        color: #fff;
-    }
-
-    .btn-twitter {
-        background-color: #42AEEC;
-        color: #fff;
-    }
+   
 </style>
 
+
+<hr />
 <div class="container">
     <br>
     <hr>
@@ -43,33 +37,27 @@
     <div class="card bg-light">
         <article class="card-body mx-auto" style="width: 48rem">
 
-            <h3 class="card-title mt-3 text-center">買家會員註冊</h3>
+            <h3 class="card-title mt-3 text-center">賣家會員註冊</h3>
             <br />
-            <p>
-                <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login in Twitter</a>
-                <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login in facebook</a>
-            </p>
-            <p class="divider-text">
-                <span class="bg-light">OR</span>
-            </p>
-            <form asp-action="CustomerRegister">
+            
+            <form asp-action="SupplierRegister">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input asp-for="CustomerName" class="form-control" placeholder="請輸入姓名 例：王羲之" />
+                    <input asp-for="RepresentativeName" class="form-control" placeholder="請輸入公司代表人姓名 例：王羲之" />
                 </div> <!-- form-group// -->
 
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                <span asp-validation-for="RepresentativeName" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input asp-for="Email" class="form-control" placeholder="例: Waston@@Fake.com" />
+                    <input asp-for="SupplierEmail" class="form-control" placeholder="例: Waston@Fake.com" />
                 </div> <!-- form-group// -->
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <span asp-validation-for="SupplierEmail" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -79,71 +67,69 @@
                 </div> <!-- form-group// -->
                 <span asp-validation-for="CellPhone" class="text-danger"></span>
 
-
-                <div class="input-group-prepend">
-
-                    <div class="form-group input-group">
-                        <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
-                        <select asp-for="Gender" class="form-control">
-                            <option disabled> 選擇性別</option>
-                            <option value="Female">女性</option>
-                            <option value="Male">男性</option>
-                            <option value="Other">不透露</option>
-                        </select>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-
-
-
-                </div> <!-- form-group end.// -->
-                <span asp-validation-for="Gender"></span>
+                    <input asp-for="Password_S" class="form-control" placeholder="請輸入密碼" />
+                </div> <!-- form-group// -->
+                <span asp-validation-for="Password_S" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input asp-for="C_Password" class="form-control" placeholder="請輸入密碼" />
+                    <input asp-for="ConfirmPassword_S" class="form-control" placeholder="請再輸入一次密碼" />
                 </div> <!-- form-group// -->
-                <span asp-validation-for="C_Password" class="text-danger"></span>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input asp-for="ConfirmPassword" class="form-control" placeholder="請再輸入一次密碼" />
-                </div> <!-- form-group// -->
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
-                    </div>
-                    <input asp-for="Birthday" class="form-control" />
-                </div>
-                <span asp-validation-for="Birthday" class="text-danger"></span>
+                <span asp-validation-for="ConfirmPassword_S" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
                     </div>
-                    <input asp-for="IdentityNumber" class="form-control" placeholder="請輸入身份證字號" />
+                    <input asp-for="RepresentativeIdentityNumber" class="form-control" placeholder="請輸入身份證字號" />
                 </div>
-                <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+                <span asp-validation-for="RepresentativeIdentityNumber" class="text-danger"></span>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                    </div>
+                    <input asp-for="CompanyName" class="form-control" placeholder="請輸入公司名稱" />
+                </div>
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                    </div>
+                    <input asp-for="TaxIDNumber" class="form-control" placeholder="請輸入公司統編" />
+                </div>
+                <span asp-validation-for="TaxIDNumber" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                     </div>
-                    <input asp-for="Phone" class="form-control" placeholder="請輸入電話號碼" />
+                    <input asp-for="Phone" class="form-control" placeholder="請輸入公司聯絡電話" />
                 </div> <!-- form-group// -->
                 <span asp-validation-for="Phone" class="text-danger"></span>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-dollar-sign"></i> </span>
+                    </div>
+                    <input asp-for="Capital" class="form-control" placeholder="請輸入實收資本額" />
+                </div> <!-- form-group// -->
+                <span asp-validation-for="Capital" class="text-danger"></span>
 
                 <div>
                     <div id="twzipcode" class="form-group input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                            <span class="input-group-text"> <i class="fas fa-building"></i> </span>
                         </div>
                     </div>
-                    <input asp-for="Address" class="form-control" placeholder="請輸入地址" />
+                    <input asp-for="Address" class="form-control" placeholder="請輸入公司地址" />
                 </div>
                 <br />
 
@@ -163,21 +149,23 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/jquery/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#twzipcode").twzipcode({
-                zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
-                css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
-                countyName: "City", // 自訂城市 select 標籤的 name 值
-                districtName: "Town" // 自訂區別 select 標籤的 name 值
-            });
-        });
-
-
-
-
-    </script>
-
 }
+<script src="~/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#twzipcode").twzipcode({
+            zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+            css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+            countyName: "City", // 自訂城市 select 標籤的 name 值
+            districtName: "Town" // 自訂區別 select 標籤的 name 值
+        });
+    });
+
+
+
+
+</script>
+
+
+
