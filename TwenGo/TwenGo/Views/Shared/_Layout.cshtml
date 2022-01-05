@@ -7,6 +7,7 @@
 
     <link rel="icon" href="~/images/favicon-16x16.png" type="image/x-icon" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" media="all">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="~/css/ionicons.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css" media="all">
@@ -37,42 +38,16 @@
         </div>
     </div>
     <div class="site">
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="topbar-text">
-                            <span>Work time: Monday - Friday: 08AM-06PM</span>
-                            <span>Saturday - Sunday: 10AM-06PM</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="topbar-menu">
-                            <ul class="topbar-menu">
-                                <li class="dropdown">
-                                    <a href="#">Languages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">Français</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Register</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <header id="header" class="header header-desktop header-2">
             <div class="top-search">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
                             <form asp-controller="Shop" asp-action="Index">
-                                    <input type="text" class="top-search-input" name="SearchString" />
-                                    <button class="btn btn-warning" type="submit" >搜尋</button>
+                                <input type="text" class="top-search-input" name="SearchString" />
+                                <button class="btn btn-warning" type="submit">搜尋</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>

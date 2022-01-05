@@ -40,6 +40,10 @@
     font-weight: 400;
     font-style: normal
 }
+.card-text{
+    color:#5fbd74;
+    font-size:15px;
+}
 
 i[class^="organik-"],
 i[class*=" organik-"] {
@@ -841,7 +845,7 @@ form .row .form-wrap {
     transition: all 0.5s;
 }
 .header.scrolling-menu {
-    position: fixed;
+    position: static;
     background: #fff;
     top: 0;
     left: 0;
@@ -6028,4 +6032,6 @@ table.shop-cart .actions .update-cart {
         transform: rotate(-360deg);
         -webkit-transform: rotate(-360deg);
     }
+    
 }
+

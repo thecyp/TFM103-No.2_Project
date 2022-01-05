@@ -18,13 +18,13 @@ namespace 套版測試2.Controllers
             _context = twenGoContext;
         }
         
-        public async Task< IActionResult> Index(string searching)
+        public async Task< IActionResult> Index(string searchString)
         {
             var products = from p in _context.Product
                            select p;
-            if (!string.IsNullOrEmpty(searching))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                products = products.Where(s => s.ProductName.Contains(searching));
+                products = products.Where(s => s.ProductName.Contains(searchString));
             }
             return View(await products.ToListAsync());
         }

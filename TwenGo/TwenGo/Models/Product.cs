@@ -23,5 +23,7 @@ namespace TwenGo.Models
         public decimal Price { get; set; }
         [Display(Name ="庫存")]
         public int UnitStock { get; set; }
+        
+        public string Picture { get; set; }
     }
 }
