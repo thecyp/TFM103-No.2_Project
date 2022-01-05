@@ -1,0 +1,66 @@
+﻿@model TwenGo.Data.Product
+<div id="app">
+    <script>
+        $(document).ready(
+            function () {
+                $("#dialog").hide()
+            }
+        )
+    </script>
+    {{100*100}}
+    <div class="row">
+        <div class="col-sm-3" v-for="item in products">
+            <div class="card">
+                <div class="card-body">
+                    <img :src="item.picturePath" class="card-img-top">
+                    <h2 class="card-title">{{item.productName}}</h2>
+                    <p class="card-text">{{item.description}}</p>
+                    <p class="card-text">類別:{{item.categoryName}}</p>
+                    <p class="card-text">庫存:{{item.quantity}}</p>
+                    <p class="card-text">定價:{{item.price}}元</p>
+
+                    @*<a href="#" class="btn-dark">編輯</a>
+                    <a href="#" class="btn-dark">DELETE</a>*@
+
+                    @*<form asp-action="Delete">
+                        <input type="hidden" asp-for="ProductID" />
+                        <input type="submit" value="刪除" class="btn-danger" />
+                    </form>*@
+                  
+                    <button v-on:click="show">開團</button>
+                    <div id="dialog">
+                        <label>12345</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        var v = new Vue({
+            el: "#app",
+            data: {
+                products: []
+            }, methods: {
+                show: function () {
+                    ("#dialog").dialog()
+                }
+
+            },
+            mounted: function () {
+                let self = this;
+                fetch('https://localhost:44390/api/products')
+                    .then(function (res) {
+                        return res.json();
+                    })
+                    .then(function (myjson) {
+                        for (let i = 0; i < myjson.length; i++) {
+                            self.products.push(myjson[i])
+                        }
+                    })
+            },
+        });
+    </script>

@@ -1,0 +1,32 @@
+﻿<h1>賣家管理中心</h1>
+
+<div>
+    <a href="/Product/Launch">商品上架</a>
+    <a href="/Product/ProductView">商品瀏覽</a>
+
+    @*<a id="btngo" href="/Group/GroupUp" class="btn-dark">開團</a>*@
+</div>
+
+@*<style>
+    #btngo {
+        color: aquamarine;
+        font-size: 30px;
+    }
+</style>*@
+<div id="app">
+    <button class="button" v-on:click="showModal = true">
+        Show Modal
+    </button>
+    <transition name="fade" appear>
+        <div class="modal-overlay" v-if="showModal" v-on:click="showModal = false"></div>
+    </transition>
+    <transition name="slide" appear>
+        <div class="modal" v-if="showModal">
+            <h1>Lorem Ipsum</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident explicabo accusamus laudantium voluptatum nobis sed nesciunt neque possimus molestiae?</p>
+            <button class="button" v-on:click="showModal = false">
+            Close Modal
+            </button>
+        </div>
+    </transition>
+</div>

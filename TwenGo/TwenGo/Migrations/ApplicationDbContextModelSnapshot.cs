@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/TwenGoContextModelSnapshot.cs
 using TwenGo.Models.Repository;
+========
+using TwenGo.Data;
+>>>>>>>> main:TwenGo/TwenGo/Migrations/ApplicationDbContextModelSnapshot.cs
 
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220103222437_initial")]
-    partial class initial
+    partial class TwenGoContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,6 +74,74 @@ namespace TwenGo.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/TwenGoContextModelSnapshot.cs
+========
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+>>>>>>>> main:TwenGo/TwenGo/Migrations/ApplicationDbContextModelSnapshot.cs
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -156,6 +226,7 @@ namespace TwenGo.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/TwenGoContextModelSnapshot.cs
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.Property<string>("UserId")
@@ -284,6 +355,75 @@ namespace TwenGo.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+========
+            modelBuilder.Entity("TwenGo.Data.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("TwenGo.Data.Group", b =>
+                {
+                    b.Property<int>("GroupID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CountDown")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("GroupDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("GroupID");
+
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("TwenGo.Data.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PicturePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Quantity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("Products");
+>>>>>>>> main:TwenGo/TwenGo/Migrations/ApplicationDbContextModelSnapshot.cs
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -337,6 +477,7 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/TwenGoContextModelSnapshot.cs
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
@@ -364,6 +505,20 @@ namespace TwenGo.Migrations
                     b.Navigation("UserOfCustomer");
 
                     b.Navigation("UserOfSuppliers");
+========
+            modelBuilder.Entity("TwenGo.Data.Product", b =>
+                {
+                    b.HasOne("TwenGo.Data.Category", null)
+                        .WithMany("product")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TwenGo.Data.Category", b =>
+                {
+                    b.Navigation("product");
+>>>>>>>> main:TwenGo/TwenGo/Migrations/ApplicationDbContextModelSnapshot.cs
                 });
 #pragma warning restore 612, 618
         }
