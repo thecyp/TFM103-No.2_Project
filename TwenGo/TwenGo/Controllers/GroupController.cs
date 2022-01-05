@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Data;
+using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
     public class GroupController : Controller
     {
-        private readonly ApplicationDbContext db;
-        public GroupController(ApplicationDbContext db)
+        private readonly TwenGoContext db;
+        public GroupController(TwenGoContext db)
         {
             
             this.db = db;

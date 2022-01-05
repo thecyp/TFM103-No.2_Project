@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Data;
 using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace 套版測試2.Controllers
 {
@@ -20,7 +21,7 @@ namespace 套版測試2.Controllers
         
         public async Task< IActionResult> Index(string searchString)
         {
-            var products = from p in _context.Product
+            var products = from p in _context.Products
                            select p;
             if (!string.IsNullOrEmpty(searchString))
             {

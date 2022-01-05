@@ -9,21 +9,18 @@ namespace TwenGo.Models
 {
     public class Product
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductID { get; set; }
-        [Display(Name ="產品名稱")]
-        public string ProductName { get; set; }
-        [Display(Name ="種類")]
-        public int Category { get; set; }
-        [Display(Name ="單位")]
-        public string Quantity { get; set; }
-        [Display(Name ="產品簡介")]
-        public string Description { get; set; }
-        [Display(Name ="售價")]
-        [Column(TypeName ="decimal(18,2)")]
+        public String ProductName { get; set; }
+        public String Quantity { get; set; }
+        [MaxLength(100)]
+        public String Description { get; set; }
         public decimal Price { get; set; }
-        [Display(Name ="庫存")]
-        public int UnitStock { get; set; }
-        
-        public string Picture { get; set; }
+        public String PicturePath { get; set; }
+
+        [ForeignKey("CategoryID")]
+        public int CategoryID { get; set; }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Data;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Models
 {
@@ -16,11 +17,11 @@ namespace TwenGo.Models
                     serviceProvider.GetRequiredService<DbContextOptions<TwenGoContext>>()
                 ))
             {
-                if (context.Product.Any())
+                if (context.Products.Any())
                 {
                     return;
                 }
-                context.Product.AddRange(
+                context.Products.AddRange(
                     new Product
                     {
                         ProductName="可口可樂",

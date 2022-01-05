@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Data;
 using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
@@ -25,15 +26,15 @@ namespace TwenGo.Controllers
         }
 
             private readonly IWebHostEnvironment env;
-            private readonly ApplicationDbContext db;
+            private readonly TwenGoContext db;
             private readonly string fileRoot = @"\Pictures\";
-        public ProductController(IWebHostEnvironment env, ApplicationDbContext db)
+        public ProductController(IWebHostEnvironment env, TwenGoContext db)
         {
             this.env = env;
             this.db = db;
         }
         [HttpPost]
-        public IActionResult Upload(LaunchViewModel data ,Category category)
+        public IActionResult Upload(LaunchViewModel data , Models.Category category)
         {
             if ((data.pic.FirstOrDefault()?.Length) <= 0)
             {
@@ -45,7 +46,7 @@ namespace TwenGo.Controllers
             {
                 file.CopyTo(fileStream);
             }
-            db.Products.Add(new Product
+            db.Products.Add(new Models.Product
             {
                 CategoryID = category.CategoryID,
                 ProductName = data.ProductName,

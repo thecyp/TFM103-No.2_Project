@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TwenGo.Data;
+using TwenGo.Models;
 using TwenGo.Models.Repository.Entity;
 
 namespace TwenGo.Models.Repository
@@ -12,7 +14,10 @@ namespace TwenGo.Models.Repository
     {
         public virtual DbSet<UserOfSuppliers> UserOfSuppliers { get; set; }
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
+        public  DbSet<Product> Products { get; set; }
+        public  DbSet<Category> Categories { get; set; }
 
+        public  DbSet<Group> Groups { get; set; }
         public TwenGoContext(DbContextOptions<TwenGoContext> options)
          : base(options)
         {

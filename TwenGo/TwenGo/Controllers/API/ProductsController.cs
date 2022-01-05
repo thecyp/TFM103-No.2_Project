@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TwenGo.Data;
-
+using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers.API
 {
@@ -14,9 +15,9 @@ namespace TwenGo.Controllers.API
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly TwenGoContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(TwenGoContext context)
         {
             _context = context;
         }

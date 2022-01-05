@@ -6,14 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TwenGo.Data;
+using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly TwenGoContext _context;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(TwenGoContext context)
         {
             _context = context;
         }

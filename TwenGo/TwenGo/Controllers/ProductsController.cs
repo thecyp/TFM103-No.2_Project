@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TwenGo.Data;
 using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
@@ -22,7 +23,7 @@ namespace TwenGo.Controllers
         // GET: Products
         public async Task<IActionResult> Index(string searchString)
         {
-            var products = from p in _context.Product
+            var products = from p in _context.Products
                            select p;
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -39,7 +40,7 @@ namespace TwenGo.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.ProductID == id);
             if (product == null)
             {
@@ -60,7 +61,7 @@ namespace TwenGo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,ProductName,Category,Quantity,Description,Price,UnitStock")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductID,ProductName,Category,Quantity,Description,Price,UnitStock")] Models.Product product)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace TwenGo.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -92,7 +93,7 @@ namespace TwenGo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductName,Category,Quantity,Description,Price,UnitStock")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductName,Category,Quantity,Description,Price,UnitStock")] Models.Product product)
         {
             if (id != product.ProductID)
             {
@@ -130,7 +131,7 @@ namespace TwenGo.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.ProductID == id);
             if (product == null)
             {
@@ -145,15 +146,15 @@ namespace TwenGo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
+            var product = await _context.Products.FindAsync(id);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return _context.Product.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.ProductID == id);
         }
 
     }

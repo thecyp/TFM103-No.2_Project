@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TwenGo.Data;
+using TwenGo.Models;
+using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers.API
 {
@@ -13,9 +15,9 @@ namespace TwenGo.Controllers.API
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly TwenGoContext _context;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(TwenGoContext context)
         {
             _context = context;
         }
