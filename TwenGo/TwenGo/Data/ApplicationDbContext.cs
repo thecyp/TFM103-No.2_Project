@@ -3,17 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TwenGo.Models;
 
 namespace TwenGo.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
         }
-
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
     }
 }
