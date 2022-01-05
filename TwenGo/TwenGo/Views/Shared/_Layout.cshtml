@@ -6,7 +6,7 @@
     <title>TwenGo</title>
 
     <link rel="icon" href="~/images/favicon-16x16.png" type="image/x-icon" />
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" media="all">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="~/css/ionicons.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css" media="all">
@@ -27,11 +27,11 @@
         <div class="mobile-menu">
             <ul id="mobile-menu" class="menu">
                 <li><a asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
-                <li><a asp-area="" asp-controller="AboutUs" asp-action="index">About Us</a></li>
+                @*<li><a asp-area="" asp-controller="aboutus" asp-action="index">about us</a></li>*@
                 <li><a asp-area="" asp-controller="Shop" asp-action="index">Shop</a></li>
                 <li><a asp-area="" asp-controller="ShopDetail" asp-action="index">Shop Detail</a></li>
                 <li><a asp-area="" asp-controller="Cart" asp-action="index">Cart</a></li>
-                <li><a asp-area="" asp-controller="Cart" asp-action="OrderDetail">Order</a></li>
+                <li><a asp-area="" asp-controller="CustomerOrderM" asp-action="index">Order</a></li>
                 <li><a asp-area="" asp-controller="Contact" asp-action="index">Contact Us</a></li>
             </ul>
         </div>
@@ -58,6 +58,8 @@
                                 </li>
                                 <li><a href="#">Login</a></li>
                                 <li><a href="#">Register</a></li>
+                                <li><a class="nav-link" asp-area="" asp-controller="Suppliers" asp-action="index">Suppliers</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -88,11 +90,11 @@
                             <nav class="menu">
                                 <ul class="main-menu">
                                     <li><a asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
-                                    <li><a asp-area="" asp-controller="AboutUs" asp-action="index">About Us</a></li>
+                                    @*<li><a asp-area="" asp-controller="AboutUs" asp-action="index">About Us</a></li>*@
                                     <li><a asp-area="" asp-controller="Shop" asp-action="index">Shop</a></li>
                                     <li><a asp-area="" asp-controller="ShopDetail" asp-action="index">Shop Detail</a></li>
                                     <li><a asp-area="" asp-controller="Cart" asp-action="index">Cart</a></li>
-                                    <li><a asp-area="" asp-controller="Cart" asp-action="OrderDetail">Order</a></li>
+                                    <li><a asp-area="" asp-controller="CustomerOrderM" asp-action="index">Order</a></li>
                                     <li><a asp-area="" asp-controller="Contact" asp-action="index">Contact Us</a></li>
                                 </ul>
                             </nav>

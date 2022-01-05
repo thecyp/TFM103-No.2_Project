@@ -1,0 +1,32 @@
+﻿body {
+    box-sizing: border-box;
+    font-family: "Noto Sans TC", sans-serif;
+    display: flex;
+    align-items: center;
+}
+li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    position: relative;
+    background-image: linear-gradient(45deg, #1e681e, #69e742, #eef85a);
+    box-shadow: 0 0 0 5px #fff;
+    & + li{
+    margin-left: 100px;
+    &::before{
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    background-color: #fff;
+    top: 0;
+    bottom: 0;
+    left: -100px;
+    margin: auto;
+    z-index: -1;
+        }
+    }
