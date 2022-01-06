@@ -23,6 +23,9 @@ namespace TwenGo.Models.Repository
         {
         }
 
-        ///
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Shipper> Shippers { get; set; }
     }
 }
