@@ -47,7 +47,7 @@ namespace TwenGo
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<Users>(options => {
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 4;
                 options.Password.RequireLowercase = false;
@@ -79,6 +79,7 @@ namespace TwenGo
             app.UseSession();
             app.UseRouting();
 
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 

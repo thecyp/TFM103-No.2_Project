@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,22 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TwenGo.Models.Repository;
+using TwenGo.Models.Repository.Entity;
 using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly SignInManager<Users> _signInManager;
         private readonly TwenGoContext context;
-
-        public LoginController(TwenGoContext context) 
+        
+        public LoginController(TwenGoContext twenGoContext, SignInManager<Users> signInManager) 
         {
-            this.context = context;
+            _signInManager = signInManager;
+            context = twenGoContext;
         }
-
+        
         public IActionResult Index()
         {
             var h = HttpContext.Request;
@@ -41,7 +45,7 @@ namespace TwenGo.Controllers
             {
                 if (HttpContext.User.Identity.Name== ClaimTypes.Name) 
                 {
-                    return Content("Waston歡迎登入");
+                    return Content("歡迎登入");
                 }
 
                 
@@ -65,31 +69,34 @@ namespace TwenGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel LoginData)
+        public async Task<IActionResult> LoginAsync(LoginViewModel LoginData)
         {
+
+            var result = await _signInManager.PasswordSignInAsync(LoginData.Email, LoginData.Password, true, lockoutOnFailure: false);
             //去資料庫查使用者
-            var user = context.Users.Where(u => u.Email == LoginData.Email ).FirstOrDefault();
-            if(user == null) 
-            {
-                return Content("帳號密碼錯誤");
-            }
+            //var user = context.Users.Where(u => u.Email == LoginData.Email ).FirstOrDefault();
+            //if(user == null) 
+            //{
+            //    return Content("帳號密碼錯誤");
+            //}
 
-            var claims = new List<Claim>() { 
-            new Claim(ClaimTypes.Name,user.UserName),
-            new Claim(ClaimTypes.Email,user.Email),
-            new Claim(ClaimTypes.Role,"Myth"),
-           
-            new Claim("Customer","true")
-            };
+            //var claims = new List<Claim>() { 
+            //new Claim(ClaimTypes.Name,user.UserName),
+            //new Claim(ClaimTypes.Email,user.Email),
+            //new Claim(ClaimTypes.Role,"Myth"),
 
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
+            //new Claim("Customer","true")
+            //};
 
-            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            //SignInAsync幫你做登入這件事 登入的時候就把Cookie丟給使用者來做辨識
-            //自動幫Waston生產一張Claim做登入
-            return RedirectToAction("Index", "Home");
+            //var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            //var principal = new ClaimsPrincipal(identity);
+
+            //HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            ////SignInAsync幫你做登入這件事 登入的時候就把Cookie丟給使用者來做辨識
+            ////自動幫Waston生產一張Claim做登入
+            //return RedirectToAction("Index", "Home");
             //Redirect 重新定向
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult LoginFailed()
