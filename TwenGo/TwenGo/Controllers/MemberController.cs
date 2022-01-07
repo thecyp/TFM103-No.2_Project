@@ -48,7 +48,7 @@ namespace TwenGo.Controllers
                 Phone = customer.Phone,
                 Town = customer.Town,
                 City = customer.City,
-
+              
 
                 UserName = customer.CustomerName,
                 
@@ -97,7 +97,7 @@ namespace TwenGo.Controllers
                 Phone = supplier.Phone,
                 Town = supplier.Town,
                 City = supplier.City,
-
+               
 
                 UserName = supplier.RepresentativeName,
 
