@@ -8,11 +8,11 @@ using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
-    public class ReceiverOrderMController : Controller
+    public class OrderMController : Controller
     {
         private readonly TwenGoContext _context;
 
-        public ReceiverOrderMController(TwenGoContext context)
+        public OrderMController(TwenGoContext context)
         {
             _context = context;
         }
