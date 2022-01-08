@@ -42,6 +42,7 @@
     <Folder Include="Areas\backstage\Models\" />
     <Folder Include="Areas\backstage\Views\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Views\Member\" />
     <Folder Include="wwwroot\Pictures\" />
   </ItemGroup>
 

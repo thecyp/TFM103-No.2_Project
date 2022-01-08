@@ -119,6 +119,10 @@
             left: 0;
             z-index: 1;
         }
+
+    #Left {
+        text-align: left;
+    }
 </style>
 
 
@@ -139,15 +143,26 @@
                     </div>
 
                     <div class="form-group">
-
                         <input name="Password" type="password" class="form-control" id="inputPassword" placeholder="請輸入密碼">
+                    </div>
 
+                    <div class="form-group" id="Left">
+                        <div class="checkbox">
+                            <label asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
                     </div>
-                    <div class="forgot">
-                        <a href="reset.html">忘記密碼?</a>
-                    </div>
+
+
                     <button type="submit" class="btn btn-primary">登入</button>
                     <br />
+                    <div class="form-group">
+                        <div class="forgot">
+                            <a href="#">忘記密碼?</a>
+                        </div>
+                    </div>
 
                 </form>
                 <p class="divider-text">

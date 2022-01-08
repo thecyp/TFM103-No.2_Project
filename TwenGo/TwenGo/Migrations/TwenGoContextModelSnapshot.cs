@@ -249,6 +249,21 @@ namespace TwenGo.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.TwenGoRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TwenGoRole");
+                });
+
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.Property<string>("UserId")
@@ -268,29 +283,6 @@ namespace TwenGo.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserOfCustomer");
-                });
-
-            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfSuppliers", b =>
-                {
-                    b.Property<string>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Capital")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxIDNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserOfSuppliers");
                 });
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.Users", b =>
@@ -354,6 +346,13 @@ namespace TwenGo.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RealName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("RememberMe")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -411,65 +410,6 @@ namespace TwenGo.Migrations
                     b.HasKey("ShipID");
 
                     b.ToTable("Shippers");
-                });
-
-            modelBuilder.Entity("TwenGo.Models.Supplier", b =>
-                {
-                    b.Property<int>("SuppliersID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Account_S")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Capital")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CellPhone_S")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email_S")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationOfCompany")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MallPicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password_S")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Representative")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RepresentativeIdentityNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxIDNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SuppliersID");
-
-                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -532,22 +472,22 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.TwenGoRole", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
-                        .WithOne("UserOfCustomer")
-                        .HasForeignKey("TwenGo.Models.Repository.Entity.UserOfCustomer", "UserId")
+                        .WithOne("TwenGoRole")
+                        .HasForeignKey("TwenGo.Models.Repository.Entity.TwenGoRole", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfSuppliers", b =>
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
-                        .WithOne("UserOfSuppliers")
-                        .HasForeignKey("TwenGo.Models.Repository.Entity.UserOfSuppliers", "UserId")
+                        .WithOne("UserOfCustomer")
+                        .HasForeignKey("TwenGo.Models.Repository.Entity.UserOfCustomer", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -561,9 +501,9 @@ namespace TwenGo.Migrations
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.Users", b =>
                 {
-                    b.Navigation("UserOfCustomer");
+                    b.Navigation("TwenGoRole");
 
-                    b.Navigation("UserOfSuppliers");
+                    b.Navigation("UserOfCustomer");
                 });
 #pragma warning restore 612, 618
         }

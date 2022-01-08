@@ -49,7 +49,7 @@ namespace TwenGo.Controllers
                 Town = customer.Town,
                 City = customer.City,
                 RealName=customer.CustomerName,
-
+                RememberMe=customer.RememberMe,
                 UserName = customer.Email,
                 
                 IdentityNumber = customer.IdentityNumber,
@@ -78,58 +78,13 @@ namespace TwenGo.Controllers
             }
         }
 
-        public IActionResult SupplierRegister()
-        {
-
-            return View();
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SupplierRegisterAsync(SupplierViewModel supplier)
-        {
-            var data = new Users()
-            {
-                Address = supplier.Address,
-                Email = supplier.SupplierEmail,
-                Id = Guid.NewGuid().ToString(),
-                Phone = supplier.Phone,
-                Town = supplier.Town,
-                City = supplier.City,
-               RealName=supplier.RepresentativeName,
-
-                UserName = supplier.SupplierEmail,
-
-                IdentityNumber = supplier.RepresentativeIdentityNumber,
-                NormalizedEmail = supplier.SupplierEmail,
-                PhoneNumber = supplier.CellPhone,
-                CellPhone = supplier.CellPhone,
-
-                NormalizedUserName = supplier.SupplierEmail,
-                UserOfSuppliers = new UserOfSuppliers()
-                {
-                    CompanyName = supplier.CompanyName,
-                    TaxIDNumber = supplier.TaxIDNumber,
-                    Capital = supplier.Capital
-                }
-            };
-            var result = await _userManager.CreateAsync(data, supplier.Password_S);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return RedirectToAction("Error", "Member");
-            }
-        }
+        
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

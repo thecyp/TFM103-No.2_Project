@@ -12,7 +12,7 @@ namespace TwenGo.Models.Repository
 {
     public class TwenGoContext : IdentityDbContext<Users>
     {
-        public virtual DbSet<UserOfSuppliers> UserOfSuppliers { get; set; }
+        
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
         public  DbSet<Product> Products { get; set; }
         public  DbSet<Category> Categories { get; set; }
@@ -23,9 +23,11 @@ namespace TwenGo.Models.Repository
         {
         }
 
-        public DbSet<Supplier> Suppliers { get; set; }
+       public DbSet<TwenGoRole> TwenGoRole { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Shipper> Shippers { get; set; }
+
+        
     }
 }

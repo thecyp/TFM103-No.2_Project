@@ -37,13 +37,7 @@ namespace TwenGo
                 opt.LoginPath = new PathString("~/Login/Index");
             });
 
-
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.User.AllowedUserNameCharacters = null;
-            });
-
+                                    
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<Users>(options => {
@@ -55,6 +49,7 @@ namespace TwenGo
                 options.Password.RequireUppercase = false;
                
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TwenGoContext>();
             services.AddControllersWithViews();
             services.AddSession();
