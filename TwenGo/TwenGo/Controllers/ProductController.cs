@@ -51,7 +51,7 @@ namespace TwenGo.Controllers
                 CategoryID = category.CategoryID,
                 ProductName = data.ProductName,
                 Description = data.Description,
-                Price = data.Price,
+                Price = (int)data.Price,
                 Quantity = data.Quantity,
                 PicturePath = combineFileName
             });
