@@ -19,14 +19,16 @@
                     <p class="card-text">庫存:{{item.quantity}}</p>
                     <p class="card-text">定價:{{item.price}}元</p>
 
+                    <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
+
                     @*<a href="#" class="btn-dark">編輯</a>
-                    <a href="#" class="btn-dark">DELETE</a>*@
+        <a href="#" class="btn-dark">DELETE</a>*@
 
                     @*<form asp-action="Delete">
-                        <input type="hidden" asp-for="ProductID" />
-                        <input type="submit" value="刪除" class="btn-danger" />
-                    </form>*@
-                  
+            <input type="hidden" asp-for="ProductID" />
+            <input type="submit" value="刪除" class="btn-danger" />
+        </form>*@
+
                     <button v-on:click="show">開團</button>
                     <div id="dialog">
                         <label>12345</label>
@@ -62,5 +64,40 @@
                         }
                     })
             },
+        });
+
+
+        var vcart = new Vue({
+            el: '#cartMenu',
+            data: {
+                product: []
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/Cart/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                },
+                CleanCart: function (id) {
+                    console.log(id);
+                    let data = new FormData();
+                    data.append("id", id);
+                    fetch("/Cart/CleanCart", {
+                        body: data, // must match 'Content-Type' header
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    }).then(response => response.text())
+                        .then(function (d) {
+                            vcart.GetCartProduct();
+                            alert(d);
+
+                        })
+                }
+
+            },
+
         });
     </script>

@@ -5,7 +5,10 @@ namespace TwenGo.Models.Repository.Entity
 {
     public class Users : IdentityUser
     {
-        
+        [Required]
+        [Display(Name = "姓名")]
+        public string RealName { get; set; }
+
         [Required]
         [Display(Name = "身分證字號")]
         public string IdentityNumber { get; set; }

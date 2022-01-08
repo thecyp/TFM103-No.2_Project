@@ -13,12 +13,12 @@ namespace TwenGo.Models.ViewModels
         [EmailAddress]
         [Display(Name = "信箱")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
-        public string Login_Email { get; set; }
+        public string Email { get; set; }
 
         [MaxLength(30)]
         [DataType(DataType.Password)]//默認生成的是密碼框而不是文字框
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "密碼")]
-        public string Pwd { get; set; }
+        public string Password { get; set; }
     }
 }

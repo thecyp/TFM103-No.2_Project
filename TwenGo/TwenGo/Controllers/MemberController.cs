@@ -48,9 +48,9 @@ namespace TwenGo.Controllers
                 Phone = customer.Phone,
                 Town = customer.Town,
                 City = customer.City,
+                RealName=customer.CustomerName,
 
-
-                UserName = customer.CustomerName,
+                UserName = customer.Email,
                 
                 IdentityNumber = customer.IdentityNumber,
                 NormalizedEmail = customer.Email,
@@ -97,9 +97,9 @@ namespace TwenGo.Controllers
                 Phone = supplier.Phone,
                 Town = supplier.Town,
                 City = supplier.City,
+               RealName=supplier.RepresentativeName,
 
-
-                UserName = supplier.RepresentativeName,
+                UserName = supplier.SupplierEmail,
 
                 IdentityNumber = supplier.RepresentativeIdentityNumber,
                 NormalizedEmail = supplier.SupplierEmail,
