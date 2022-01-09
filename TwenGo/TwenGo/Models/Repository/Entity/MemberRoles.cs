@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TwenGo.Models.Repository.Entity
 {
-    public class TwenGoRole
+    public class MemberRoles
     {
-        [Key, ForeignKey("Users")]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
@@ -14,6 +14,6 @@ namespace TwenGo.Models.Repository.Entity
         [Display(Name = "角色")]
         public string RoleName { get; set; }
 
-        public virtual Users Users { get; set; }
+        
     }
 }

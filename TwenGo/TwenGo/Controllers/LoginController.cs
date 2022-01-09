@@ -53,7 +53,7 @@ namespace TwenGo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         //登入檢測頁面
         public IActionResult CheckLogin()
         {

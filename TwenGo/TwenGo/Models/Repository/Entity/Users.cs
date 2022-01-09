@@ -35,9 +35,7 @@ namespace TwenGo.Models.Repository.Entity
         [Display(Name = "記住我?")]
         public bool RememberMe { get; set; }
 
-
-
-        public virtual TwenGoRole TwenGoRole { get; set; }
+               
         public virtual UserOfCustomer UserOfCustomer { get; set; }
     }
 }

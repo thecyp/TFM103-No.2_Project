@@ -70,12 +70,16 @@ namespace TwenGo.Controllers
             var result = await _userManager.CreateAsync(data,customer.C_Password);
             if (result.Succeeded )
             {
+                _userManager.AddToRoleAsync(data, "Customer").Wait();
                 return RedirectToAction("Index", "Home");
+
             }
             else
             {
-                return RedirectToAction("Error","Member");
+                return RedirectToAction("Error");
             }
+
+            
         }
 
         
