@@ -12,14 +12,14 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    public class UserController : Controller
+    //[Authorize(Roles = "Administrator")]
+    public class RolesController : Controller
     {
         private readonly TwenGoContext _db;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<Users> _userManager;
        
-        public UserController(RoleManager<IdentityRole>roleManager, TwenGoContext twenGoContext, UserManager<Users> userManager) 
+        public RolesController(RoleManager<IdentityRole>roleManager, TwenGoContext twenGoContext, UserManager<Users> userManager) 
         {
             
             _userManager = userManager;
@@ -35,20 +35,20 @@ namespace TwenGo.Controllers
        
         public async Task<IActionResult> RoleCreateAsync(RoleViewModel role)
         {
+           
+
             
             var roleExist = await _roleManager.RoleExistsAsync(role.RoleName); //判斷角色是否已存在
+
+            if (!roleExist)
+            {
+                var result1 = await _roleManager.CreateAsync(new IdentityRole(role.RoleName));
+            }
+            else
+            {
+                return Content("已經有這角色了");
+            }
             
-                //_userManager.AddToRoleAsync(data, "Administrator").Wait();
-              
-                if (!roleExist)
-                {
-                    var result1 = await _roleManager.CreateAsync(new IdentityRole(role.RoleName));
-                }
-                else
-                {
-                    return Content("已經有這角色了");
-                }
-           
             return RedirectToAction("Index", "Home");
         }
     }

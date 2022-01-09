@@ -63,7 +63,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input asp-for="CustomerName" class="form-control" placeholder="請輸入姓名 例：王羲之" />
+                    <input asp-for="CustomerName" class="form-control" placeholder="請輸入姓名 例：周杰倫" />
                 </div> <!-- form-group// -->
 
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
@@ -124,7 +124,7 @@
                         <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
                     </div>
                     <input asp-for="Birthday" class="form-control" />
-                    </div>
+                </div>
                 <span asp-validation-for="Birthday" class="text-danger"></span>
 
                 <div class="form-group input-group">
@@ -143,15 +143,24 @@
                 </div> <!-- form-group// -->
                 <span asp-validation-for="Phone" class="text-danger"></span>
 
+
                 <div>
                     <div id="twzipcode" class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
                         </div>
-                    </div>
-                    <input asp-for="Address" class="form-control" placeholder="請輸入地址" />
+                        </div>
+                    <input asp-for="Address" class="form-control" placeholder="請輸入地址" style="width:100%" />
                 </div>
+                
                 <br />
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <input asp-for="Phone" class="form-control" placeholder="請輸入電話號碼" />
+                </div> <!-- form-group// -->
 
 
                 <div class="form-group">
@@ -162,8 +171,8 @@
 
 
 
-        </article>
-    </div> <!-- card.// -->
+    </article>
+</div> <!-- card.// -->
 
 </div>
 

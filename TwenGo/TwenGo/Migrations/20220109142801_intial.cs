@@ -99,6 +99,18 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shippers",
                 columns: table => new
                 {
@@ -222,24 +234,6 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TwenGoRole",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TwenGoRole", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TwenGoRole_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserOfCustomer",
                 columns: table => new
                 {
@@ -355,10 +349,10 @@ namespace TwenGo.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Shippers");
+                name: "Role");
 
             migrationBuilder.DropTable(
-                name: "TwenGoRole");
+                name: "Shippers");
 
             migrationBuilder.DropTable(
                 name: "UserOfCustomer");

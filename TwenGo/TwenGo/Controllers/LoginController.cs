@@ -47,10 +47,10 @@ namespace TwenGo.Controllers
             var result = await _signInManager.PasswordSignInAsync(LoginData.Email, LoginData.Password, true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-
+                return RedirectToAction("Index", "Home");
             }
-           
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Customer")]

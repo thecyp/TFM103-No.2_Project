@@ -10,7 +10,7 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220108234800_intial")]
+    [Migration("20220109142801_intial")]
     partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,7 +251,7 @@ namespace TwenGo.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Repository.Entity.TwenGoRole", b =>
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.Roles", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace TwenGo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TwenGoRole");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
@@ -474,17 +474,6 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Repository.Entity.TwenGoRole", b =>
-                {
-                    b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
-                        .WithOne("TwenGoRole")
-                        .HasForeignKey("TwenGo.Models.Repository.Entity.TwenGoRole", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
@@ -503,8 +492,6 @@ namespace TwenGo.Migrations
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.Users", b =>
                 {
-                    b.Navigation("TwenGoRole");
-
                     b.Navigation("UserOfCustomer");
                 });
 #pragma warning restore 612, 618

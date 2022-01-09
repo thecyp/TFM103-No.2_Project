@@ -23,7 +23,7 @@ namespace TwenGo.Models.Repository
         {
         }
 
-       public DbSet<MemberRoles> MemberRoles { get; set; }
+        public DbSet<Roles> Role { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Shipper> Shippers { get; set; }
