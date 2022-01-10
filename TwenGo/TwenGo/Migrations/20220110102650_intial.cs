@@ -234,6 +234,26 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserOfAdmin",
+                columns: table => new
+                {
+                    AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserOfAdmin", x => x.AdminId);
+                    table.ForeignKey(
+                        name: "FK_UserOfAdmin_AspNetUsers_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserOfCustomer",
                 columns: table => new
                 {
@@ -353,6 +373,9 @@ namespace TwenGo.Migrations
 
             migrationBuilder.DropTable(
                 name: "Shippers");
+
+            migrationBuilder.DropTable(
+                name: "UserOfAdmin");
 
             migrationBuilder.DropTable(
                 name: "UserOfCustomer");

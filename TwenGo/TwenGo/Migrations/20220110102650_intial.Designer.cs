@@ -10,7 +10,7 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220109142801_intial")]
+    [Migration("20220110102650_intial")]
     partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,6 +266,28 @@ namespace TwenGo.Migrations
                     b.ToTable("Role");
                 });
 
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfAdmin", b =>
+                {
+                    b.Property<string>("AdminId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EmployeeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EntryDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminId");
+
+                    b.ToTable("UserOfAdmin");
+                });
+
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.Property<string>("UserId")
@@ -474,6 +496,17 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfAdmin", b =>
+                {
+                    b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
+                        .WithOne("UserOfAdmin")
+                        .HasForeignKey("TwenGo.Models.Repository.Entity.UserOfAdmin", "AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
@@ -492,6 +525,8 @@ namespace TwenGo.Migrations
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.Users", b =>
                 {
+                    b.Navigation("UserOfAdmin");
+
                     b.Navigation("UserOfCustomer");
                 });
 #pragma warning restore 612, 618

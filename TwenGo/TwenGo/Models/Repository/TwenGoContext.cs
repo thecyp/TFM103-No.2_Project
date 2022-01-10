@@ -12,7 +12,7 @@ namespace TwenGo.Models.Repository
 {
     public class TwenGoContext : IdentityDbContext<Users>
     {
-        
+        public virtual DbSet<UserOfAdmin> UserOfAdmin { get; set; }
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
         public  DbSet<Product> Products { get; set; }
         public  DbSet<Category> Categories { get; set; }

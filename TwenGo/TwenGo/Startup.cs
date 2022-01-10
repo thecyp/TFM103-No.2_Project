@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
+
 
 namespace TwenGo
 {
@@ -57,12 +59,19 @@ namespace TwenGo
 
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
-
+                
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TwenGoContext>();
             services.AddControllersWithViews();
             services.AddSession();
+           
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Login/Index");
+                //other properties
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +88,8 @@ namespace TwenGo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -87,6 +98,8 @@ namespace TwenGo
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {

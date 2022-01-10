@@ -26,7 +26,8 @@ namespace TwenGo.Controllers
             _signInManager = signInManager;
             context = twenGoContext;
         }
-        
+
+        [Route("~/Login/Index")]
         public IActionResult Index()
         {
             var h = HttpContext.Request;
@@ -55,6 +56,7 @@ namespace TwenGo.Controllers
 
         [Authorize(Roles = "Customer")]
         //登入檢測頁面
+        [Route("~/Login/CheckLogin")]
         public IActionResult CheckLogin()
         {
             if (HttpContext.User.Identity.IsAuthenticated)

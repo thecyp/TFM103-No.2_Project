@@ -12,7 +12,7 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    
     public class RolesController : Controller
     {
         private readonly TwenGoContext _db;
@@ -26,6 +26,8 @@ namespace TwenGo.Controllers
             _db = twenGoContext;
            _roleManager = roleManager;
         }
+
+        //[Authorize(Roles = "Administrator")]
         public IActionResult RoleCreate()
         {
             return View();

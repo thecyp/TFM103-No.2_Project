@@ -1,5 +1,5 @@
 ﻿
-@model TwenGo.Models.ViewModels.CustomerViewModel
+@model TwenGo.Models.ViewModels.AdminViewModel
 <style>
     .divider-text {
         position: relative;
@@ -63,10 +63,10 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input asp-for="CustomerName" class="form-control"  placeholder="請輸入姓名 例：周杰倫" />
+                    <input asp-for="AdminName" class="form-control" placeholder="請輸入姓名 例：周杰倫" />
                 </div> <!-- form-group// -->
 
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                <span asp-validation-for="AdminName" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -75,40 +75,15 @@
                     <input asp-for="Email" class="form-control" placeholder="例: Waston@@Fake.com" />
                 </div> <!-- form-group// -->
                 <span asp-validation-for="Email" class="text-danger"></span>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
-                    </div>
-                    <input asp-for="CellPhone" class="form-control" placeholder="請輸入手機號碼 例: 0912367890" />
-                </div> <!-- form-group// -->
-                <span asp-validation-for="CellPhone" class="text-danger"></span>
-
-
-                <div class="input-group-prepend">
-
-                    <div class="form-group input-group">
-                        <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
-                        <select asp-for="Gender" class="form-control">
-                            <option disabled> 選擇性別</option>
-                            <option value="Female">女性</option>
-                            <option value="Male">男性</option>
-                            <option value="Other">不透露</option>
-                        </select>
-                    </div>
-
-
-
-                </div> <!-- form-group end.// -->
-                <span asp-validation-for="Gender"></span>
+                                      
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input asp-for="C_Password" class="form-control" placeholder="請輸入密碼" />
+                    <input asp-for="Admin_Password" class="form-control" placeholder="請輸入密碼" />
                 </div> <!-- form-group// -->
-                <span asp-validation-for="C_Password" class="text-danger"></span>
+                <span asp-validation-for="Admin_Password" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -121,11 +96,11 @@
                 <div class="form-group input-group">
 
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
+                        <span class="input-group-text"> <i class="fas fa-briefcase"></i> </span>
                     </div>
-                    <input asp-for="Birthday" class="form-control" />
+                    <input asp-for="EntryDay" class="form-control" />
                 </div>
-                <span asp-validation-for="Birthday" class="text-danger"></span>
+                <span asp-validation-for="EntryDay" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -134,55 +109,26 @@
                     <input asp-for="IdentityNumber" class="form-control" placeholder="請輸入身份證字號" />
                 </div>
                 <span asp-validation-for="IdentityNumber" class="text-danger"></span>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                    </div>
-                    <input asp-for="Phone" class="form-control" placeholder="請輸入電話號碼" />
-                </div> <!-- form-group// -->
-                <span asp-validation-for="Phone" class="text-danger"></span>
-
-
-                <div>
-                    <div id="twzipcode" class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
-                        </div>
-                        </div>
-                    <input asp-for="Address" class="form-control" placeholder="請輸入地址" style="width:100%" />
-                </div>
-                
+                         
                 <br />
-                              
-
+                             
                 <div class="form-group">
                     <button type="submit" class="btn  btn-block"> 確定送出  </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">已經有帳戶了? <a href="">登入</a> </p>
+               
             </form>
 
 
 
-    </article>
-</div> <!-- card.// -->
+        </article>
+    </div> <!-- card.// -->
 
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/jquery/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#twzipcode").twzipcode({
-                zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
-                css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
-                countyName: "City", // 自訂城市 select 標籤的 name 值
-                districtName: "Town" // 自訂區別 select 標籤的 name 值
-            });
-        });
-     </script>
+    
 
 }
+
 
