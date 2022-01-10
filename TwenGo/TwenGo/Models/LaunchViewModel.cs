@@ -13,7 +13,7 @@ namespace TwenGo.Models
         public String countyName { get; set; }
         public String districtName { get; set; }
         public String Description { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public String Quantity { get; set; }
         public List<IFormFile> pic { get; set; }
        

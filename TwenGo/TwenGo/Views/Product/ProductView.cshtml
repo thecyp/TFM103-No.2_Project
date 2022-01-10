@@ -10,25 +10,9 @@
                     <p class="card-text">{{item.description}}</p>
                     <p class="card-text">服務地點:{{item.address}}</p>
                     <p class="card-text">定價:{{item.price}}元</p>
-
                     <button v-on:click="edit">編輯</button>
                     <button v-on:click="delete(item.productID)">刪除</button>
-
                     <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
-
-                    @*<a href="#" class="btn-dark">編輯</a>
-        <a href="#" class="btn-dark">DELETE</a>*@
-
-                    @*<form asp-action="Delete">
-            <input type="hidden" asp-for="ProductID" />
-            <input type="submit" value="刪除" class="btn-danger" />
-        </form>*@
-
-                    <button v-on:click="show">開團</button>
-                    <div id="dialog">
-                        <label>12345</label>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -73,33 +57,7 @@
     })//vue
 </script>
 
-
     <script>
-        var v = new Vue({
-            el: "#app",
-            data: {
-                products: []
-            }, methods: {
-                show: function () {
-                    ("#dialog").dialog()
-                }
-
-            },
-            mounted: function () {
-                let self = this;
-                fetch('https://localhost:44390/api/products')
-                    .then(function (res) {
-                        return res.json();
-                    })
-                    .then(function (myjson) {
-                        for (let i = 0; i < myjson.length; i++) {
-                            self.products.push(myjson[i])
-                        }
-                    })
-            },
-        });
-
-
         var vcart = new Vue({
             el: '#cartMenu',
             data: {
