@@ -1,38 +1,50 @@
-﻿<h1>商品上架</h1>
+﻿<script src="~/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#twzipcode").twzipcode({
+            zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+            css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+            countyName: "countyName", // 自訂城市 select 標籤的 name 值
+            districtName: "districtName" // 自訂區別 select 標籤的 name 值
+        });
+    });
+</script>
+<h1>服務上架</h1>
 <div id="app">
     <form enctype="multipart/form-data" action="~/Product/upload" method="post">
         <div>
-            <label>商品名稱</label>
+            <label>服務名稱:</label>
             <input type="text" name="ProductName" />
         </div>
-        <select name="CategoryID">
-            <option v-for="item in categories" :value="item.categoryID">{{item.categoryName}}</option>
-        </select>
+        <div id="twzipcode" class="form-group input-group">
+            <label>服務地點:</label>
+            <div class="input-group-prepend">
+                <span class="input-group-text" name="Address"> <i class="fas fa-map-marker-alt"></i> </span>
+            </div>
+        </div>
         <div>
-            <label>商品敘述</label>
+            <label>服務敘述:</label>
+            <br/>
             <textarea name="Description"></textarea>
         </div>
         <div>
-            <label>商品定價 </label>
+            <label>服務價格:</label>
             <input type="number" name="Price" />
-        </div>
-        <div>
-            <label>商品數量</label>
-            <input type="number" name="Quantity" />
         </div>
         <div>
             <label>上傳圖片</label>
             <input type="file" name="pic" id="inputpic" />
         </div>
-        <button>上傳</button>
+        <button>確認</button>
     </form>
 </div>
 <script>
-      var vm = new Vue({
+    var vm = new Vue({
         el: "#app",
         data: {
             categories: []
-        }, 
+        },
         mounted: function () {
             let self = this;
             fetch('https://localhost:44390/api/categories')
@@ -43,9 +55,7 @@
                     for (let i = 0; i < myjson.length; i++) {
                         self.categories.push(myjson[i])
                     }
-            })
+                })
         }
     })
-
-
 </script>

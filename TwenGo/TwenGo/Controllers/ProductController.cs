@@ -34,7 +34,7 @@ namespace TwenGo.Controllers
             this.db = db;
         }
         [HttpPost]
-        public IActionResult Upload(LaunchViewModel data , Models.Category category)
+        public IActionResult Upload(LaunchViewModel data)
         {
             if ((data.pic.FirstOrDefault()?.Length) <= 0)
             {
@@ -48,11 +48,10 @@ namespace TwenGo.Controllers
             }
             db.Products.Add(new Models.Product
             {
-                CategoryID = category.CategoryID,
                 ProductName = data.ProductName,
                 Description = data.Description,
                 Price = data.Price,
-                Quantity = data.Quantity,
+                Address = data.countyName+data.districtName,
                 PicturePath = combineFileName
             });
             db.SaveChanges();

@@ -10,12 +10,11 @@ namespace TwenGo.Models
     public class LaunchViewModel
     {
         public String ProductName { get; set; }
-       // [ForeignKey("CategoryID")]
-        public int CategoryID{ get; set; }
+        public String countyName { get; set; }
+        public String districtName { get; set; }
         public String Description { get; set; }
         public decimal Price { get; set; }
         public String Quantity { get; set; }
-        //public String CategoryName { get; set; }
         public List<IFormFile> pic { get; set; }
        
     }
