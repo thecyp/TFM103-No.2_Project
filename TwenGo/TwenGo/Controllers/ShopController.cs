@@ -21,6 +21,7 @@ namespace 套版測試2.Controllers
         
         public async Task< IActionResult> Index(string searchString)
         {
+
             var products = from p in _context.Products
                            select p;
             if (!string.IsNullOrEmpty(searchString))

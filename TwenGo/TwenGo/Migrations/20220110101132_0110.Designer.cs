@@ -10,8 +10,8 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220108091417_initial")]
-    partial class initial
+    [Migration("20220110101132_0110")]
+    partial class _0110
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,21 +177,6 @@ namespace TwenGo.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryID");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("TwenGo.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -267,8 +252,8 @@ namespace TwenGo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(100)
@@ -283,12 +268,7 @@ namespace TwenGo.Migrations
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quantity")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ProductID");
-
-                    b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
                 });
@@ -580,15 +560,6 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Product", b =>
-                {
-                    b.HasOne("TwenGo.Models.Category", null)
-                        .WithMany("product")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.UserOfCustomer", b =>
                 {
                     b.HasOne("TwenGo.Models.Repository.Entity.Users", "Users")
@@ -609,11 +580,6 @@ namespace TwenGo.Migrations
                         .IsRequired();
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("TwenGo.Models.Category", b =>
-                {
-                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("TwenGo.Models.Order", b =>

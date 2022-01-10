@@ -11,7 +11,7 @@ using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -44,7 +44,6 @@ namespace TwenGo.Controllers.API
         }
 
         // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -75,7 +74,6 @@ namespace TwenGo.Controllers.API
         }
 
         // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -97,38 +95,8 @@ namespace TwenGo.Controllers.API
             _context.Products.Remove(delete);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("刪除成功");
         }
-
-        // DELETE: api/Products/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct1(string id)
-        //{
-
-        //    return Ok(id);
-        //}
-
-
-        //// DELETE: api/Products/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct(int id)
-        //{
-
-        //    return Ok(id);
-        //}
-
-        //[HttpPost("delete/{id}")]
-        //public IEnumerable<Product> DeProduct(Product id)
-        //{
-        //    var delete = _context.Product.Find(id.ProductID);
-        //    if (delete == null)
-        //    {
-        //        return (IEnumerable<Product>)NotFound();
-        //    }
-        //    _context.Products.Remove(delete);
-        //    _context.SaveChangesAsync();
-        //    return (IEnumerable<Product>)NoContent();
-        //}
 
         private bool ProductExists(int id)
         {
