@@ -15,7 +15,6 @@ namespace TwenGo.Models.Repository
         public virtual DbSet<UserOfAdmin> UserOfAdmin { get; set; }
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
         public  DbSet<Product> Products { get; set; }
-        public  DbSet<Category> Categories { get; set; }
 
         public  DbSet<Group> Groups { get; set; }
         public TwenGoContext(DbContextOptions<TwenGoContext> options)

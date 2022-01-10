@@ -1,12 +1,5 @@
 ﻿@model TwenGo.Models.Product
 <div id="app">
-    <script>
-        $(document).ready(
-            function () {
-                $("#dialog").hide()
-            }
-        )
-    </script>
     {{100*100}}
     <div class="row">
         <div class="col-sm-3" v-for="item in products">
@@ -15,52 +8,87 @@
                     <img :src="item.picturePath" class="card-img-top">
                     <h2 class="card-title">{{item.productName}}</h2>
                     <p class="card-text">{{item.description}}</p>
-                    <p class="card-text">類別:{{item.categoryName}}</p>
-                    <p class="card-text">庫存:{{item.quantity}}</p>
+                    <p class="card-text">服務地點:{{item.address}}</p>
                     <p class="card-text">定價:{{item.price}}元</p>
-
-                    @*<a href="#" class="btn-dark">編輯</a>
-                    <a href="#" class="btn-dark">DELETE</a>*@
-
-                    @*<form asp-action="Delete">
-                        <input type="hidden" asp-for="ProductID" />
-                        <input type="submit" value="刪除" class="btn-danger" />
-                    </form>*@
-                  
-                    <button v-on:click="show">開團</button>
-                    <div id="dialog">
-                        <label>12345</label>
-                    </div>
-
+                    <button v-on:click="edit">編輯</button>
+                    <button v-on:click="delete(item.productID)">刪除</button>
+                    <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            products: []
+        },//data
+        mounted: function () {
+            let self = this;
+            fetch("/products")
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (myjson) {
+                    for (let i = 0; i < myjson.length; i++) {
+                        self.products.push(myjson[i])
+                    }
+                })
+        },//mounted
+        methods: {
+            delete: function (id) {
+                fetch("/products/"+id, {
+                    method: 'DELETE'
+                }).then(response =>
+                    response.text()
+                        .then(text => {
+                            alert(text);
+                            window.location.reload();
+                        })
+                )
+            },//delete
+            //edit: function (id) {
+            //    fetch("/product/" + id, {
+            //        method: 'PUT'
+            //    }).then()
+            //}
+        }//methods
+    })//vue
+</script>
 
     <script>
-        var v = new Vue({
-            el: "#app",
+        var vcart = new Vue({
+            el: '#cartMenu',
             data: {
-                products: []
-            }, methods: {
-                show: function () {
-                    ("#dialog").dialog()
+                product: []
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/Cart/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                },
+                CleanCart: function (id) {
+                    console.log(id);
+                    let data = new FormData();
+                    data.append("id", id);
+                    fetch("/Cart/CleanCart", {
+                        body: data, // must match 'Content-Type' header
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    }).then(response => response.text())
+                        .then(function (d) {
+                            vcart.GetCartProduct();
+                            alert(d);
+
+                        })
                 }
 
             },
-            mounted: function () {
-                let self = this;
-                fetch('https://localhost:44390/api/products')
-                    .then(function (res) {
-                        return res.json();
-                    })
-                    .then(function (myjson) {
-                        for (let i = 0; i < myjson.length; i++) {
-                            self.products.push(myjson[i])
-                        }
-                    })
-            },
+
         });
     </script>

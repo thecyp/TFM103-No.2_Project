@@ -13,14 +13,11 @@ namespace TwenGo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductID { get; set; }
         public String ProductName { get; set; }
-        public String Quantity { get; set; }
+        public String Address { get; set; }//0110改
+
         [MaxLength(100)]
         public String Description { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public String PicturePath { get; set; }
-
-        [ForeignKey("CategoryID")]
-        public int CategoryID { get; set; }
-
     }
 }

@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TwenGo.Migrations
 {
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
     public partial class intial : Migration
+========
+    public partial class _0110 : Migration
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,19 +59,6 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Groups",
                 columns: table => new
                 {
@@ -86,6 +77,7 @@ namespace TwenGo.Migrations
                 name: "Orders",
                 columns: table => new
                 {
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
                     OrderID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(type: "int", nullable: false),
@@ -108,6 +100,40 @@ namespace TwenGo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+========
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isPaid = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductID);
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +154,33 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
+========
+                name: "Suppliers",
+                columns: table => new
+                {
+                    SuppliersID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Account_S = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password_S = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email_S = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CellPhone_S = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Representative = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RepresentativeIdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxIDNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capital = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocationOfCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MallPicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suppliers", x => x.SuppliersID);
+                });
+
+            migrationBuilder.CreateTable(
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -274,26 +327,48 @@ namespace TwenGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
                 name: "Products",
+========
+                name: "UserOfSuppliers",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxIDNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capital = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                    table.PrimaryKey("PK_UserOfSuppliers", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryID",
+                        name: "FK_UserOfSuppliers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItem",
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    SubTotal = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -337,9 +412,9 @@ namespace TwenGo.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryID",
-                table: "Products",
-                column: "CategoryID");
+                name: "IX_OrderItem_OrderId",
+                table: "OrderItem",
+                column: "OrderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -363,13 +438,27 @@ namespace TwenGo.Migrations
                 name: "Groups");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
                 name: "Orders");
+========
+                name: "OrderItem");
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.cs
                 name: "Role");
+========
+                name: "Shippers");
+
+            migrationBuilder.DropTable(
+                name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "UserOfCustomer");
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.cs
 
             migrationBuilder.DropTable(
                 name: "Shippers");
@@ -384,7 +473,7 @@ namespace TwenGo.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

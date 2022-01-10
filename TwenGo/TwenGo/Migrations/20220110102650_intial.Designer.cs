@@ -10,8 +10,13 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.Designer.cs
     [Migration("20220110102650_intial")]
     partial class intial
+========
+    [Migration("20220110101132_0110")]
+    partial class _0110
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,45 +182,72 @@ namespace TwenGo.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryID");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("TwenGo.Models.Order", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("OrderStatus")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReceiverAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductPictureID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShipStatus")
+                    b.Property<string>("ReceiverName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderID");
+                    b.Property<string>("ReceiverPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isPaid")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("TwenGo.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("TwenGo.Models.Product", b =>
@@ -225,8 +257,8 @@ namespace TwenGo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(100)
@@ -235,18 +267,13 @@ namespace TwenGo.Migrations
                     b.Property<string>("PicturePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quantity")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ProductID");
-
-                    b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
                 });
@@ -374,9 +401,12 @@ namespace TwenGo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220110102650_intial.Designer.cs
                     b.Property<bool>("RememberMe")
                         .HasColumnType("bit");
 
+========
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220110101132_0110.Designer.cs
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -487,11 +517,11 @@ namespace TwenGo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Product", b =>
+            modelBuilder.Entity("TwenGo.Models.OrderItem", b =>
                 {
-                    b.HasOne("TwenGo.Models.Category", null)
-                        .WithMany("product")
-                        .HasForeignKey("CategoryID")
+                    b.HasOne("TwenGo.Models.Order", null)
+                        .WithMany("OrderItem")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -518,9 +548,9 @@ namespace TwenGo.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("TwenGo.Models.Category", b =>
+            modelBuilder.Entity("TwenGo.Models.Order", b =>
                 {
-                    b.Navigation("product");
+                    b.Navigation("OrderItem");
                 });
 
             modelBuilder.Entity("TwenGo.Models.Repository.Entity.Users", b =>

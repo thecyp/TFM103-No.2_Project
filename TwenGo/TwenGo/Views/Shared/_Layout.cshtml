@@ -97,7 +97,7 @@
                                 <input type="text" class="top-search-input" name="SearchString" />
                                 <button class="btn btn-warning" type="submit">搜尋</button>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -130,20 +130,12 @@
                                     <div class="widget-shopping-cart-content">
                                         <ul class="cart-list">
                                             <li>
-                                                <a href="#" class="remove">×</a>
+                                                <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                                 <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                    <img src="~/images/shop/thumb/shop_1.jpg" alt="" />
-                                                    Orange Juice&nbsp;
+                                                    <img :src=item.image alt="" />
+                                                    {{item.name}}&nbsp;
                                                 </a>
-                                                <span class="quantity">1 × $12.00</span>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="remove">×</a>
-                                                <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                    <img src="~/images/shop/thumb/shop_2.jpg" alt="" />
-                                                    Aurore Grape&nbsp;
-                                                </a>
-                                                <span class="quantity">1 × $9.00</span>
+                                                <span class="quantity">1 × ${{item.price}}</span>
                                             </li>
                                         </ul>
                                         <p class="total">
@@ -273,7 +265,7 @@
             <div class="backtotop" id="backtotop"></div>
         </div>
     </div>
-    
+
     <style>
         .copyrights {
             text-indent: -9999px;
@@ -285,5 +277,42 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        var vcart = new Vue({
+            el: '#cartMenu',
+            data: {
+                product: []
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/Cart/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                },
+                CleanCart: function (id) {
+                    console.log(id);
+                    let data = new FormData();
+                    data.append("id", id);
+                    fetch("/Cart/CleanCart", {
+                        body: data, // must match 'Content-Type' header
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    }).then(response => response.text())
+                        .then(function (d) {
+                            vcart.GetCartProduct();
+                            alert(d);
+
+                        })
+                }
+
+            },
+
+        });
+
+
+    </script>
 </body>
 </html>
