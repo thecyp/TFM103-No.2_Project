@@ -6,78 +6,185 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiverName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiverAdress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiverPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiverName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiverAdress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiverPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+@*<p>
+        <a asp-action="UserOrder" type="button" class="btn btn-secondary">委託訂單</a>
+    </p>*@
+
+
+@*<p>
+    <a asp-action="Create">新增訂單</a>
+</p>*@
+
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        @*<li><a href="#home" data-toggle="tab">首頁</a></li>*@
+        <li class="nav-item" role="presentation">
+            <button class="nav-link alert-dark" type="button" href="#home" data-toggle="tab">發案訂單</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" type="button" href="#receiver" data-toggle="tab">接案訂單</button>
+        </li>
+
+    </ul>
+
+    <div class="tab-content" style="padding:50px;">
+        <div class="tab-pane active" id="home">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverAdress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverPhone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.isPaid)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>*@
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverAdress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.isPaid)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>*@
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+        <div class="tab-pane" id="receiver">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverAdress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverPhone)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.isPaid)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>*@
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverAdress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiverPhone)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.isPaid)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>*@
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@model TwenGo.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverAdress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverAdress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.isPaid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.isPaid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
