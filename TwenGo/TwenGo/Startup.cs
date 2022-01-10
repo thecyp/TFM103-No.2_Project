@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +28,17 @@ namespace TwenGo
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
 
+            services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
+                
+                //預設的驗證機制,裡面的名字預設叫Cookies
+            ).AddCookie(opt => 
+            {
+                //未登入時會自動導到這個網址
+                opt.LoginPath = new PathString("~/Login/Index");
+            });
+
+
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.AllowedUserNameCharacters = null;
@@ -34,7 +47,7 @@ namespace TwenGo
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<Users>(options => {
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 4;
                 options.Password.RequireLowercase = false;
@@ -66,6 +79,7 @@ namespace TwenGo
             app.UseSession();
             app.UseRouting();
 
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 

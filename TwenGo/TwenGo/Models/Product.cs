@@ -17,7 +17,7 @@ namespace TwenGo.Models
 
         [MaxLength(100)]
         public String Description { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public String PicturePath { get; set; }
     }
 }
