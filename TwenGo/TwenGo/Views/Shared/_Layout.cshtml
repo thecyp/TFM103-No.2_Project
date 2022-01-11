@@ -121,7 +121,7 @@
                                 </ul>
                             </nav>
                             <div class="btn-wrap">
-                                <div class="mini-cart-wrap">
+                                <div id="cartMenu" class="mini-cart-wrap">
                                     <div class="mini-cart">
                                         <div class="mini-cart-icon" data-count="2">
                                             <i class="ion-bag"></i>
@@ -129,13 +129,14 @@
                                     </div>
                                     <div class="widget-shopping-cart-content">
                                         <ul class="cart-list">
-                                            <li>
+                                            <li v-for="item in product">
                                                 <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                                 <a asp-area="" asp-controller="ShopDetail" asp-action="index">
                                                     <img :src=item.image alt="" />
                                                     {{item.name}}&nbsp;
                                                 </a>
-                                                <span class="quantity">1 × ${{item.price}}</span>
+                                                <p class="card-text">產品敘述: {{item.description}}</p>
+                                                <span class="quantity"> ${{item.price}}</span>
                                             </li>
                                         </ul>
                                         <p class="total">

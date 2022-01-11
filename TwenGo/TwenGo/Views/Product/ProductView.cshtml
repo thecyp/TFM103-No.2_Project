@@ -57,38 +57,47 @@
     })//vue
 </script>
 
-    <script>
-        var vcart = new Vue({
-            el: '#cartMenu',
-            data: {
-                product: []
-            },
-            mounted: function () {
-                this.GetCartProduct();
-            },
-            methods: {
-                GetCartProduct: function () {
-                    let self = this;
-                    fetch("/Cart/GetCart")
-                        .then(function (res) { return res.json() })
-                        .then(function (d) { self.product = d })
-                },
-                CleanCart: function (id) {
-                    console.log(id);
-                    let data = new FormData();
-                    data.append("id", id);
-                    fetch("/Cart/CleanCart", {
-                        body: data, // must match 'Content-Type' header
-                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                    }).then(response => response.text())
-                        .then(function (d) {
-                            vcart.GetCartProduct();
-                            alert(d);
+<script>
+    var vprod = new Vue({
+        el: '#app',
+        data: {
+            product: []
+        },
+        mounted: function () {
+            let self = this;
+            fetch("/Cart/GetProduct")
+                .then(function (res) { return res.json() })
+                .then(function (d) { self.product = d })
+        },
+        methods: {
+            addToCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/AddtoCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
 
-                        })
-                }
-
+                    });
             },
+            CleanCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/CleanCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
 
-        });
-    </script>
+                    });
+            }
+        }
+    })
+</script>

@@ -7,7 +7,7 @@ using TwenGo.Helper;
 using TwenGo.Models;
 using TwenGo.Models.Repository;
 
-namespace 套版測試2.Controllers
+namespace TwenGo.Controllers
 {
     public class CartController : Controller
     {
@@ -17,6 +17,10 @@ namespace 套版測試2.Controllers
         {
             _context = context;
 
+        }
+        public IActionResult OrderDetail()
+        {
+            return View();
         }
         public IActionResult Index()
         {
@@ -43,7 +47,7 @@ namespace 套版測試2.Controllers
             return _context.Products.ToList();
         }
 
-        public List<Product> GetCart()
+        public List<CartViewModel> GetCart()
         {
             //向 Session 取得商品列表
             List<CartItem> CartItems = SessionHelper.
@@ -52,12 +56,21 @@ namespace 套版測試2.Controllers
             {
                 var temp = CartItems.Select(x => x.Product.ProductID);
                 //return _context.Products.Where(x => x.Id == x.Id).ToList();
-                return _context.Products.Where(x => temp.Contains(x.ProductID)).ToList();
-
+                var findProducts = _context.Products.Where(x => temp.Contains(x.ProductID)).ToList();
+                return findProducts.Select(x => new CartViewModel
+                {
+                    Id = x.ProductID,
+                    Image = x.PicturePath,
+                    Name = x.ProductName,
+                    Price = x.Price,
+                    Description = x.Description,
+                    Amount = CartItems.Single(z => z.ProductId == x.ProductID).Amount,
+                    Subtotal = x.Price * CartItems.Single(z => z.ProductId == x.ProductID).Amount
+                }).ToList();
             }
             else
             {
-                return new List<Product>();
+                return new List<CartViewModel>();
             }
         }
 

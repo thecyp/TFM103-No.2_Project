@@ -28,57 +28,56 @@
                     <div class="row">
                         <div class="col-md-8">
                             <table class="table shop-cart">
-                                <tbody>
+                                <tbody id="cartPage">
                                     <tr class="cart_item">
+                                        @*<td class="product-remove">
+                                                    <a href="#" class="remove">×</a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a asp-area="" asp-controller="ShopDetail" asp-action="index">
+                                                        <img src="images/shop/thumb/shop_1.jpg" alt="">
+                                                    </a>
+                                                </td>
+                                                <td class="product-info">
+                                                    <a asp-area="" asp-controller="ShopDetail" asp-action="index">Black Hoodie</a>
+                                                    <span class="sub-title">Faucibus Tincidunt</span>
+                                                    <span class="amount">$2.00</span>
+                                                </td>
+                                                <td class="product-quantity">
+                                                    <div class="quantity">
+                                                        <input id="qty-1" type="number" min="0" name="number" value="1" class="input-text qty text" size="4">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <span class="amount">$2.00</span>
+                                                </td>
+                                            </tr>*@
+                                    <tr class="cart_item" v-for="item in product">
                                         <td class="product-remove">
-                                            <a href="#" class="remove">×</a>
+                                            <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                         </td>
                                         <td class="product-thumbnail">
                                             <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                <img src="images/shop/thumb/shop_1.jpg" alt="">
+                                                <img :src=item.image alt="" />
                                             </a>
                                         </td>
                                         <td class="product-info">
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">Black Hoodie</a>
-                                            <span class="sub-title">Faucibus Tincidunt</span>
-                                            <span class="amount">$2.00</span>
+                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">{{item.name}}</a>
+                                            <span class="sub-title">{{item.description}}</span>
+                                            <span class="amount">${{item.price}}</span>
                                         </td>
                                         <td class="product-quantity">
                                             <div class="quantity">
-                                                <input id="qty-1" type="number" min="0" name="number" value="1" class="input-text qty text" size="4">
+                                                <input id="qty-2" type="number" min="0" name="number" :value="item.amount" class="input-text qty text" size="4">
                                             </div>
                                         </td>
                                         <td class="product-subtotal">
-                                            <span class="amount">$2.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-remove">
-                                            <a href="#" class="remove">×</a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                <img src="images/shop/thumb/shop_2.jpg" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="product-info">
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">Redish Dress</a>
-                                            <span class="sub-title">Consequat Quismassa</span>
-                                            <span class="amount">$35.00</span>
-                                        </td>
-                                        <td class="product-quantity">
-                                            <div class="quantity">
-                                                <input id="qty-2" type="number" min="0" name="number" value="1" class="input-text qty text" size="4">
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">$35.00</span>
+                                            <span class="amount">{{item.price}}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="actions">
                                             <a class="continue-shopping" asp-controller="Shop" asp-action="index"> 繼續購物</a>
-                                            <a href="#" v-on:click="CleanCart(item.id)" class="btn btn-primary">刪除商品</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,6 +111,44 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var vcart2 = new Vue({
+            el: '#cartPage',
+            data: {
+                product: []
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/Cart/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                },
+                CleanCart: function (id) {
+                    console.log(id);
+                    let data = new FormData();
+                    data.append("id", id);
+                    fetch("/Cart/CleanCart", {
+                        body: data, // must match 'Content-Type' header
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    }).then(response => response.text())
+                        .then(function (d) {
+                            vcart.GetCartProduct();
+                            alert(d);
+
+                        })
+                }
+
+            },
+
+        });
+
+
+    </script>
 </body>
 
 
