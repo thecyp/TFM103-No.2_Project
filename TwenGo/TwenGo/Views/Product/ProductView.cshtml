@@ -5,11 +5,12 @@
         <div class="col-sm-3" v-for="item in products">
             <div class="card">
                 <div class="card-body">
-                    <img :src="item.picturePath" class="card-img-top">
-                    <h2 class="card-title">{{item.productName}}</h2>
-                    <p class="card-text">{{item.description}}</p>
+                    <h2 class="card-title">{{item.productName}}</h2> 
+                    <p class="card-text">服務內容:<br>{{item.description}}</p>
                     <p class="card-text">服務地點:{{item.address}}</p>
                     <p class="card-text">價格:{{item.price}}元</p>
+                    <img :src="item.picturePath" class="card-img-top">
+                    <p style="height:10px"></p>
                     <button v-on:click="edit(item.productID)">編輯</button>
                     <button v-on:click="del(item.productID)">刪除</button>
                 </div>
