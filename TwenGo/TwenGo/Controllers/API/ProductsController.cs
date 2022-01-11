@@ -53,7 +53,6 @@ namespace TwenGo.Controllers.API
             }
 
             _context.Entry(product).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -69,21 +68,10 @@ namespace TwenGo.Controllers.API
                     throw;
                 }
             }
-
             return NoContent();
         }
 
-        // POST: api/Products
-        [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
-        }
-
-
+        // DEIETE: api/Products
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -98,6 +86,15 @@ namespace TwenGo.Controllers.API
             return Ok("刪除成功");
         }
 
+        // POST: api/Products
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+        }
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ProductID == id);
