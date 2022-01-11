@@ -20,5 +20,8 @@ namespace TwenGo.Models.ViewModels
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "密碼")]
         public string Password { get; set; }
+
+        [Display(Name = "記住我")]
+        public bool RememberMe { get; set; }
     }
 }

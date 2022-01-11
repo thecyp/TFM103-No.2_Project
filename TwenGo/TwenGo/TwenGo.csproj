@@ -12,11 +12,6 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
-    <None Include="Views\Suppliers\Create.cshtml" />
-    <None Include="Views\Suppliers\Delete.cshtml" />
-    <None Include="Views\Suppliers\Details.cshtml" />
-    <None Include="Views\Suppliers\Edit.cshtml" />
-    <None Include="Views\Suppliers\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

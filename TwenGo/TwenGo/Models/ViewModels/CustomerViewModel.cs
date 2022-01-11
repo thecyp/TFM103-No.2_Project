@@ -77,6 +77,7 @@ namespace TwenGo.Models.ViewModels
         [Display(Name = "地址")]
         public string Address { get; set; }
 
-        
+        [Display(Name = "記住我?")]
+        public bool RememberMe { get; set; }
     }
 }

@@ -32,7 +32,10 @@ namespace TwenGo.Models.Repository.Entity
         [Display(Name = "地址")]
         public string Address { get; set; }
 
-        public virtual UserOfSuppliers UserOfSuppliers { get; set; }
+        [Display(Name = "記住我?")]
+        public bool RememberMe { get; set; }
+
+        public virtual UserOfAdmin UserOfAdmin { get; set; }       
         public virtual UserOfCustomer UserOfCustomer { get; set; }
     }
 }

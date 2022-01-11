@@ -1,5 +1,4 @@
-﻿@model TwenGo.Models.ViewModels.LoginViewModel
-
+﻿@model TwenGo.Models.ViewModels.RoleViewModel
 <style>
 
     .panel h2 {
@@ -86,10 +85,7 @@
             text-decoration: none;
         }
 
-    .btn-facebook {
-        background-color: #405D9D;
-        color: #fff;
-    }
+
 
     a:hover {
         text-decoration: none !important;
@@ -119,47 +115,36 @@
             left: 0;
             z-index: 1;
         }
+
+    #Left {
+        text-align: left;
+    }
 </style>
-
-
 
 <body id="LoginForm">
     <div class="container">
-
         <div class="login-form">
             <div class="main-div">
                 <div class="panel">
-                    <h2>會員登入</h2>
+                    <h2>角色建立</h2>
                 </div>
-                <form id="Login" action="~/Login/Index" method="post">
-
+                <form asp-action="RoleCreate">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <input name="Email" type="Email" class="form-control" id="inputEmail" placeholder="請輸入電子信箱">
-
+                        <input asp-for="RoleName" class="form-control" />
                     </div>
-
-                    <div class="form-group">
-
-                        <input name="C_Password" type="password" class="form-control" id="inputPassword" placeholder="請輸入密碼">
-
-                    </div>
-                    <div class="forgot">
-                        <a href="reset.html">忘記密碼?</a>
-                    </div>
-                    <button type="submit" class="btn btn-primary">登入</button>
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
                     <br />
-
+                    <div class="form-group">
+                        <button type="submit" class="btn  btn-block"> 確定送出  </button>
+                    </div>
                 </form>
-                <p class="divider-text">
-                    <span class="bg-white">OR</span>
-                </p>
-                <p>
-                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login in facebook</a>
-                </p>
             </div>
-
         </div>
     </div>
 
-
 </body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

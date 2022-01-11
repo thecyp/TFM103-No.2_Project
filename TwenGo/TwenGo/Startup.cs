@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,8 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
+
 
 namespace TwenGo
 {
@@ -28,22 +31,22 @@ namespace TwenGo
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
 
+            //宣告增加驗證方式，使用 cookie 驗證
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
                 //預設的驗證機制,裡面的名字預設叫Cookies
             ).AddCookie(opt => 
             {
+                //瀏覽器會限制cookie 只能經由HTTP(S) 協定來存取
+                opt.Cookie.HttpOnly = true;
                 //未登入時會自動導到這個網址
                 opt.LoginPath = new PathString("~/Login/Index");
+                //登入有效時間
+                opt.ExpireTimeSpan = TimeSpan.FromDays(30);
+
             });
 
-
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.User.AllowedUserNameCharacters = null;
-            });
-
+                                    
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<Users>(options => {
@@ -53,11 +56,22 @@ namespace TwenGo
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-               
+
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+                
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TwenGoContext>();
             services.AddControllersWithViews();
             services.AddSession();
+           
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Login/Index");
+                //other properties
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +88,8 @@ namespace TwenGo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -82,6 +98,8 @@ namespace TwenGo
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {
