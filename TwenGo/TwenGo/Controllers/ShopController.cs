@@ -30,6 +30,12 @@ namespace 套版測試2.Controllers
             }
             return View(await products.ToListAsync());
         }
-        
+
+        public ActionResult Introduce()
+        {
+            return View();
+        }
+
+
     }
 }

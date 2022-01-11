@@ -1,22 +1,23 @@
 ﻿@model IEnumerable<TwenGo.Models.Product>
 
-    @{
-        ViewData["Title"] = "搜尋結果";
-    }
+@{
+    ViewData["Title"] = "搜尋結果";
+}
 
 <h2>搜尋結果</h2>
-<div>
-    @foreach (var item in Model)
-    {
-    <div class="col-md-3">
-        <div class="card" style="width:20rem;float:left;display:inline;margin:10px; ">
-            <img src="@item.PicturePath" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">@item.ProductName</h5>
-                <p class="card-text">優惠價:@item.Price</p>
-                <a asp-controller="ShopDetail" asp-action="Index" class="btn btn-primary">產品介紹</a>
+@foreach (var item in Model)
+{
+    <div>
+        <div class="col-md-3" v-for="item in products">
+            <div class="card" style="width:20rem;float:left;display:inline;margin:10px; ">
+                <img :src="item.picturePath" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName</h5>
+                    <p class="card-text">優惠價:@item.Price</p>
+                    <a href="shop/Introduce" class="btn btn-dark">產品介紹</a>
+                </div>
             </div>
         </div>
     </div>
-    }
-</div>
+}
+
