@@ -33,7 +33,7 @@ namespace TwenGo.Controllers.API
         // GET: api/Products/5
         [HttpGet("{id}")]
      
-        public async Task<ActionResult> GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -41,9 +41,9 @@ namespace TwenGo.Controllers.API
             {
                 return NotFound();
             }
-            var j = JsonSerializer.Serialize(product);
+            //var j = JsonSerializer.Serialize(product);
 
-            return this.Content(j,"application/json");
+            return product;
         }
 
         // PUT: api/Products/5

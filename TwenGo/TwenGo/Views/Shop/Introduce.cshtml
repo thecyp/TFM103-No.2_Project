@@ -1,0 +1,30 @@
+﻿<div id="app">
+    {{100*100}}
+    <div class="row">
+        <div class="col-sm-3">
+            <h1>{{products.productName}}</h1>
+            <p>服務內容:<br>{{products.description}}</p>
+            <p>服務地點:{{products.address}}</p>
+            <p>價格:{{products.price}}元</p>
+            <img :src="products.picturePath" class="card-img-top">
+        </div>
+    </div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            products: []
+        }, mounted: function () {
+            let self = this;
+            fetch("/products/"+@ViewBag.ProductID)
+                .then(res => {
+                    return res.json();
+                })
+                .then(d => {
+                    self.products = d
+                })
+        }//mounted
+    })
+</script>
