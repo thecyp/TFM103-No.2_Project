@@ -19,7 +19,7 @@
 
     <h4 style="padding-top: 20px;">訂單資料</h4>
     <hr />
-    <form>
+    <form id="orderForm">
         <div class="text-danger"></div>
         <input type="hidden" />
         <div class="row">
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="form-group col-8">
                                 <label class="control-label">預約日期</label>
-                                <input class="form-control" />
+                                <input asp-for="ReciveDate" class="form-control" />
                                 <span class="text-danger"></span>
                             </div>
                             <div class="form-group col-6">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">備註</label>
-                            <input type="text" placeholder="#選填" class="form-control" />
+                            <textarea style="height:200px" form="orderForm" placeholder="#選填" class="form-control"></textarea>
                             <span class="text-danger"></span>
                         </div>
                     </div>
