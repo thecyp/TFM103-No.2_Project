@@ -5,14 +5,14 @@
         <div class="col-sm-3" v-for="item in products">
             <div class="card">
                 <div class="card-body">
-                    <img :src="item.picturePath" class="card-img-top">
-                    <h2 class="card-title">{{item.productName}}</h2>
-                    <p class="card-text">{{item.description}}</p>
+                    <h2 class="card-title">{{item.productName}}</h2> 
+                    <p class="card-text">服務內容:<br>{{item.description}}</p>
                     <p class="card-text">服務地點:{{item.address}}</p>
-                    <p class="card-text">定價:{{item.price}}元</p>
-                    <button v-on:click="edit">編輯</button>
-                    <button v-on:click="delete(item.productID)">刪除</button>
-                    <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
+                    <p class="card-text">價格:{{item.price}}元</p>
+                    <img :src="item.picturePath" class="card-img-top">
+                    <p style="height:10px"></p>
+                    <button v-on:click="edit(item.productID)">編輯</button>
+                    <button v-on:click="del(item.productID)">刪除</button>
                 </div>
             </div>
         </div>
@@ -37,67 +37,30 @@
                 })
         },//mounted
         methods: {
-            delete: function (id) {
-                fetch("/products/"+id, {
-                    method: 'DELETE'
-                }).then(response =>
-                    response.text()
+            del: function (id) {
+                var q = confirm("確認要刪除此項服務?")
+                if (q) {
+                    fetch("/products/" + id, {
+                        method: 'DELETE'
+                    }).then(response =>
+                        response.text()
                         .then(text => {
                             alert(text);
                             window.location.reload();
-                        })
-                )
+                        }))
+                }//if
             },//delete
-            //edit: function (id) {
-            //    fetch("/product/" + id, {
-            //        method: 'PUT'
-            //    }).then()
-            //}
+
+            edit: function (id) {
+                confirm("test")
+                fetch("/product/" + id, {
+                    method: 'PUT'
+                }).then(response =>
+                    response.text()
+                        .then(text => {
+                    }))
+
+            }//edit
         }//methods
     })//vue
-</script>
-
-<script>
-    var vprod = new Vue({
-        el: '#app',
-        data: {
-            product: []
-        },
-        mounted: function () {
-            let self = this;
-            fetch("/Cart/GetProduct")
-                .then(function (res) { return res.json() })
-                .then(function (d) { self.product = d })
-        },
-        methods: {
-            addToCart: function (id) {
-                console.log(id);
-                let data = new FormData();
-                data.append("id", id);
-                fetch("/Cart/AddtoCart", {
-                    body: data, // must match 'Content-Type' header
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                }).then(response => response.text())
-                    .then(function (d) {
-                        vcart.GetCartProduct();
-                        alert(d);
-
-                    });
-            },
-            CleanCart: function (id) {
-                console.log(id);
-                let data = new FormData();
-                data.append("id", id);
-                fetch("/Cart/CleanCart", {
-                    body: data, // must match 'Content-Type' header
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                }).then(response => response.text())
-                    .then(function (d) {
-                        vcart.GetCartProduct();
-                        alert(d);
-
-                    });
-            }
-        }
-    })
 </script>

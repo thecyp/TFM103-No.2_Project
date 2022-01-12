@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,5 +29,12 @@ namespace TwenGo.Controllers
             }
             return View(await products.ToListAsync());
         }
+
+        public ActionResult Introduce()
+        {
+            return View();
+        }
+
+
     }
 }

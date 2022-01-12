@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,8 @@ namespace TwenGo.Controllers.API
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+     
+        public async Task<ActionResult> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -39,8 +41,9 @@ namespace TwenGo.Controllers.API
             {
                 return NotFound();
             }
+            var j = JsonSerializer.Serialize(product);
 
-            return product;
+            return this.Content(j,"application/json");
         }
 
         // PUT: api/Products/5
@@ -53,7 +56,6 @@ namespace TwenGo.Controllers.API
             }
 
             _context.Entry(product).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -69,21 +71,10 @@ namespace TwenGo.Controllers.API
                     throw;
                 }
             }
-
             return NoContent();
         }
 
         // POST: api/Products
-        [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        }
-
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -98,6 +89,15 @@ namespace TwenGo.Controllers.API
             return Ok("刪除成功");
         }
 
+        // POST: api/Products
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+        }
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
