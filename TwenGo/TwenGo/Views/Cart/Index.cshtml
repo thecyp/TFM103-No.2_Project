@@ -25,10 +25,10 @@
             </div>
             <div class="section pt-7 pb-7">
                 <div class="container">
-                    <div class="row" >
+                    <div class="row" id="cartPage">
                         <div class="col-md-8">
                             <table class="table shop-cart">
-                                <tbody id="cartPage">
+                                <tbody >
                                     <tr class="cart_item" v-for="item in product">
                                         <td class="product-remove">
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
@@ -71,7 +71,7 @@
                                     </tbody>
                                 </table>
                                 <div class="proceed-to-checkout">
-                                    <a asp-controller="Cart" asp-action="OrderDetail">填寫訂單資料</a>
+                                    <a asp-controller="Order" asp-action="index">填寫訂單資料</a>
                                 </div>
                             </div>
                         </div>

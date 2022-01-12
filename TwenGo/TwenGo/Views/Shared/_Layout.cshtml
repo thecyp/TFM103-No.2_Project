@@ -121,13 +121,13 @@
                                 </ul>
                             </nav>
                             <div class="btn-wrap">
-                                <div id="cartMenu" class="mini-cart-wrap">
+                                <div  class="mini-cart-wrap">
                                     <div class="mini-cart">
                                         <div class="mini-cart-icon" data-count="2">
                                             <i class="ion-bag"></i>
                                         </div>
                                     </div>
-                                    <div class="widget-shopping-cart-content">
+                                    <div class="widget-shopping-cart-content" id="cartMenu">
                                         <ul class="cart-list">
                                             <li v-for="item in product">
                                                 <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
@@ -140,12 +140,12 @@
                                             </li>
                                         </ul>
                                         <p class="total">
-                                            <strong>小計:</strong>
-                                            <span class="amount">$21.00</span>
+                                            <strong>總價:</strong>
+                                            <span class="amount">$ {{product[0].total}}</span>
                                         </p>
                                         <p class="buttons">
                                             <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                            <a asp-area="" asp-controller="Cart" asp-action="OrderDetail" class="checkout">立即購買</a>
+                                            <a asp-area="" asp-controller="Order" asp-action="index" class="checkout">立即購買</a>
                                         </p>
                                     </div>
                                 </div>
