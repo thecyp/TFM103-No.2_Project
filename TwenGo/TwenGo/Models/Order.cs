@@ -16,15 +16,17 @@ namespace TwenGo.Models
         public int Total { get; set; }
 
         [Required]
+        public DateTime ReciveDate { get; set; }
+        [Required]
         public string ReceiverName { get; set; }
         [Required]
-        public string ReceiverAdress { get; set; }
+        public string ReceiverAddress { get; set; }
         [Required]
         public string ReceiverPhone { get; set; }
 
+
         public bool isPaid { get; set; }
         public List<OrderItem> OrderItem { get; set; }
-        //詳細時間 地區
     }
 
     public class OrderItem
@@ -34,6 +36,7 @@ namespace TwenGo.Models
         public int ProductId { get; set; }
         public int Amount { get; set; }
         public int SubTotal { get; set; }
+        public int Total { get; set; }
     }
 
     public class CartItem : OrderItem
@@ -45,6 +48,7 @@ namespace TwenGo.Models
             this.ProductId = order.ProductId;
             this.Amount = order.Amount;
             this.SubTotal = order.SubTotal;
+            this.Total = order.Total;
         }
 
         public Product Product { get; set; }

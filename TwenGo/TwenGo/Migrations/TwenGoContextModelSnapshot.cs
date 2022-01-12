@@ -233,6 +233,9 @@ namespace TwenGo.Migrations
                     b.Property<int>("SubTotal")
                         .HasColumnType("int");
 
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");

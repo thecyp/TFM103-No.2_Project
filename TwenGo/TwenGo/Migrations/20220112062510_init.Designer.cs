@@ -10,8 +10,8 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220112041907_Initial")]
-    partial class Initial
+    [Migration("20220112062510_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,6 +233,9 @@ namespace TwenGo.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SubTotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

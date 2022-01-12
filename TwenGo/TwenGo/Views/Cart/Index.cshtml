@@ -25,33 +25,10 @@
             </div>
             <div class="section pt-7 pb-7">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" id="cartPage">
                         <div class="col-md-8">
                             <table class="table shop-cart">
-                                <tbody id="cartPage">
-                                    <tr class="cart_item">
-                                        @*<td class="product-remove">
-                                                    <a href="#" class="remove">×</a>
-                                                </td>
-                                                <td class="product-thumbnail">
-                                                    <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                        <img src="images/shop/thumb/shop_1.jpg" alt="">
-                                                    </a>
-                                                </td>
-                                                <td class="product-info">
-                                                    <a asp-area="" asp-controller="ShopDetail" asp-action="index">Black Hoodie</a>
-                                                    <span class="sub-title">Faucibus Tincidunt</span>
-                                                    <span class="amount">$2.00</span>
-                                                </td>
-                                                <td class="product-quantity">
-                                                    <div class="quantity">
-                                                        <input id="qty-1" type="number" min="0" name="number" value="1" class="input-text qty text" size="4">
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal">
-                                                    <span class="amount">$2.00</span>
-                                                </td>
-                                            </tr>*@
+                                <tbody >
                                     <tr class="cart_item" v-for="item in product">
                                         <td class="product-remove">
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
@@ -72,7 +49,7 @@
                                             </div>
                                         </td>
                                         <td class="product-subtotal">
-                                            <span class="amount">{{item.price}}</span>
+                                            <span class="amount">NT$ {{item.subtotal}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,17 +64,9 @@
                             <div class="cart-totals">
                                 <table>
                                     <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>小計</th>
-                                            <td>$116.00</td>
-                                        </tr>
-                                        <tr class="shipping">
-                                            <th>物流</th>
-                                            <td>免運費</td>
-                                        </tr>
                                         <tr class="order-total">
-                                            <th>總計</th>
-                                            <td><strong>$116.00</strong></td>
+                                            <th>總計: </th>
+                                            <td v-for="item in product"><strong>NT$ {{item.total}}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
