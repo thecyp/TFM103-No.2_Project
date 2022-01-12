@@ -25,10 +25,10 @@
             </div>
             <div class="section pt-7 pb-7">
                 <div class="container">
-                    <div class="row" id="cartPage">
+                    <div class="row" >
                         <div class="col-md-8">
                             <table class="table shop-cart">
-                                <tbody >
+                                <tbody id="cartPage">
                                     <tr class="cart_item" v-for="item in product">
                                         <td class="product-remove">
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
@@ -66,7 +66,7 @@
                                     <tbody>
                                         <tr class="order-total">
                                             <th>總計: </th>
-                                            <td v-for="item in product"><strong>NT$ {{item.total}}</strong></td>
+                                            <td ><strong>NT$ {{product[0].total}}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>

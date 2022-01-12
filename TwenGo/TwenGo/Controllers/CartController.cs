@@ -18,8 +18,6 @@ namespace TwenGo.Controllers
         public CartController(TwenGoContext context)
         {
             _context = context;
-
-
         }
         public IActionResult Index()
         {
