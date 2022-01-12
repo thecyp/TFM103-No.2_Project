@@ -8,6 +8,7 @@ namespace TwenGo.Models
 {
     public class Order
     {
+        [DisplayFormat(DataFormatString = "{0:000000}")]
         public int Id { get; set; }
 
         public DateTime OrderDate { get; set; }
@@ -23,6 +24,7 @@ namespace TwenGo.Models
         public string ReceiverAddress { get; set; }
         [Required]
         public string ReceiverPhone { get; set; }
+        public string Memo { get; set; }
 
 
         public bool isPaid { get; set; }

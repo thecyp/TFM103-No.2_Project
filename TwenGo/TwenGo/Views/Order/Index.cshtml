@@ -1,0 +1,190 @@
+﻿@model TwenGo.Models.Order
+
+@{ ViewData["Title"] = "Order"; }
+<body>
+    <div class="section border-bottom pt-2 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumbs">
+                        <li><a a asp-controller="Home" asp-action="index">首頁</a></li>
+                        <li><a asp-controller="ShopDetail" asp-action="index">商品詳情</a></li>
+                        <li> <a asp-controller="Cart" asp-action="index">購物車</a></></li>
+                        <li>訂單資料</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 style="padding-top: 20px;">訂單資料</h4>
+    <hr />
+    <form>
+        <div class="text-danger"></div>
+        <input type="hidden" />
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">付款人資料</h5>
+                        <div class="form-group">
+                            <label class="control-label">付款人ID</label>
+                            <input readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">付款人帳號</label>
+                            <input readonly class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">預約資料</h5>
+                        <div class="row">
+                            <div class="form-group col-8">
+                                <label class="control-label">預約日期</label>
+                                <input class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="control-label">預約姓名</label>
+                                <input placeholder="#必填" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-8">
+                                <label class="control-label">預約電話</label>
+                                <input placeholder="#必填" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">預約地址</label>
+                            <input placeholder="#必填" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">備註</label>
+                            <input type="text" placeholder="#選填" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="OrderPage" class="col-md-4">
+                <div class="cart-totals">
+                    <input type="hidden" />
+                    <div  class="card-body">
+                        <h5 class="card-text" style="font-size:30px">訂單內容</h5>
+                        <table class="table table-borderless">
+                            <thead v-for="item in product">
+                                <tr >
+                                    <th>商品名稱: </th>
+                                    <td>{{item.name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>小計: </th>
+                                    <td>{{item.price}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div class="text-right">
+                            <input type="hidden" />
+                            <p class="card-text font-weight-bolder" style="padding-right:12px" >總計:　$ {{product.total}}</p>
+                        </div>
+                        <p></p>
+                        <div class="text-center card-link">
+                            <button type="submit" class="btn btn-success w-75">建立訂單</button>
+                        </div>
+                    </div>
+                </div>
+            </divid="OrderPage">
+        </div>
+    </form>
+    <p></p>
+    <button class="btn btn-sm btn-outline-secondary" asp-controller="Cart" asp-action="Index"><i class="fas fa-angle-left"></i> 返回購物車</button>
+
+    <script>
+        var vorder = new Vue({
+            el: '#OrderPage',
+            data: {
+                product: []
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/Cart/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                },
+            },
+
+        });
+    </script>
+</body>
+@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    }
+
+<style>
+    .progressbar li {
+        list-style-type: none;
+        width: 25%;
+        float: left;
+        font-size: 12px;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        color: #7d7d7d;
+    }
+
+        .progressbar li:before {
+            width: 30px;
+            height: 30px;
+            content: counter(step);
+            counter-increment: step;
+            line-height: 30px;
+            border: 2px solid #7d7d7d;
+            display: block;
+            text-align: center;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        .progressbar li:after {
+            width: 100%;
+            height: 2px;
+            content: '';
+            position: absolute;
+            background-color: #7d7d7d;
+            top: 15px;
+            left: -50%;
+            z-index: -1;
+        }
+
+        .progressbar li:first-child:after {
+            content: none;
+        }
+
+        .progressbar li.active {
+            color: green;
+        }
+
+            .progressbar li.active:before {
+                border-color: #55b776;
+            }
+
+            .progressbar li.active + li:after {
+                background-color: #55b776;
+            }
+</style>
