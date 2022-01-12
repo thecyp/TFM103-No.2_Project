@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,12 @@ namespace TwenGo.Controllers
     {
         private readonly TwenGoContext _context;
 
+
         public CartController(TwenGoContext context)
         {
             _context = context;
 
-        }
-        public IActionResult OrderDetail()
-        {
-            return View();
+
         }
         public IActionResult Index()
         {
