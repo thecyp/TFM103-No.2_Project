@@ -96,7 +96,7 @@ namespace TwenGo.Controllers.API
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
         private bool ProductExists(int id)
         {
