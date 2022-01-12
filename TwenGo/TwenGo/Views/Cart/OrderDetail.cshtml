@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="page-title text-center">訂單詳情</h2>
+                        <h2 class="page-title text-center">訂單資料填寫</h2>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                         <ul class="breadcrumbs">
                             <li><a asp-controller="Home" asp-action="index">首頁</a></li>
                             <li><a asp-controller="Cart" asp-action="index">購物車</a></li>
-                            <li>訂單詳情</li>
+                            <li>訂單資料填寫</li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>個人資料填寫</h3>
+                        <h3>資料填寫</h3>
                         <form>
                             <div class="row">
                                 <div class="col-md-6">
@@ -59,7 +59,6 @@
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <h3>物流資料填寫</h3>
                         <form>
                             <div class="row">
                                 <div class="col-md-12">
@@ -144,21 +143,6 @@
                                     <tr>
                                         <th>小計</th>
                                         <td>$21.00</td>
-                                    </tr>
-                                    <tr>
-                                        <th>運送方式</th>
-                                        <td>
-                                            <ul id="shipping_method">
-                                                <li>
-                                                    <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_free_shipping1" value="free_shipping:1" class="shipping_method" checked="checked">
-                                                    <span>常溫</span>
-                                                </li>
-                                                <li>
-                                                    <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_free_shipping1" value="free_shipping:1" class="shipping_method" checked="checked">
-                                                    <span>冷藏/冷凍</span>
-                                                </li>
-                                            </ul>
-                                        </td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>總計</th>

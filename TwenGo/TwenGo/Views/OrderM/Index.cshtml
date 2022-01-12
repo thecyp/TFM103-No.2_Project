@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TwenGo.Models.Order>
+﻿@model IEnumerable<TwenGo.Models.OrderM>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,8 +12,8 @@
 
 
 @*<p>
-    <a asp-action="Create">新增訂單</a>
-</p>*@
+        <a asp-action="Create">新增訂單</a>
+    </p>*@
 
 
 <div class="container">
@@ -37,8 +37,8 @@
                             @Html.DisplayNameFor(model => model.OrderDate)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.UserId)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.UserName)
                         </th>
@@ -58,8 +58,8 @@
                             @Html.DisplayNameFor(model => model.isPaid)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>*@
                         <th></th>
                     </tr>
                 </thead>
@@ -71,8 +71,8 @@
                                 @Html.DisplayFor(modelItem => item.OrderDate)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.UserId)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
@@ -92,8 +92,8 @@
                                 @Html.DisplayFor(modelItem => item.isPaid)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>*@
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                                 @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
@@ -127,8 +127,8 @@
                             @Html.DisplayNameFor(model => model.ReceiverPhone)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.UserId)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.UserName)
                         </th>
@@ -139,8 +139,8 @@
                             @Html.DisplayNameFor(model => model.isPaid)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>*@
                         <th></th>
                     </tr>
                 </thead>
@@ -161,8 +161,8 @@
                                 @Html.DisplayFor(modelItem => item.ReceiverPhone)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.UserId)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
@@ -173,8 +173,8 @@
                                 @Html.DisplayFor(modelItem => item.isPaid)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>*@
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                                 @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
