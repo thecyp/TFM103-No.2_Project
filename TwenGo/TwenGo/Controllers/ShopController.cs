@@ -31,12 +31,10 @@ namespace 套版測試2.Controllers
             return View(await products.ToListAsync());
         }
 
-        public ActionResult Introduce(Int32 productid)
+        public ActionResult Introduce(int productid)
         {
             ViewBag.ProductID = productid;
             return View();
         }
-
-
     }
 }
