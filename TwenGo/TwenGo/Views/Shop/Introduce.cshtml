@@ -1,16 +1,38 @@
-﻿<div id="app">
-    {{100*100}}
-    <div class="row">
-        <div class="col-sm-3">
-            <h1>{{products.productName}}</h1>
-            <p>服務內容:<br>{{products.description}}</p>
-            <p>服務地點:{{products.address}}</p>
-            <p>價格:{{products.price}}元</p>
-            <img :src="products.picturePath" class="card-img-top">
+﻿<div id="app" class="product">
+    <div id="carouselExampleSlidesOnly" class="carousel slide iii"  data-bs-ride="carousel">
+        <div class="carousel-inner" style="text-align:center">
+            <div class="carousel-item active">
+                <img :src="products.picturePath" class="d-block w-75" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3 iii color" style="max-width: 100%;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body" style="">
+                    <h1 class="card-title">{{products.productName}}</h1>
+                    <p class="card-text"><h2>服務內容:</h2><h6>{{products.description}}</h6></p>
+                    <p class="card-text"><h6>服務地點:{{products.address}}</h6></p>
+                    <p class="card-text"><h6>服務價格:{{products.price}}元</h6></p>
+                    <button>加入購物車</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
+<style>
+    body{
+        background-color:cornsilk
+    }
+    .color{
+        background-color:floralwhite
+    }
+    .iii {
+       float: left;
+        width: 50%;
+        color:black
+    }
+</style>
 <script>
     var vm = new Vue({
         el: "#app",
@@ -28,3 +50,5 @@
         }//mounted
     })
 </script>
+
+//products.picturePath
