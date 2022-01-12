@@ -54,18 +54,18 @@ namespace TwenGo.Controllers
                 GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
             if (CartItems != null)
             {
-                var temp = CartItems.Select(x => x.Product.ProductID);
+                var temp = CartItems.Select(x => x.Product.Id);
                 //return _context.Products.Where(x => x.Id == x.Id).ToList();
-                var findProducts = _context.Products.Where(x => temp.Contains(x.ProductID)).ToList();
+                var findProducts = _context.Products.Where(x => temp.Contains(x.Id)).ToList();
                 return findProducts.Select(x => new CartViewModel
                 {
-                    Id = x.ProductID,
+                    Id = x.Id,
                     Image = x.PicturePath,
                     Name = x.ProductName,
                     Price = x.Price,
                     Description = x.Description,
-                    Amount = CartItems.Single(z => z.ProductId == x.ProductID).Amount,
-                    Subtotal = x.Price * CartItems.Single(z => z.ProductId == x.ProductID).Amount
+                    Amount = CartItems.Single(z => z.ProductId == x.Id).Amount,
+                    Subtotal = x.Price * CartItems.Single(z => z.ProductId == x.Id).Amount
                 }).ToList();
             }
             else
@@ -78,11 +78,11 @@ namespace TwenGo.Controllers
         [HttpPost]
         public IActionResult AddtoCart([FromForm] int id)
         {
-            var product = _context.Products.Single(x => x.ProductID.Equals(id));
+            var product = _context.Products.Single(x => x.Id.Equals(id));
             //取得商品資料
             CartItem item = new CartItem
             {
-                ProductId = product.ProductID,
+                ProductId = product.Id,
                 Product = product,
                 Amount = 1,
                 SubTotal = product.Price,
@@ -103,7 +103,7 @@ namespace TwenGo.Controllers
                 List<CartItem> cart = SessionHelper.
                     GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
 
-                int index = cart.FindIndex(m => m.Product.ProductID.Equals(id));
+                int index = cart.FindIndex(m => m.Product.Id.Equals(id));
                 if (index != -1)
                 {
                     cart[index].Amount += item.Amount;
@@ -126,7 +126,7 @@ namespace TwenGo.Controllers
                 GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
 
             //用FindIndex查詢目標在List裡的位置
-            int index = cart.FindIndex(m => m.Product.ProductID.Equals(id));
+            int index = cart.FindIndex(m => m.Product.Id.Equals(id));
             cart.RemoveAt(index);
 
             if (cart.Count < 1)

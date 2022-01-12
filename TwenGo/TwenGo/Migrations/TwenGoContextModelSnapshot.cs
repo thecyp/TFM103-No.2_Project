@@ -197,9 +197,6 @@ namespace TwenGo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
@@ -245,7 +242,7 @@ namespace TwenGo.Migrations
 
             modelBuilder.Entity("TwenGo.Models.Product", b =>
                 {
-                    b.Property<int>("ProductID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -266,7 +263,7 @@ namespace TwenGo.Migrations
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProductID");
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
                 });

@@ -11,7 +11,7 @@ namespace TwenGo.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductID { get; set; }
+        public int Id { get; set; }
         public String ProductName { get; set; }
         public String Address { get; set; }//0110改
 

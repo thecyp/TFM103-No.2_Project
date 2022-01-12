@@ -8,7 +8,7 @@ using TwenGo.Data;
 using TwenGo.Models;
 using TwenGo.Models.Repository;
 
-namespace 套版測試2.Controllers
+namespace TwenGo.Controllers
 {
     public class ShopController : Controller
     {
@@ -18,8 +18,7 @@ namespace 套版測試2.Controllers
         {
             _context = twenGoContext;
         }
-        
-        public async Task< IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString)
         {
 
             var products = from p in _context.Products
@@ -30,6 +29,5 @@ namespace 套版測試2.Controllers
             }
             return View(await products.ToListAsync());
         }
-        
     }
 }

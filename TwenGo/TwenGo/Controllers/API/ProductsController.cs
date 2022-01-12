@@ -47,7 +47,7 @@ namespace TwenGo.Controllers.API
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (id != product.ProductID)
+            if (id != product.Id)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace TwenGo.Controllers.API
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
 
@@ -100,7 +100,7 @@ namespace TwenGo.Controllers.API
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

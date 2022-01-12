@@ -41,7 +41,7 @@ namespace TwenGo.Controllers
             }
 
             var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -95,7 +95,7 @@ namespace TwenGo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductName,Category,Quantity,Description,Price,UnitStock")] Models.Product product)
         {
-            if (id != product.ProductID)
+            if (id != product.Id)
             {
                 return NotFound();
             }
@@ -109,7 +109,7 @@ namespace TwenGo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ProductID))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,7 @@ namespace TwenGo.Controllers
             }
 
             var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -154,7 +154,7 @@ namespace TwenGo.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.Id == id);
         }
 
     }
