@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace 套版測試2.Controllers
+namespace TwenGo2.Controllers
 {
     public class ContactUsController : Controller
     {
