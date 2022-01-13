@@ -39,6 +39,7 @@
     <script type="text/javascript" src="~/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.migration.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.parallax.min.js"></script>
+
     @await RenderSectionAsync("Styles", required: false)
 
 
@@ -93,46 +94,6 @@
                             <img class="logo-image" src="~/images/logo.png" alt="Organik Logo" />
                         </a>
                     </div>
-                    <div class="col-md-9">
-                        <div class="header-right">
-                            <nav class="menu">
-                                <ul class="main-menu">
-                                    <li><a asp-area="" asp-controller="Home" asp-action="index">首頁</a></li>
-                                    <li><a asp-area="" asp-controller="AboutUs" asp-action="index">關於我們</a></li>
-                                    <li><a asp-area="" asp-controller="Shop" asp-action="index">購物</a></li>
-                                    <li><a asp-area="" asp-controller="Cart" asp-action="index">購物車</a></li>
-                                    <li><a asp-area="" asp-controller="Contact" asp-action="index">聯絡我們</a></li>
-                                </ul>
-                            </nav>
-                            <div class="btn-wrap">
-                                <div class="mini-cart-wrap">
-                                    <div class="mini-cart">
-                                        <div class="mini-cart-icon" data-count="!">
-                                            <i class="ion-bag"></i>
-                                        </div>
-                                    </div>
-                                    <div class="widget-shopping-cart-content" id="cartMenu">
-                                        <ul class="cart-list">
-                                            <li v-for="item in product">
-                                                <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
-                                                <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                    <img :src=item.image alt="" />
-                                                    {{item.name}}&nbsp;
-                                                </a>
-                                                <span class="card-text">x{{item.amount}}</span>
-                                                <span class="quantity"> NT$ {{item.subtotal}}</span>
-                                            </li>
-                                        </ul>
-
-                                        <p class="total">
-                                            <strong>總價: </strong>
-                                            <span class="amount">$ {{product[0].total}}</span>
-                                        </p>
-
-                                        <p class="buttons">
-                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                            <a asp-area="" asp-controller="Order" asp-action="index" class="checkout">立即購買</a>
-                                        </p>
                     <div class="col-md-8">
                         <form asp-controller="Shop" asp-action="Index">
                             <input type="text" class="top-search-input" name="SearchString" />
@@ -144,36 +105,25 @@
                         <div class="btn-wrap">
                             <div id="cartMenu" class="mini-cart-wrap">
                                 <div class="mini-cart">
-                                    <div class="mini-cart-icon" data-count="2">
-                                        
+                                    <div class="mini-cart-icon" data-count="!">
                                         <i class="ion-bag"></i>
-                                           
                                     </div>
-
-
                                 </div>
-
-                                <div class="top-search-btn-wrap">
-                                    <div class="top-search-btn">
-                                        <a href="javascript:void(0);">
-                                            <i class="ion-search"></i>
-                                        </a>
-                                    </div>
                                 <div class="widget-shopping-cart-content">
-                                    <ul class="cart-list">
-                                        <li v-for="item in product">
+                                    <ul class="cart-list"  v-for="item in product">
+                                        <li>
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                             <a asp-area="" asp-controller="ShopDetail" asp-action="index">
                                                 <img :src=item.image alt="" />
-                                                {{item.name}}&nbsp;
+                                                產品名稱: {{item.name}}&nbsp;
                                             </a>
                                             <p class="card-text">產品敘述: {{item.description}}</p>
                                             <span class="quantity"> ${{item.price}}</span>
                                         </li>
                                     </ul>
                                     <p class="total">
-                                        <strong>小計:</strong>
-                                        <span class="amount">$21.00</span>
+                                        <strong>總計: </strong>
+                                        <span class="amount">NT$ {{product[0].total}}</span>
                                     </p>
                                     <p class="buttons">
                                         <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
@@ -181,7 +131,7 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -189,13 +139,13 @@
             </div>
         </div>
 
-        
+
         <header class="header header-mobile">
             <div class="container">
                 <div class="row">
-                 
-                    
-                    
+
+
+
                 </div>
             </div>
         </header>
@@ -273,7 +223,7 @@
         </div>
     </div>
     @await RenderSectionAsync("Scripts", required: false)
-   
+
     <style>
         .copyrights {
             text-indent: -9999px;
