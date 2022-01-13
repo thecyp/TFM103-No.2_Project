@@ -1,66 +1,145 @@
 ﻿@model TwenGo.Models.Product
 <div id="app">
-    {{100*100}}
     <div class="row">
         <div class="col-sm-3" v-for="item in products">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">{{item.productName}}</h2> 
+                    <h2 class="card-title">{{item.productName}}</h2>
                     <p class="card-text">服務內容:<br>{{item.description}}</p>
                     <p class="card-text">服務地點:{{item.address}}</p>
                     <p class="card-text">價格:{{item.price}}元</p>
                     <img :src="item.picturePath" class="card-img-top">
                     <p style="height:10px"></p>
-                    <button v-on:click="edit(item.productID)">編輯</button>
-                    <button v-on:click="del(item.productID)">刪除</button>
+                    @*<button v-on:click="show()">編輯</button>*@
+                    <button class="btn btn-primary" onclick="show()">編輯</button>
+                    <button class="btn btn-danger" v-on:click="del(item.id)">刪除</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    var v = new Vue({
-        el: "#app",
-        data: {
-            products: []
-        },//data
-        mounted: function () {
-            let self = this;
-            fetch("/products")
-                .then(function (res) {
-                    return res.json();
-                })
-                .then(function (myjson) {
-                    for (let i = 0; i < myjson.length; i++) {
-                        self.products.push(myjson[i])
-                    }
-                })
-        },//mounted
-        methods: {
-            del: function (id) {
-                var q = confirm("確認要刪除此項服務?")
-                if (q) {
-                    fetch("/products/" + id, {
-                        method: 'DELETE'
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" id="dia">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">編輯資料</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label for="name">服務名稱:</label>
+                    <input type="text" class="form-control" id="name" name="ProductName">
+                </div>
+                <label>服務地點:</label>
+                <div id="twzipcode" class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" name="Address"> <i class="fas fa-map-marker-alt"></i> </span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>服務敘述:</label>
+                        <br />
+                        <textarea name="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>服務價格:</label>
+                    <br />
+                    <input type="number" name="Price" />
+                </div>
+                <div>
+                    <label>上傳圖片</label>
+                    <br />
+                    <input type="file" name="pic" id="inputpic" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消變更</button>
+                <button type="button" class="btn btn-primary">儲存修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        $(window).ready(() => {
+            $('#myModal').modal("hide");
+
+        })
+        function show(){
+            $('#myModal').modal();
+        }
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .modal.fade .modal-dialog {
+            transform: translateY(10vh);
+        }
+
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }
+        .modal-backdrop {
+           z-index: 0;
+        }
+      
+    
+    </style>
+
+    <script>
+        var v = new Vue({
+            el: "#app",
+            data: {
+                products: []
+            },//data
+            mounted: function () {
+                let self = this;
+                fetch("/products")
+                    .then(function (res) {
+                        return res.json();
+                    })
+                    .then(function (myjson) {
+                        for (let i = 0; i < myjson.length; i++) {
+                            self.products.push(myjson[i])
+                        }
+                    })
+            },//mounted
+            methods: {
+                del: function (id) {
+                    var q = confirm("確認要刪除此項服務?")
+                    if (q) {
+                        fetch("/products/" + id, {
+                            method: 'DELETE'
+                        }).then(response =>
+                            response.text()
+                                .then(text => {
+                                    alert(text);
+                                    window.location.reload();
+                                }))
+                    }//if
+                },//delete
+
+                edit: function (id) {
+                    confirm("test")
+                    fetch("/product/" + id, {
+                        method: 'PUT'
                     }).then(response =>
                         response.text()
-                        .then(text => {
-                            alert(text);
-                            window.location.reload();
+                            .then(text => {
                         }))
-                }//if
-            },//delete
 
-            edit: function (id) {
-                confirm("test")
-                fetch("/product/" + id, {
-                    method: 'PUT'
-                }).then(response =>
-                    response.text()
-                        .then(text => {
-                    }))
-
-            }//edit
-        }//methods
-    })//vue
-</script>
+                //}//edit
+            }//methods
+        })//vue
+    </script>
+    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    //setTimeout(() => $('#myModal').modal('show'), 1000);
+    //setTimeout(() => $('#myModal').modal('hide'), 4000);
+    @*integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"*@
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>*@

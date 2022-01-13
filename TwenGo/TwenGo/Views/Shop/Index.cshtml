@@ -1,32 +1,28 @@
 ﻿@model IEnumerable<TwenGo.Models.Product>
-
 @{
     ViewData["Title"] = "搜尋結果";
 }
-
 <h2>搜尋結果</h2>
-@*@foreach(i in Model)
-            {
-
-            }*@
-<div class="section pt-7 pb-7">
-    <div class="container">
-        <div class="row">
-            <div id="example-2" class="col-md-3">
-                <div class="card" style="width:20rem;float:left;display:inline;margin:10px;" v-for="item in product">
-                    <img :src="item.picturePath" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">產品名稱: {{item.productName}}</h5>
-                        <p class="card-text">描述: {{item.description}}</p>
-                        <p class="card-text">優惠價: {{item.price}}</p>
-                        <a href="shop/Introduce?id={{item.id}}" class="btn btn-dark">產品介紹</a>
+@foreach (var item in Model)
+{
+    <div class="section pt-7 pb-7">
+        <div class="container">
+            <div class="row">
+                <div id="example-2" class="col-md-3">
+                    <div class="card" style="width:20rem;float:left;display:inline;margin:10px;">
+                        <img src="@item.PicturePath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">產品名稱:@item.ProductName</h5>
+                            <p class="card-text">描述: @item.Description</p>
+                            <p class="card-text">優惠價:@item.Price</p>
+                            <a href="/shop/introduce?id=@item.Id" class="btn btn-dark">產品介紹</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 
 <script>
     var vprod = new Vue({
@@ -36,7 +32,7 @@
         },
         mounted: function () {
             let self = this;
-            fetch("/Cart/GetProduct")
+            fetch("/Products")
                 .then(function (res) { return res.json() })
                 .then(function (d) { self.product = d })
         },
@@ -66,9 +62,8 @@
                     .then(function (d) {
                         vcart.GetCartProduct();
                         alert(d);
-
                     });
             }
-        }
+        },//method
     })
 </script>

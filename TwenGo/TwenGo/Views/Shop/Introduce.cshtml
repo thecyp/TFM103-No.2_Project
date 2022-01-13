@@ -1,12 +1,12 @@
 ﻿<div id="app" class="product">
-    <div id="carouselExampleSlidesOnly" class="carousel slide iii"  data-bs-ride="carousel">
+    <div id="carouselExampleSlidesOnly" class="carousel slide MyProduct"  data-bs-ride="carousel">
         <div class="carousel-inner" style="text-align:center">
             <div class="carousel-item active">
                 <img :src="products.picturePath" class="d-block w-75" alt="...">
             </div>
         </div>
     </div>
-    <div class="card mb-3 iii color" style="max-width: 100%;">
+    <div class="card mb-3 MyProduct color" style="max-width: 100%;">
         <div class="row g-0">
             <div class="col-md-8">
                 <div class="card-body" style="">
@@ -27,7 +27,7 @@
     .color{
         background-color:floralwhite
     }
-    .iii {
+    .MyProduct {
        float: left;
         width: 50%;
         color:black
@@ -87,11 +87,9 @@
                     .then(function (d) {
                         vcart.GetCartProduct();
                         alert(d);
-
                     });
             }
         }
     })
 </script>
-
-//products.picturePath
+.
