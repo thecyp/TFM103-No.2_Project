@@ -1,5 +1,5 @@
-﻿
-@model TwenGo.Models.ViewModels.AdminViewModel
+﻿@model TwenGo.Models.ViewModels.AdminViewModel
+
 <style>
     .divider-text {
         position: relative;
@@ -41,23 +41,18 @@
     }
 </style>
 
-<div class="container">
+
+<<div class="container">
     <br>
     <hr>
 
     <div class="card bg-light">
         <article class="card-body mx-auto" style="width: 48rem">
 
-            <h3 class="card-title mt-3 text-center">買家會員註冊</h3>
+            <h3 class="card-title mt-3 text-center">管理員註冊</h3>
             <br />
-            <p>
-                <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login in Twitter</a>
-                <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login in facebook</a>
-            </p>
-            <p class="divider-text">
-                <span class="bg-light">OR</span>
-            </p>
-            <form asp-action="CustomerRegister">
+
+            <form asp-action="Admin">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -65,8 +60,15 @@
                     </div>
                     <input asp-for="AdminName" class="form-control" placeholder="請輸入姓名 例：周杰倫" />
                 </div> <!-- form-group// -->
-
                 <span asp-validation-for="AdminName" class="text-danger"></span>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                    </div>
+                    <input asp-for="IdentityNumber" class="form-control" placeholder="請輸入身分證字號" />
+                </div> <!-- form-group// -->
+                <span asp-validation-for="IdentityNumber" class="text-danger"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -75,7 +77,21 @@
                     <input asp-for="Email" class="form-control" placeholder="例: Waston@@Fake.com" />
                 </div> <!-- form-group// -->
                 <span asp-validation-for="Email" class="text-danger"></span>
-                                      
+
+
+                <div class="input-group-prepend">
+
+                    <div class="form-group input-group">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                        <select asp-for="JobTitle" class="form-control">
+                            <option disabled> 選擇職稱</option>
+                            <option value="Software Engineer">軟體工程師</option>
+                            <option value="DBA">資料庫設計與管理人員</option>
+                            <option value="Programming">程式設計師</option>
+                        </select>
+                    </div>
+                </div> <!-- form-group end.// -->
+                <span asp-validation-for="JobTitle"></span>
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -96,26 +112,20 @@
                 <div class="form-group input-group">
 
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-briefcase"></i> </span>
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
                     </div>
                     <input asp-for="EntryDay" class="form-control" />
                 </div>
                 <span asp-validation-for="EntryDay" class="text-danger"></span>
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
-                    </div>
-                    <input asp-for="IdentityNumber" class="form-control" placeholder="請輸入身份證字號" />
-                </div>
-                <span asp-validation-for="IdentityNumber" class="text-danger"></span>
-                         
+
                 <br />
-                             
+
+
                 <div class="form-group">
                     <button type="submit" class="btn  btn-block"> 確定送出  </button>
                 </div> <!-- form-group// -->
-               
+                <p class="text-center">已經有帳戶了? <a href="~/Login/Index">登入</a> </p>
             </form>
 
 
@@ -127,8 +137,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-
 }
-
-

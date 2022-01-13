@@ -1,23 +1,69 @@
 ﻿@model IEnumerable<TwenGo.Models.Product>
-
 @{
     ViewData["Title"] = "搜尋結果";
 }
-
 <h2>搜尋結果</h2>
 @foreach (var item in Model)
 {
-    <div>
-        <div class="col-md-3" v-for="item in products">
-            <div class="card" style="width:20rem;float:left;display:inline;margin:10px; ">
-                <img :src="item.picturePath" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">@item.ProductName</h5>
-                    <p class="card-text">優惠價:@item.Price</p>
-                    <a href="shop/Introduce" class="btn btn-dark">產品介紹</a>
+    <div class="section pt-7 pb-7">
+        <div class="container">
+            <div class="row">
+                <div id="example-2" class="col-md-3">
+                    <div class="card" style="width:20rem;float:left;display:inline;margin:10px;">
+                        <img src="@item.PicturePath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">產品名稱:@item.ProductName</h5>
+                            <p class="card-text">描述: @item.Description</p>
+                            <p class="card-text">優惠價:@item.Price</p>
+                            <a href="/shop/introduce?id=@item.Id" class="btn btn-dark">產品介紹</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 }
 
+<script>
+    var vprod = new Vue({
+        el: '#example-2',
+        data: {
+            product: []
+        },
+        mounted: function () {
+            let self = this;
+            fetch("/Products")
+                .then(function (res) { return res.json() })
+                .then(function (d) { self.product = d })
+        },
+        methods: {
+            addToCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/AddtoCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
+
+                    });
+            },
+            CleanCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/CleanCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
+                    });
+            }
+        },//method
+    })
+</script>

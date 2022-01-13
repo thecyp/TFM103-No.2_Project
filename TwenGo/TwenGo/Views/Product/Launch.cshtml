@@ -10,36 +10,59 @@
         });
     });
 </script>
-<h1>服務上架</h1>
-<div id="app">
-    <form enctype="multipart/form-data" action="~/Product/upload" method="post">
-        <div>
-            <label>服務名稱:</label>
-            <input type="text" name="ProductName" />
+<div id="launch">
+    <form enctype="multipart/form-data" action="~/Product/Upload" method="post">
+        <h1>服務上架</h1>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="name">服務名稱:</label>
+                <input type="text" class="form-control" id="name" name="ProductName">
+            </div>
         </div>
+        <label>服務地點:</label>
         <div id="twzipcode" class="form-group input-group">
-            <label>服務地點:</label>
             <div class="input-group-prepend">
                 <span class="input-group-text" name="Address"> <i class="fas fa-map-marker-alt"></i> </span>
             </div>
         </div>
-        <div>
-            <label>服務敘述:</label>
-            <br/>
-            <textarea name="Description"></textarea>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>服務敘述:</label>
+                <br />
+                <textarea name="Description"></textarea>
+            </div>
         </div>
-        <div>
-            <label>服務價格:</label>
-            <input type="number" name="Price" />
+        <label>服務價格:</label>
+        <div class="form-row">
+            <input class="form-group col-md-2" type="number" name="Price" />
         </div>
         <div>
             <label>上傳圖片</label>
+            <br />
             <input type="file" name="pic" id="inputpic" />
         </div>
+        <br />
         <button>確認</button>
     </form>
 </div>
-<script>
+
+<style>
+    body {
+        background-color: #C5E1A5
+    }
+    #launch {
+        background-color: #F1F8E9;
+        padding: 20px
+    }
+    input,textarea{
+       
+    }
+    h1 {
+        color: #616161;
+    }
+</style>
+
+@*<script>
     var vm = new Vue({
         el: "#app",
         data: {
@@ -58,4 +81,4 @@
                 })
         }
     })
-</script>
+</script>*@

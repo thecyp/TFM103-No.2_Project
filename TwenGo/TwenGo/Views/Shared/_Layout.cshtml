@@ -39,15 +39,16 @@
     <script type="text/javascript" src="~/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.migration.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.parallax.min.js"></script>
-
+   
     @await RenderSectionAsync("Styles", required: false)
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
     <div class="noo-spinner">
@@ -71,13 +72,10 @@
         <div class="topbar">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="topbar-text">
-                            <span>客服時間: 週一 - 週五: 08AM-06PM</span>
-                            <span>週六 - 週日: 10AM-06PM</span>
-                        </div>
+                    <div class="col-md-8">
+
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="topbar-menu">
                             <ul class="topbar-menu">
                                 <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">會員中心</a></li>
@@ -89,107 +87,65 @@
                 </div>
             </div>
         </div>
-        <header id="header" class="header header-desktop header-2">
-            <div class="top-search">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form asp-controller="Shop" asp-action="Index">
-                                <input type="text" class="top-search-input" name="SearchString" />
-                                <button class="btn btn-warning" type="submit">搜尋</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="topbar">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" id="logo">
+                    <div class="col-md-2">
+                        <a asp-area="" asp-controller="Home" asp-action="index">
                             <img class="logo-image" src="~/images/logo.png" alt="Organik Logo" />
                         </a>
                     </div>
-                    <div class="col-md-9">
-                        <div class="header-right">
-                            <nav class="menu">
-                                <ul class="main-menu">
-                                    <li><a asp-area="" asp-controller="Home" asp-action="index">首頁</a></li>
-                                    <li><a asp-area="" asp-controller="AboutUs" asp-action="index">關於我們</a></li>
-                                    <li><a asp-area="" asp-controller="Shop" asp-action="index">購物</a></li>
-                                    <li><a asp-area="" asp-controller="Cart" asp-action="index">購物車</a></li>
-                                    <li><a asp-area="" asp-controller="Contact" asp-action="index">聯絡我們</a></li>
-                                </ul>
-                            </nav>
-                            <div class="btn-wrap" id="cartMenu">
-                                <div class="mini-cart-wrap">
-                                    <div class="mini-cart">
-                                        <div class="mini-cart-icon" data-count="2">
-                                            <i class="ion-bag"></i>
-                                        </div>
-                                    </div>
-                                    <div class="widget-shopping-cart-content">
-                                        <ul class="cart-list">
-                                            <li>
-                                                <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
-                                                <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                    <img :src=item.image alt="" />
-                                                    {{item.name}}&nbsp;
-                                                </a>
-                                                <span class="quantity">1 × ${{item.price}}</span>
-                                            </li>
-                                        </ul>
-                                        <p class="total">
-                                            <strong>小計:</strong>
-                                            <span class="amount">$21.00</span>
-                                        </p>
-                                        <p class="buttons">
-                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                            <a asp-area="" asp-controller="Cart" asp-action="OrderDetail" class="checkout">立即購買</a>
-                                        </p>
+                    <div class="col-md-8">
+                        <form asp-controller="Shop" asp-action="Index">
+                            <input type="text" class="top-search-input" name="SearchString" />
+                            <button class="btn btn-warning" type="submit"><i class="ion-search"></i></button>
+                        </form>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn-wrap">
+                            <div class="mini-cart-wrap">
+                                <div class="mini-cart">
+                                    <div class="mini-cart-icon" data-count="!">
+                                        <i class="ion-bag"></i>
                                     </div>
                                 </div>
-                                <div class="top-search-btn-wrap">
-                                    <div class="top-search-btn">
-                                        <a href="javascript:void(0);">
-                                            <i class="ion-search"></i>
-                                        </a>
-                                    </div>
+                                <div class="widget-shopping-cart-content" id="cartMenu">
+                                    <ul class="cart-list">
+                                        <li v-for="item in product">
+                                            <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
+                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">
+                                                <img :src=item.image alt="" />
+                                                {{item.name}}&nbsp;
+                                            </a>
+                                            <span class="card-text">x{{item.amount}}</span>
+                                            <span class="quantity"> NT${{item.subtotal}}</span>
+                                        </li>
+                                    </ul>
+                                    <p class="total">
+                                        <strong style="font-size:20px">總價 </strong>
+                                        <span class="amount">NT$ {{product[0].total}}</span>
+                                    </p>
+                                    <p class="buttons">
+                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
+                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="checkout">立即購買</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </header>
+        </div>
+
+
         <header class="header header-mobile">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-2">
-                        <div class="header-left">
-                            <div id="open-left"><i class="ion-navicon"></i></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="header-center">
-                            <a href="#" id="logo-2">
-                                <img class="logo-image" src="~/images/logo.png" alt="Organik Logo" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="header-right">
-                            <div class="mini-cart-wrap">
-                                <a asp-area="" asp-controller="Cart" asp-action="index">
-                                    <div class="mini-cart">
-                                        <div class="mini-cart-icon" data-count="2">
-                                            <i class="ion-bag"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
+
+
                 </div>
             </div>
         </header>
@@ -206,7 +162,7 @@
                     <div class="col-md-5">
                         <img src="~/images/footer_logo.png" class="footer-logo" alt="" />
                         <p>
-                            Welcome to Organik. Our products are freshly harvested, washed ready for box and finally delivered from our family farm right to your doorstep.
+                            歡迎來到XXXX，我們將為您提供最 的生活服務。
                         </p>
                         <div class="footer-social">
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
@@ -217,9 +173,9 @@
                     </div>
                     <div class="col-md-2">
                         <div class="widget">
-                            <h3 class="widget-title">Infomation</h3>
+                            <h3 class="widget-title">相關資訊</h3>
                             <ul>
-                                <li><a href="#">New Products</a></li>
+                                <li><a href="/shop">New Products</a></li>
                                 <li><a href="#">Top Sellers</a></li>
                                 <li><a href="#">Our Blog</a></li>
                                 <li><a href="#">About Our Shop</a></li>
@@ -239,12 +195,12 @@
                     </div>
                     <div class="col-md-3">
                         <div class="widget">
-                            <h3 class="widget-title">Subscribe</h3>
+                            <h3 class="widget-title">訂閱</h3>
                             <p>
-                                Enter your email address for our mailing list to keep yourself updated.
+                                訂閱我們收到最新消息!
                             </p>
                             <form class="newsletter">
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="" />
+                                <input type="email" name="EMAIL" placeholder="輸入電子信箱" required="" />
                                 <button><i class="fa fa-paper-plane"></i></button>
                             </form>
                         </div>
@@ -252,21 +208,21 @@
                 </div>
             </div>
         </footer>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        Copyright &copy; 2020.Company name All rights reserved.
-                    </div>
-                    <div class="col-md-4">
-                        <img src="~/images/footer_payment.png" alt="" />
+        @*<div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            Copyright &copy; 2020.Company name All rights reserved.
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/footer_payment.png" alt="" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="backtotop" id="backtotop"></div>
-        </div>
+                <div class="backtotop" id="backtotop"></div>
+            </div>*@
     </div>
-
+    @await RenderSectionAsync("Scripts", required: false)
     <style>
         .copyrights {
             text-indent: -9999px;
@@ -276,8 +232,7 @@
             overflow: hidden;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
     <script>
         var vcart = new Vue({
             el: '#cartMenu',
@@ -305,15 +260,10 @@
                         .then(function (d) {
                             vcart.GetCartProduct();
                             alert(d);
-
                         })
-                }
-
+                },
             },
-
         });
-
-
     </script>
 </body>
 </html>

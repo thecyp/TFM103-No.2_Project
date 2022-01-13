@@ -1,0 +1,95 @@
+﻿<div id="app" class="product">
+    <div id="carouselExampleSlidesOnly" class="carousel slide MyProduct"  data-bs-ride="carousel">
+        <div class="carousel-inner" style="text-align:center">
+            <div class="carousel-item active">
+                <img :src="products.picturePath" class="d-block w-75" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3 MyProduct color" style="max-width: 100%;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body" style="">
+                    <h1 class="card-title">{{products.productName}}</h1>
+                    <p class="card-text"><h2>服務內容:</h2><h6>{{products.description}}</h6></p>
+                    <p class="card-text"><h6>服務地點:{{products.address}}</h6></p>
+                    <p class="card-text"><h6>服務價格:{{products.price}}元</h6></p>
+                    <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    body{
+        background-color:cornsilk
+    }
+    .color{
+        background-color:floralwhite
+    }
+    .MyProduct {
+       float: left;
+        width: 50%;
+        color:black
+    }
+</style>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            products: []
+        }, mounted: function () {
+            let self = this;
+            fetch("/products/"+@ViewBag.Id)
+                .then(res => {
+                    return res.json();
+                })
+                .then(d => {
+                    self.products = d
+                })
+        }//mounted
+ //================vue cart
+    })//app
+    var vprod = new Vue({
+        el: '#example-2',
+        data: {
+            product: []
+        },
+        mounted: function () {
+            let self = this;
+            fetch("/Cart/GetProduct")
+                .then(function (res) { return res.json() })
+                .then(function (d) { self.product = d })
+        },
+        methods: {
+            addToCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/AddtoCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
+
+                    });
+            },
+            CleanCart: function (id) {
+                console.log(id);
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Cart/CleanCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        vcart.GetCartProduct();
+                        alert(d);
+                    });
+            }
+        }
+    })
+</script>
+.

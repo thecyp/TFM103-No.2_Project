@@ -27,10 +27,13 @@ namespace TwenGo.Models.Repository
         {
         }
 
-        public DbSet<Roles> Role { get; set; }
+       
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
 
         public DbSet<Shipper> Shippers { get; set; }
+
+        public DbSet<TwenGo.Models.ViewModels.AdminViewModel> AdminViewModel { get; set; }
 
         
     }
