@@ -39,7 +39,7 @@ namespace TwenGo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CustomerRegisterAsync( CustomerViewModel customer)
+        public async Task<IActionResult> CustomerRegisterAsync(CustomerViewModel customer)
         {
                        
             var data = new Users()
