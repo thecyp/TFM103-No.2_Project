@@ -182,10 +182,13 @@ namespace TwenGo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Memo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReceiverAdress")
+                    b.Property<string>("ReceiverAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -196,6 +199,9 @@ namespace TwenGo.Migrations
                     b.Property<string>("ReceiverPhone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReciveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");

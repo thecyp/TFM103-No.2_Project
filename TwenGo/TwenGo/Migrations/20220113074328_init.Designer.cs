@@ -10,7 +10,7 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    [Migration("20220112062510_init")]
+    [Migration("20220113074328_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,10 +184,13 @@ namespace TwenGo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Memo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReceiverAdress")
+                    b.Property<string>("ReceiverAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -198,6 +201,9 @@ namespace TwenGo.Migrations
                     b.Property<string>("ReceiverPhone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReciveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");

@@ -19,7 +19,7 @@
 
     <h4 style="padding-top: 20px;">訂單資料</h4>
     <hr />
-    <form id="orderForm">
+    <form asp-action="CreateOrder" id="orderForm" method="post">
         <div class="text-danger"></div>
         <input type="hidden" />
         <div class="row">
@@ -29,11 +29,11 @@
                         <h5 class="card-title">付款人資料</h5>
                         <div class="form-group">
                             <label class="control-label">付款人ID</label>
-                            <input readonly class="form-control" />
+                            <input asp-for="UserId" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label class="control-label">付款人帳號</label>
-                            <input readonly class="form-control" />
+                            <input asp-for="UserName" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -48,25 +48,25 @@
                                 <span class="text-danger"></span>
                             </div>
                             <div class="form-group col-6">
-                                <label class="control-label">預約姓名</label>
-                                <input placeholder="#必填" class="form-control" />
-                                <span class="text-danger"></span>
+                                <label asp-for="ReceiverName" class="control-label">預約姓名</label>
+                                <input asp-for="ReceiverName" placeholder="#必填" class="form-control" />
+                                <span asp-validation-for="ReceiverName" class="text-danger"></span>
                             </div>
                             <div class="form-group col-8">
-                                <label class="control-label">預約電話</label>
-                                <input placeholder="#必填" class="form-control" />
-                                <span class="text-danger"></span>
+                                <label asp-for="ReceiverPhone" class="control-label">預約電話</label>
+                                <input asp-for="ReceiverPhone" placeholder="#必填" class="form-control" />
+                                <span asp-validation-for="ReceiverPhone" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">預約地址</label>
-                            <input placeholder="#必填" class="form-control" />
-                            <span class="text-danger"></span>
+                            <label asp-for="ReceiverAddress" class="control-label">預約地址</label>
+                            <input asp-for="ReceiverAddress" placeholder="#必填" class="form-control" />
+                            <span asp-validation-for="ReceiverAddress" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">備註</label>
-                            <textarea style="height:200px" form="orderForm" placeholder="#選填" class="form-control"></textarea>
-                            <span class="text-danger"></span>
+                            <label asp-for="Memo" class="control-label">備註</label>
+                            <textarea asp-for="Memo" style="height:200px" form="orderForm" placeholder="#選填" class="form-control"></textarea>
+                            <span asp-validation-for="Memo" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -75,17 +75,14 @@
             <div id="OrderPage" class="col-md-4">
                 <div class="cart-totals">
                     <input type="hidden" />
-                    <div  class="card-body">
+                    <div class="card-body">
                         <h5 class="card-text" style="font-size:30px">訂單內容</h5>
                         <table class="table table-borderless">
                             <thead v-for="item in product">
-                                <tr >
-                                    <th>商品名稱: </th>
-                                    <td>{{item.name}}</td>
-                                </tr>
+                                <tr>品項:</tr>
                                 <tr>
-                                    <th>小計: </th>
-                                    <td>{{item.price}}</td>
+                                    <th>{{item.name}}</th>
+                                    <td>x{{item.amount}}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,19 +91,21 @@
                         <hr />
                         <div class="text-right">
                             <input type="hidden" />
-                            <p class="card-text font-weight-bolder" style="padding-right:12px; font-size:larger" >總計:　$ {{product[0].total}}</p>
+                            <p class="card-text font-weight-bolder" style="padding-right:12px; font-size:larger">總金額:　NT$ {{product[0].total}}</p>
                         </div>
                         <p></p>
-                        <div class="text-center card-link">
-                            <button type="submit" class="btn btn-success w-75">建立訂單</button>
+                        <div class="text-center card-link" style="margin-top:100px">
+                            <button type="submit" class="continue-shopping w-75">建立訂單</button>
+                        </div>
+                        <div align="center" style="margin-top:30px">
+                            <button class="btn btn-3 w-50" asp-controller="Cart" asp-action="Index"><i class="fas fa-angle-left"></i> 返回購物車</button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </form>
-    <p></p>
-    <button class="btn btn-sm btn-outline-secondary" asp-controller="Cart" asp-action="Index"><i class="fas fa-angle-left"></i> 返回購物車</button>
 
     <script>
         var vorder = new Vue({

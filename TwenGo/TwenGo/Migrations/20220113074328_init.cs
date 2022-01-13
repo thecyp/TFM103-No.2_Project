@@ -79,9 +79,11 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<int>(type: "int", nullable: false),
+                    ReciveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReceiverAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Memo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
