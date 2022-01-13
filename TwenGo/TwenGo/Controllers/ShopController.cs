@@ -30,11 +30,10 @@ namespace TwenGo.Controllers
             return View(await products.ToListAsync());
         }
 
-        public ActionResult Introduce()
+        public ActionResult Introduce(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
-
-
     }
 }

@@ -3,35 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TwenGo.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220113123712_intial.cs
                 name: "AdminViewModel",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AdminName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     IdentityNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Admin_Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Town = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminViewModel", x => x.UserId);
+                    table.PrimaryKey("PK_AdminViewModel", x => x.AdminId);
                 });
 
             migrationBuilder.CreateTable(
-========
->>>>>>>> main:TwenGo/TwenGo/Migrations/20220111093939_initial.cs
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -52,6 +45,8 @@ namespace TwenGo.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RealName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Town = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -101,11 +96,12 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<int>(type: "int", nullable: false),
+                    ReciveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReceiverAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isPaid = table.Column<bool>(type: "bit", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Memo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,7 +112,7 @@ namespace TwenGo.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -126,19 +122,7 @@ namespace TwenGo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,6 +253,7 @@ namespace TwenGo.Migrations
                 columns: table => new
                 {
                     AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -290,9 +275,7 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CustomerPicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -314,7 +297,8 @@ namespace TwenGo.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    SubTotal = table.Column<int>(type: "int", nullable: false)
+                    SubTotal = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -375,6 +359,9 @@ namespace TwenGo.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdminViewModel");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -397,9 +384,6 @@ namespace TwenGo.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Shippers");

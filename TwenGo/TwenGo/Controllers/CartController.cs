@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,10 @@ namespace TwenGo.Controllers
     {
         private readonly TwenGoContext _context;
 
+
         public CartController(TwenGoContext context)
         {
             _context = context;
-
-        }
-        public IActionResult OrderDetail()
-        {
-            return View();
         }
         public IActionResult Index()
         {
@@ -55,7 +52,6 @@ namespace TwenGo.Controllers
             if (CartItems != null)
             {
                 var temp = CartItems.Select(x => x.Product.Id);
-                //return _context.Products.Where(x => x.Id == x.Id).ToList();
                 var findProducts = _context.Products.Where(x => temp.Contains(x.Id)).ToList();
                 return findProducts.Select(x => new CartViewModel
                 {
@@ -65,7 +61,8 @@ namespace TwenGo.Controllers
                     Price = x.Price,
                     Description = x.Description,
                     Amount = CartItems.Single(z => z.ProductId == x.Id).Amount,
-                    Subtotal = x.Price * CartItems.Single(z => z.ProductId == x.Id).Amount
+                    Subtotal = x.Price * CartItems.Single(z => z.ProductId == x.Id).Amount,
+                    Total = CartItems.Sum(z => z.SubTotal)
                 }).ToList();
             }
             else

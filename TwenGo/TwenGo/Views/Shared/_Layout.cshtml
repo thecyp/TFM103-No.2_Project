@@ -39,7 +39,7 @@
     <script type="text/javascript" src="~/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.migration.min.js"></script>
     <script type="text/javascript" src="~/js/extensions/revolution.extension.parallax.min.js"></script>
-
+   
     @await RenderSectionAsync("Styles", required: false)
 
 
@@ -78,6 +78,7 @@
                     <div class="col-md-4">
                         <div class="topbar-menu">
                             <ul class="topbar-menu">
+                                <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">會員中心</a></li>
                                 <li><a asp-area="" asp-controller="Login" asp-action="Index">登入</a></li>
                                 <li><a asp-area="" asp-controller="Member" asp-action="CustomerRegister">註冊</a></li>
                             </ul>
@@ -103,15 +104,13 @@
                     </div>
                     <div class="col-md-2">
                         <div class="btn-wrap">
-                            <div id="cartMenu" class="mini-cart-wrap">
+                            <div class="mini-cart-wrap">
                                 <div class="mini-cart">
-                                    <div class="mini-cart-icon" data-count="2">
-                                        
+                                    <div class="mini-cart-icon" data-count="!">
                                         <i class="ion-bag"></i>
-                                           
                                     </div>
                                 </div>
-                                <div class="widget-shopping-cart-content">
+                                <div class="widget-shopping-cart-content" id="cartMenu">
                                     <ul class="cart-list">
                                         <li v-for="item in product">
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
@@ -119,21 +118,20 @@
                                                 <img :src=item.image alt="" />
                                                 {{item.name}}&nbsp;
                                             </a>
-                                            <p class="card-text">產品敘述: {{item.description}}</p>
-                                            <span class="quantity"> ${{item.price}}</span>
+                                            <span class="card-text">x{{item.amount}}</span>
+                                            <span class="quantity"> NT${{item.subtotal}}</span>
                                         </li>
                                     </ul>
                                     <p class="total">
-                                        <strong>小計:</strong>
-                                        <span class="amount">$21.00</span>
+                                        <strong style="font-size:20px">總價 </strong>
+                                        <span class="amount">NT$ {{product[0].total}}</span>
                                     </p>
                                     <p class="buttons">
                                         <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                        <a asp-area="" asp-controller="Cart" asp-action="OrderDetail" class="checkout">立即購買</a>
+                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="checkout">立即購買</a>
                                     </p>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -141,13 +139,13 @@
             </div>
         </div>
 
-        
+
         <header class="header header-mobile">
             <div class="container">
                 <div class="row">
-                 
-                    
-                    
+
+
+
                 </div>
             </div>
         </header>
@@ -164,7 +162,7 @@
                     <div class="col-md-5">
                         <img src="~/images/footer_logo.png" class="footer-logo" alt="" />
                         <p>
-                            Welcome to Organik. Our products are freshly harvested, washed ready for box and finally delivered from our family farm right to your doorstep.
+                            歡迎來到XXXX，我們將為您提供最 的生活服務。
                         </p>
                         <div class="footer-social">
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
@@ -175,9 +173,9 @@
                     </div>
                     <div class="col-md-2">
                         <div class="widget">
-                            <h3 class="widget-title">Infomation</h3>
+                            <h3 class="widget-title">相關資訊</h3>
                             <ul>
-                                <li><a href="#">New Products</a></li>
+                                <li><a href="/shop">New Products</a></li>
                                 <li><a href="#">Top Sellers</a></li>
                                 <li><a href="#">Our Blog</a></li>
                                 <li><a href="#">About Our Shop</a></li>
@@ -197,12 +195,12 @@
                     </div>
                     <div class="col-md-3">
                         <div class="widget">
-                            <h3 class="widget-title">Subscribe</h3>
+                            <h3 class="widget-title">訂閱</h3>
                             <p>
-                                Enter your email address for our mailing list to keep yourself updated.
+                                訂閱我們收到最新消息!
                             </p>
                             <form class="newsletter">
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="" />
+                                <input type="email" name="EMAIL" placeholder="輸入電子信箱" required="" />
                                 <button><i class="fa fa-paper-plane"></i></button>
                             </form>
                         </div>
@@ -210,22 +208,21 @@
                 </div>
             </div>
         </footer>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        Copyright &copy; 2020.Company name All rights reserved.
-                    </div>
-                    <div class="col-md-4">
-                        <img src="~/images/footer_payment.png" alt="" />
+        @*<div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            Copyright &copy; 2020.Company name All rights reserved.
+                        </div>
+                        <div class="col-md-4">
+                            <img src="~/images/footer_payment.png" alt="" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="backtotop" id="backtotop"></div>
-        </div>
+                <div class="backtotop" id="backtotop"></div>
+            </div>*@
     </div>
     @await RenderSectionAsync("Scripts", required: false)
-   
     <style>
         .copyrights {
             text-indent: -9999px;
@@ -263,15 +260,10 @@
                         .then(function (d) {
                             vcart.GetCartProduct();
                             alert(d);
-
                         })
-                }
-
+                },
             },
-
         });
-
-
     </script>
 </body>
 </html>
