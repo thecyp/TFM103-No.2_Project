@@ -11,17 +11,21 @@ namespace TwenGo.Migrations
                 name: "AdminViewModel",
                 columns: table => new
                 {
-                    AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AdminName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdentityNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Admin_Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Town = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminViewModel", x => x.AdminId);
+                    table.PrimaryKey("PK_AdminViewModel", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,8 +49,6 @@ namespace TwenGo.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RealName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Town = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -251,7 +253,6 @@ namespace TwenGo.Migrations
                 columns: table => new
                 {
                     AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -273,7 +274,9 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerPicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CustomerPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

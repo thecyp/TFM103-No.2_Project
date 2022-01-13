@@ -10,10 +10,7 @@ namespace TwenGo.Models.Repository.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string AdminId { get; set; }
 
-        [Required]
-        public string EmployeeName { get; set; }
-
-
+       
         [Required]
         public string JobTitle { get; set; }
 

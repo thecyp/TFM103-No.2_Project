@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 namespace TwenGo.Models.ViewModels
 {
     public class AdminViewModel
-    {
+    {  
         [Key]
-        public string AdminId { get; set; }
-
+        public int UserId { get; set; }
+        
         [MaxLength(25)]
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "姓名")]
         public string AdminName { get; set; }
 
-        [MaxLength(10)]
+        [Required(ErrorMessage = "請選擇{0}")]
         [Display(Name = "職稱")]
-        [Required]
         public string JobTitle { get; set; }
 
         [MaxLength(10)]
@@ -53,5 +52,16 @@ namespace TwenGo.Models.ViewModels
         [Display(Name = "信箱")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
+
+        [Display(Name = "城市")]
+        public string City { get; set; }
+
+        [Display(Name = "區域")]
+        public string Town { get; set; }
+
+
+        [MaxLength(100)]
+        [Display(Name = "地址")]
+        public string Address { get; set; }
     }
 }

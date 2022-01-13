@@ -52,7 +52,7 @@
             <h3 class="card-title mt-3 text-center">管理員註冊</h3>
             <br />
 
-            <form asp-action="Admin">
+            <form asp-action="AdminRegister">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -118,6 +118,14 @@
                 </div>
                 <span asp-validation-for="EntryDay" class="text-danger"></span>
 
+                <div>
+                    <div id="twzipcode" class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                        </div>
+                    </div>
+                    <input asp-for="Address" class="form-control" placeholder="請輸入地址" style="width:100%" />
+                </div>
 
                 <br />
 
@@ -137,4 +145,17 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#twzipcode").twzipcode({
+                zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+                css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+                countyName: "City", // 自訂城市 select 標籤的 name 值
+                districtName: "Town" // 自訂區別 select 標籤的 name 值
+            });
+        });
+    </script>
+
 }

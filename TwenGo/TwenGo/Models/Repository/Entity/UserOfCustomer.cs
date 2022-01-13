@@ -21,6 +21,13 @@ namespace TwenGo.Models.Repository.Entity
         [Display(Name = "大頭貼")]
         public string CustomerPicture { get; set; }
 
+        [Required]
+        [Display(Name = "手機號碼")]
+        public string CellPhone { get; set; }
+
+        [Display(Name = "電話號碼")]
+        public string Phone { get; set; }
+
         public virtual Users Users { get; set; }
     }
 }

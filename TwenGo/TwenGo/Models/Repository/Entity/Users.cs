@@ -13,12 +13,7 @@ namespace TwenGo.Models.Repository.Entity
         [Display(Name = "身分證字號")]
         public string IdentityNumber { get; set; }
 
-        [Required]
-        [Display(Name = "手機號碼")]
-        public string CellPhone { get; set; }
-
-        [Display(Name = "電話號碼")]
-        public string Phone { get; set; }
+        
 
         [Required]
         [Display(Name = "城市")]

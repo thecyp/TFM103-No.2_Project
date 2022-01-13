@@ -45,7 +45,7 @@ namespace TwenGo.Models.ViewModels
         [Required(ErrorMessage = "請選擇{0}")]
         [Display(Name = "生日")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
 
         [MaxLength(10)]

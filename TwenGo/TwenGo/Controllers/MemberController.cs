@@ -47,7 +47,7 @@ namespace TwenGo.Controllers
                 Address = customer.Address,
                 Email = customer.Email,
                 Id = Guid.NewGuid().ToString(),
-                Phone = customer.Phone,
+               
                 Town = customer.Town,
                 City = customer.City,
                 RealName=customer.CustomerName,
@@ -56,12 +56,14 @@ namespace TwenGo.Controllers
                 
                 IdentityNumber = customer.IdentityNumber,
                 NormalizedEmail = customer.Email,
-                PhoneNumber = customer.CellPhone,
-                CellPhone = customer.CellPhone,
-               
+                
+                          
                 NormalizedUserName = customer.Email,
+
                 UserOfCustomer = new UserOfCustomer()
                 {
+                    Phone = customer.Phone,
+                    CellPhone = customer.CellPhone,
                     Gender = customer.Gender,
                     CustomerPicture = "",
                     Birthday = customer.Birthday
