@@ -3,10 +3,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TwenGo.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AdminViewModel",
+                columns: table => new
+                {
+                    AdminId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AdminName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    IdentityNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Admin_Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    EntryDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminViewModel", x => x.AdminId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -79,9 +96,11 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<int>(type: "int", nullable: false),
+                    ReciveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReceiverAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Memo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -104,18 +123,6 @@ namespace TwenGo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -290,7 +297,8 @@ namespace TwenGo.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    SubTotal = table.Column<int>(type: "int", nullable: false)
+                    SubTotal = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -351,6 +359,9 @@ namespace TwenGo.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdminViewModel");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -373,9 +384,6 @@ namespace TwenGo.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Shippers");

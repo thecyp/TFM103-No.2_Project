@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TwenGo.Models.Repository.Entity
 {
     public class UserOfAdmin
     {
-        [Key, ForeignKey("Users")]
+        [Key,ForeignKey("Users")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string AdminId { get; set; }
 
@@ -24,7 +20,6 @@ namespace TwenGo.Models.Repository.Entity
         [Required]
         public DateTime EntryDay { get; set; }
 
-        
         public virtual Users Users { get; set; }
     }
 }

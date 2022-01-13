@@ -17,5 +17,6 @@ namespace TwenGo.Models
         public string Image { get; set; }
         public int Amount { get; set; }
         public int Subtotal { get; set; }
+        public int Total { get; set; }
     }
 }
