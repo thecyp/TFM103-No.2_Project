@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TwenGo.Data;
 using TwenGo.Models;
 using TwenGo.Models.Repository.Entity;
+using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Models.Repository
 {
@@ -14,6 +15,10 @@ namespace TwenGo.Models.Repository
     {
         public virtual DbSet<UserOfAdmin> UserOfAdmin { get; set; }
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
+
+        public override DbSet<Users> Users { get; set; }
+
+        public virtual DbSet<CustomerViewModel> CustomerViewModels { get; set; }
         public  DbSet<Product> Products { get; set; }
 
         public  DbSet<Group> Groups { get; set; }

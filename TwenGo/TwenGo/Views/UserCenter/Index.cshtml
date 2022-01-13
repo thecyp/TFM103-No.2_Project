@@ -1,0 +1,39 @@
+﻿
+<div id="app">
+    {{100*100}}
+    <div class="row" v-for="users in users">
+        <div class="col-sm-3" >
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">姓名:<br>{{users.realName}}</p>
+                    <p class="card-text">服務地點:{{users.identityNumber}}</p>
+                    <p class="card-text">:{{users.gender}}</p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            users: []
+        },//data
+        mounted: function () {
+            let self = this;
+            fetch("/api/users")
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (d) {
+                    for (var i = 0; i < d.length; i++)
+                        self.users.push(d[i])
+                    })
+                
+        },//mounted
+       
+  
+    })//vue
+</script>

@@ -39,7 +39,7 @@ namespace TwenGo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CustomerRegisterAsync(CustomerViewModel customer)
         {
-           
+
             var data = new Users()
             {
                 Address = customer.Address,
@@ -48,9 +48,10 @@ namespace TwenGo.Controllers
                 Phone = customer.Phone,
                 Town = customer.Town,
                 City = customer.City,
-                RealName=customer.CustomerName,
-                RememberMe=customer.RememberMe,
+                RealName = customer.CustomerName,
+                RememberMe = customer.RememberMe,
                 UserName = customer.Email,
+  
                 
                 IdentityNumber = customer.IdentityNumber,
                 NormalizedEmail = customer.Email,

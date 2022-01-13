@@ -9,8 +9,8 @@ namespace TwenGo.Models.ViewModels
 {
     public class CustomerViewModel
     {
-        
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [MaxLength(25)]
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "姓名")]
@@ -29,13 +29,13 @@ namespace TwenGo.Models.ViewModels
         [Display(Name = "密碼")]
         public string C_Password { get; set; }
 
-        [NotMapped] 
+        [NotMapped]
         [Compare("C_Password", ErrorMessage = "密碼不相符")]
         [Display(Name = "請再輸入一次密碼")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        [Required( ErrorMessage = "請選擇{0}")]
+        [Required(ErrorMessage = "請選擇{0}")]
         [Display(Name = "性別")]
         public string Gender { get; set; }
 
@@ -51,7 +51,7 @@ namespace TwenGo.Models.ViewModels
         [RegularExpression(@"^[A-Z]{1}[1-2]{1}[0-9]{8}$", ErrorMessage = "請輸入正確格式")]
         public string IdentityNumber { get; set; }
 
-      
+
 
         [MaxLength(10)]
         [Required(ErrorMessage = "請輸入{0}")]
@@ -65,7 +65,7 @@ namespace TwenGo.Models.ViewModels
         [RegularExpression(@"^\(?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "請輸入正確格式")]
         public string Phone { get; set; }
 
-                
+
         [Display(Name = "城市")]
         public string City { get; set; }
 
@@ -79,5 +79,6 @@ namespace TwenGo.Models.ViewModels
 
         [Display(Name = "記住我?")]
         public bool RememberMe { get; set; }
+
     }
 }
