@@ -9,6 +9,9 @@ namespace TwenGo.Models.ViewModels
 {
     public class AdminViewModel
     {
+        [Key]
+        public string AdminId { get; set; }
+
         [MaxLength(25)]
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "姓名")]
@@ -29,6 +32,7 @@ namespace TwenGo.Models.ViewModels
         [DataType(DataType.Password)]//默認生成的是密碼框而不是文字框
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "密碼")]
+        [RegularExpression(@"^.*(?=.{4,}).*$", ErrorMessage = "請輸入正確格式,至少需要4字元")]
         public string Admin_Password { get; set; }
 
         [NotMapped]
@@ -40,7 +44,7 @@ namespace TwenGo.Models.ViewModels
         [Required(ErrorMessage = "請選擇{0}")]
         [Display(Name = "入職日期")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime EntryDay { get; set; }
 
         [MaxLength(50)]

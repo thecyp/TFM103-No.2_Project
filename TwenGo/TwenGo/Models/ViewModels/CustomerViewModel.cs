@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,12 +22,14 @@ namespace TwenGo.Models.ViewModels
         [EmailAddress]
         [Display(Name = "信箱")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [Remote(action: "CustomerRegisterAsync", controller: "Member", HttpMethod = "POST")]
         public string Email { get; set; }
 
         [MaxLength(30)]
         [DataType(DataType.Password)]//默認生成的是密碼框而不是文字框
         [Required(ErrorMessage = "請輸入{0}")]
         [Display(Name = "密碼")]
+        [RegularExpression(@"^.*(?=.{4,}).*$", ErrorMessage = "請輸入正確格式,至少需要4字元")]
         public string C_Password { get; set; }
 
         [NotMapped] 

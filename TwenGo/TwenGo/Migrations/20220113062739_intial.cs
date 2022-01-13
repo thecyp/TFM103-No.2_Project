@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TwenGo.Migrations
 {
-    public partial class init : Migration
+    public partial class intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,11 +96,9 @@ namespace TwenGo.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<int>(type: "int", nullable: false),
-                    ReciveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReceiverAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Memo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -297,8 +295,7 @@ namespace TwenGo.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    SubTotal = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false)
+                    SubTotal = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

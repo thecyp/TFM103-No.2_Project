@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TwenGo.Models.Repository;
 
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    partial class TwenGoContextModelSnapshot : ModelSnapshot
+    [Migration("20220113062739_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,13 +184,10 @@ namespace TwenGo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Memo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReceiverAddress")
+                    b.Property<string>("ReceiverAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -199,9 +198,6 @@ namespace TwenGo.Migrations
                     b.Property<string>("ReceiverPhone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReciveDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
@@ -237,9 +233,6 @@ namespace TwenGo.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SubTotal")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

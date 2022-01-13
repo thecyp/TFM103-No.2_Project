@@ -16,7 +16,7 @@ namespace TwenGo.Controllers
         private readonly UserManager<Users> _userManager;
         private readonly IPasswordHasher<Users> passwordHasher;
         private readonly ILogger<MemberController> _logger;
-
+       
 
         public MemberController(ILogger<MemberController> logger, TwenGoContext twenGoContext,UserManager<Users> userManager,IPasswordHasher<Users> passwordHasher)
         {
@@ -30,16 +30,18 @@ namespace TwenGo.Controllers
 
         public IActionResult CustomerRegister()
         {
-            
+
             return View();
-           
+
         }
+
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CustomerRegisterAsync(CustomerViewModel customer)
+        public async Task<IActionResult> CustomerRegisterAsync( CustomerViewModel customer)
         {
-           
+                       
             var data = new Users()
             {
                 Address = customer.Address,
@@ -68,6 +70,8 @@ namespace TwenGo.Controllers
            
 
             var result = await _userManager.CreateAsync(data,customer.C_Password);
+            
+
             if (result.Succeeded )
             {
                 _userManager.AddToRoleAsync(data, "Customer").Wait();
