@@ -8,7 +8,7 @@
     <div class="section pt-7 pb-7">
         <div class="container">
             <div class="row">
-                <div id="example-2" class="col-md-3">
+                <div class="col-md-3">
                     <div class="card" style="width:20rem;float:left;display:inline;margin:10px;">
                         <img src="@item.PicturePath" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -23,47 +23,3 @@
         </div>
     </div>
 }
-
-<script>
-    var vprod = new Vue({
-        el: '#example-2',
-        data: {
-            product: []
-        },
-        mounted: function () {
-            let self = this;
-            fetch("/Products")
-                .then(function (res) { return res.json() })
-                .then(function (d) { self.product = d })
-        },
-        methods: {
-            addToCart: function (id) {
-                console.log(id);
-                let data = new FormData();
-                data.append("id", id);
-                fetch("/Cart/AddtoCart", {
-                    body: data, // must match 'Content-Type' header
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                }).then(response => response.text())
-                    .then(function (d) {
-                        vcart.GetCartProduct();
-                        alert(d);
-
-                    });
-            },
-            CleanCart: function (id) {
-                console.log(id);
-                let data = new FormData();
-                data.append("id", id);
-                fetch("/Cart/CleanCart", {
-                    body: data, // must match 'Content-Type' header
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                }).then(response => response.text())
-                    .then(function (d) {
-                        vcart.GetCartProduct();
-                        alert(d);
-                    });
-            }
-        },//method
-    })
-</script>
