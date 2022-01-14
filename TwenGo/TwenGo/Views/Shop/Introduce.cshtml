@@ -1,4 +1,4 @@
-﻿<div id="app" class="product">
+﻿<div  class="product">
     <div id="carouselExampleSlidesOnly" class="carousel slide MyProduct"  data-bs-ride="carousel">
         <div class="carousel-inner" style="text-align:center">
             <div class="carousel-item active">
@@ -9,12 +9,12 @@
     <div class="card mb-3 MyProduct color" style="max-width: 100%;">
         <div class="row g-0">
             <div class="col-md-8">
-                <div class="card-body" style="">
+                <div id="app" class="card-body" style="">
                     <h1 class="card-title">{{products.productName}}</h1>
                     <p class="card-text"><h2>服務內容:</h2><h6>{{products.description}}</h6></p>
                     <p class="card-text"><h6>服務地點:{{products.address}}</h6></p>
                     <p class="card-text"><h6>服務價格:{{products.price}}元</h6></p>
-                    <a href="#" v-on:click="addToCart(item.id)" class="btn btn-primary">加入購物車</a>
+                    <a href="#" v-on:click="addToCart(products.Id)" class="btn btn-success">加入購物車</a>
                 </div>
             </div>
         </div>
@@ -47,25 +47,12 @@
                 .then(d => {
                     self.products = d
                 })
-        }//mounted
- //================vue cart
-    })//app
-    var vprod = new Vue({
-        el: '#example-2',
-        data: {
-            product: []
-        },
-        mounted: function () {
-            let self = this;
-            fetch("/Cart/GetProduct")
-                .then(function (res) { return res.json() })
-                .then(function (d) { self.product = d })
-        },
+        },//mounted
         methods: {
             addToCart: function (id) {
                 console.log(id);
                 let data = new FormData();
-                data.append("id", id);
+                data.append("id", @ViewBag.Id);
                 fetch("/Cart/AddtoCart", {
                     body: data, // must match 'Content-Type' header
                     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -75,21 +62,9 @@
                         alert(d);
 
                     });
-            },
-            CleanCart: function (id) {
-                console.log(id);
-                let data = new FormData();
-                data.append("id", id);
-                fetch("/Cart/CleanCart", {
-                    body: data, // must match 'Content-Type' header
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                }).then(response => response.text())
-                    .then(function (d) {
-                        vcart.GetCartProduct();
-                        alert(d);
-                    });
-            }
+            },//addToCart
         }
-    })
+
+    })//app
 </script>
 .

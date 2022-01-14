@@ -21,21 +21,7 @@ namespace TwenGo.Controllers
         }
         public IActionResult Index()
         {
-            ////向 Session 取得商品列表
-            //List<CartItem> CartItems = SessionHelper.
-            //    GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-
-            ////計算商品總額
-            //if (CartItems != null)
-            //{
-            //    ViewBag.Total = CartItems.Sum(m => m.SubTotal);
-            //}
-            //else
-            //{
-            //    ViewBag.Total = 0;
-            //}
-
-            return View(/*CartItems*/);
+            return View();
         }
 
         [HttpGet]

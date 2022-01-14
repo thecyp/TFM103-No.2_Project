@@ -3,16 +3,20 @@
 @{ ViewData["Title"] = "ReviewOrder"; }
 
 
-<div>
-    <p>　</p>
-    <ul class="progressbar">
-        <li class="active">購物車</li>
-        <li class="active">訂單資料</li>
-        <li class="active">建立訂單</li>
-        <li>付款</li>
-    </ul>
-    <p>　</p>
-    <p>　</p>
+<div class="section border-bottom pt-2 pb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="breadcrumbs">
+                    <li><a a asp-controller="Home" asp-action="index">首頁</a></li>
+                    <li><a asp-controller="Shop" asp-action="index">商品</a></li>
+                    <li><a asp-controller="Cart" asp-action="index">購物車</a></li>
+                    <li><a asp-controller="Order" asp-action="index">訂單資料</a></li>
+                    <li>我的訂單</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="text-center">
@@ -42,11 +46,12 @@
                 <tbody>
                     @foreach (var item in ViewBag.orderItems)
                     {
-        <tr>
-            <td>@item.Product.ProductName</td>
-            <td>@item.Amount</td>
-            <td>@item.SubTotal</td>
-        </tr>}
+                        <tr>
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.Amount</td>
+                            <td>@item.SubTotal</td>
+                        </tr>
+}
                 </tbody>
             </table>
             <div class="text-right pr-5">
@@ -65,10 +70,10 @@
                     訂單狀態：
                     @if (@Model.isPaid)
                     {
-        <span>已付款</span> }
+                        <span>已付款</span> }
                     else
                     {
-        <span>未付款</span>}
+                        <span>未付款</span>}
                 </p>
                 <div class="row">
                     <p class="col-3">立即付款：</p>
