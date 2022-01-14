@@ -23,16 +23,10 @@ namespace TwenGo.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
         #region 結帳流程
 
         // 結帳
-        public IActionResult Checkout()
+        public IActionResult Index()
         {
             //確認 Session 內存在購物車
             if (SessionHelper.GetObjectFromJson<List<OrderItem>>(HttpContext.Session, "cart") == null)
