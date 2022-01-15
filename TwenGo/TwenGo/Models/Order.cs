@@ -11,22 +11,35 @@ namespace TwenGo.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "訂單日期")]
         public DateTime OrderDate { get; set; }
         public string UserId { get; set; }
+
+        [Display(Name = "使用者名稱")]
         public string UserName { get; set; }
+
+        [Display(Name = "總價")]
         public int Total { get; set; }
 
         [Required]
+        [Display(Name = "接案日期")]
         public DateTime ReciveDate { get; set; }
+
         [Required]
+        [Display(Name = "接案者")]
         public string ReceiverName { get; set; }
+
         [Required]
+        [Display(Name = "接案者地址")]
         public string ReceiverAddress { get; set; }
+
         [Required]
+        [Display(Name = "接案者電話")]
         public string ReceiverPhone { get; set; }
         public string Memo { get; set; }
 
 
+        [Display(Name = "付款狀態")]
         public bool isPaid { get; set; }
         public List<OrderItem> OrderItem { get; set; }
     }
