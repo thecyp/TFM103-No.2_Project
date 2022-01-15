@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using TwenGo.Models.Repository.Entity;
 
+
 namespace TwenGo.Controllers
 {
     //[Authorize]
@@ -27,15 +28,21 @@ namespace TwenGo.Controllers
         {
             //var aaa = HttpContext.User.Identity.Name;
 
-            //var data = new CustomerViewModel()
-            //{
-            //    CustomerName = "123",
-            //    Email = "AAA",
-                
-            //};
+            var data = new CustomerViewModel()
+            {
+                CustomerName = "123",
+                Email = "AAA",
+
+            };
 
             return View();
 
+        }
+
+        public ActionResult EditProfile()
+        {
+        
+            return View();
         }
 
 
