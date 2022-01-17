@@ -46,7 +46,7 @@ namespace TwenGo.Controllers.API
         }
 
         // PUT: api/Products/5
-        [HttpPatch("{id}")]
+        [HttpPut("{id}")]
         public void Patch(int id, [FromBody] Product product)
         {
             var edit = _context.Products.Find(id);

@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <form class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -42,39 +42,39 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <label for="name">服務名稱:</label>
-                            <input type="text" class="form-control" id="name" name="ProductName" ref="put_name" :value="put.productName">
+                            <input type="text" class="form-control" id="name" name="ProductName" :value="put.productName">
                         </div>
                         <label>服務地點:</label>
                         <div id="twzipcode" class="form-group input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" name="Address" ref="put_address"></span>
+                                <span class="input-group-text" name="Address" ></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label>服務敘述:</label>
                                 <br />
-                                <textarea name="Description" ref="put_des" style="width:100%;height:100px">{{put.description}}</textarea>
+                                <textarea name="Description"  style="width:100%;height:100px">{{put.description}}</textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <label>服務價格:</label>
                             <br />
-                            <input type="number" name="Price" ref="put_price" :value="put.price" />
+                            <input type="number" name="Price" :value="put.price" />
                         </div>
                         <div>
                             <label>上傳圖片</label>
                             <br />
-                            <input type="file" name="pic" id="inputpic" ref="put_pic" />
+                            <input type="file" name="pic" id="inputpic"/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消變更</button>
-                        <button type="button" class="btn btn-primary" v-on:click="edit()">儲存修改</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">取消變更</button>
+                        <button type="submit" class="btn btn-primary" v-on:click="edit(put.id)">儲存修改</button>
                     </div>
                 </div>
             </div>@*#dia*@
-        </div>
+        </form>
     </div>@*#app*@
 
 
@@ -90,17 +90,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <style>
-        .modal.fade .modal-dialog {
+        body{
+            background-color:ivory
+        }
+        .card {
+            margin-top: 30px;
+            
+        }
+        .card-text {
+            color:black
+        }
+        .hidding {
+            z-index: -1  ;
+        }
+
+        /*.modal.fade .modal-dialog {
             transform: translateY(10vh);
         }
 
         .modal.show .modal-dialog {
             transform: translateY(0);
-        }
+        }*/
 
         .modal-backdrop {
             z-index: 0;
         }
+
     </style>
 
     <script>
@@ -108,7 +123,7 @@
             el: "#app",
             data: {
                 products: [],
-                put: []
+                put: [],
             },//data
             mounted: function () {
                 let self = this;
@@ -132,12 +147,13 @@
                             response.text()
                                 .then(text => {
                                     alert(text);
-                                    window.location.reload();
+                                    window.location.reload();//F5重整
                                 }))
                     }//if
                 },//delete
                 show: function (id) {
                     $('#myModal').modal("show");
+                    /*$(".card").toggleClass("hidding")*/
                     let self = this;
                     fetch("/products/" + id,)
                         .then(response =>
@@ -148,23 +164,24 @@
 
                 },//getid
                 edit: function (id) {
-                    /*alert("123")*/
                     const putdata = {
-                        Price: 500
+                     
                     }
                     fetch("/product/" + id, {
-                        method: 'PATCH',
+                        method: 'PUT',
                         headers: {
+                            'Accept': 'application/json',
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(putdata)
                     }).then(res => { return res.json() })
+                    .then
                     alert("更新成功")
                     $('#myModal').modal("hide");
-
                 }//edit
             }//methods
         })//vue
+
     //var vm = new Vue({
     //    el: "#myModal",
     //    data: {
