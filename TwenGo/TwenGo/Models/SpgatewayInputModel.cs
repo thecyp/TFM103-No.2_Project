@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TwenGo.Models.ThirdPartyPay
+namespace TwenGo.Models
 {
     /// <summary>
     /// [智付通]介接資料模型

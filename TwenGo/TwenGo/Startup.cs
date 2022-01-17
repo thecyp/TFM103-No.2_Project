@@ -71,6 +71,7 @@ namespace TwenGo
                 options.LoginPath = new PathString("/Login/Index");
                 //other properties
             });
+            services.AddHttpContextAccessor();
 
         }
 
