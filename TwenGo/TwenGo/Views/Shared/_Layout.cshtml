@@ -68,147 +68,150 @@
             </ul>
         </div>
     </div>
+  
     <div class="site">
-        <div class="topbar">
-           <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
+        <header>
+            <div class="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
 
-                    </div>
-                    <div class="col-md-4">
-                        <div class="topbar-menu">
-                            <ul class="topbar-menu">
-                                <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">會員中心</a></li>
-                                <li><a asp-area="" asp-controller="Login" asp-action="Index">登入</a></li>
-                                <li><a asp-area="" asp-controller="Member" asp-action="CustomerRegister">註冊</a></li>
-                            </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2">
-                        <a asp-area="" asp-controller="Home" asp-action="index">
-                            <img class="logo-image" src="~/images/logo.png" alt="Organik Logo" />
-                        </a>
-                    </div>
-                    <div class="col-md-8">
-                        <form asp-controller="Shop" asp-action="Index">
-                            <input type="text" class="top-search-input" name="SearchString" />
-                            <button class="btn btn-warning" type="submit"><i class="ion-search"></i></button>
-                        </form>
+                        <div class="col-md-4">
 
-                    </div>
-                    <div class="col-md-2">
-                        <div class="btn-wrap">
-                            <div class="mini-cart-wrap">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon" data-count="!">
-                                        <i class="ion-bag"></i>
-                                    </div>
-                                </div>
-                                <div class="widget-shopping-cart-content" id="cartMenu">
-                                    <ul class="cart-list">
-                                        <li v-for="item in product">
-                                            <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">
-                                                <img :src=item.image alt="" />
-                                                {{item.name}}&nbsp;
-                                            </a>
-                                            <span class="card-text">x{{item.amount}}</span>
-                                            <span class="quantity"> NT${{item.subtotal}}</span>
-                                        </li>
-                                    </ul>
-                                    <p class="total">
-                                        <strong style="font-size:20px">總價 </strong>
-                                        <span class="amount">NT$ {{product[0].total}}</span>
-                                    </p>
-                                    <p class="buttons">
-                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="checkout">立即購買</a>
-                                    </p>
-                                </div>
+                            <div class="topbar-menu">
+                                
+                                <partial name="_LoginPartial" />
                             </div>
+
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-
-
-        <header class="header header-mobile">
-            <div class="container">
-                <div class="row">
-
-
-
                 </div>
             </div>
         </header>
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <img src="~/images/footer_logo.png" class="footer-logo" alt="" />
-                        <p>
-                            歡迎來到XXXX，我們將為您提供最 的生活服務。
-                        </p>
-                        <div class="footer-social">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
+            <div class="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a asp-area="" asp-controller="Home" asp-action="index">
+                                <img class="logo-image" src="~/images/logo.png" alt="Organik Logo" />
+                            </a>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">相關資訊</h3>
-                            <ul>
-                                <li><a href="/shop">New Products</a></li>
-                                <li><a href="#">Top Sellers</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Our Shop</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">Useful Link</h3>
-                            <ul>
-                                <li><a href="#">Our Team</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Secure Shopping</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <h3 class="widget-title">訂閱</h3>
-                            <p>
-                                訂閱我們收到最新消息!
-                            </p>
-                            <form class="newsletter">
-                                <input type="email" name="EMAIL" placeholder="輸入電子信箱" required="" />
-                                <button><i class="fa fa-paper-plane"></i></button>
+                        <div class="col-md-8">
+                            <form asp-controller="Shop" asp-action="Index">
+                                <input type="text" class="top-search-input" name="SearchString" />
+                                <button class="btn btn-warning" type="submit"><i class="ion-search"></i></button>
                             </form>
+
                         </div>
+                        <div class="col-md-2">
+                            <div class="btn-wrap">
+                                <div class="mini-cart-wrap">
+                                    <div class="mini-cart">
+                                        <div class="mini-cart-icon" data-count="!">
+                                            <i class="ion-bag"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-shopping-cart-content" id="cartMenu">
+                                        <ul class="cart-list">
+                                            <li v-for="item in product">
+                                                <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
+                                                <a asp-area="" asp-controller="ShopDetail" asp-action="index">
+                                                    <img :src=item.image alt="" />
+                                                    {{item.name}}&nbsp;
+                                                </a>
+                                                <span class="card-text">x{{item.amount}}</span>
+                                                <span class="quantity"> NT${{item.subtotal}}</span>
+                                            </li>
+                                        </ul>
+                                        <p class="total">
+                                            <strong style="font-size:20px">總價 </strong>
+                                            <span class="amount">NT$ {{product[0].total}}</span>
+                                        </p>
+                                        <p class="buttons">
+                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
+                                            <a asp-area="" asp-controller="Cart" asp-action="index" class="checkout">立即購買</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </footer>
-        @*<div class="copyright">
+
+
+            <header class="header header-mobile">
+                <div class="container">
+                    <div class="row">
+
+
+
+                    </div>
+                </div>
+            </header>
+
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="~/images/footer_logo.png" class="footer-logo" alt="" />
+                            <p>
+                                歡迎來到XXXX，我們將為您提供最 的生活服務。
+                            </p>
+                            <div class="footer-social">
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="widget-title">相關資訊</h3>
+                                <ul>
+                                    <li><a href="/shop">New Products</a></li>
+                                    <li><a href="#">Top Sellers</a></li>
+                                    <li><a href="#">Our Blog</a></li>
+                                    <li><a href="#">About Our Shop</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="widget-title">Useful Link</h3>
+                                <ul>
+                                    <li><a href="#">Our Team</a></li>
+                                    <li><a href="#">Our Blog</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Secure Shopping</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h3 class="widget-title">訂閱</h3>
+                                <p>
+                                    訂閱我們收到最新消息!
+                                </p>
+                                <form class="newsletter">
+                                    <input type="email" name="EMAIL" placeholder="輸入電子信箱" required="" />
+                                    <button><i class="fa fa-paper-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            @*<div class="copyright">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
