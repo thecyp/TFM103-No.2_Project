@@ -9,7 +9,9 @@
             <div class="col-sm-12">
                 <ul class="breadcrumbs">
                     <li><a a asp-controller="Home" asp-action="index">首頁</a></li>
-                    <li><a asp-controller="OrderManagement" asp-action="index">訂單管理</a></li>
+                    <li><a asp-controller="Shop" asp-action="index">商品</a></li>
+                    <li><a asp-controller="Cart" asp-action="index">購物車</a></li>
+                    <li><a asp-controller="Order" asp-action="index">訂單資料</a></li>
                     <li>我的訂單</li>
                 </ul>
             </div>
@@ -19,7 +21,7 @@
 
 <div class="text-center">
     <p></p>
-    <h4>訂單詳細資訊</h4>
+    <h4>訂單建立成功</h4>
     <p></p>
 </div>
 
@@ -33,7 +35,7 @@
         </div>
 
         <div>
-            <table class="table table-success table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>商品名稱</th>
@@ -59,9 +61,9 @@
         <hr />
         <div class="row">
             <div class="col-7">
-                <p>預約者姓名：@Html.DisplayFor(model => model.ReceiverName)</p>
-                <p>預約者電話：@Html.DisplayFor(model => model.ReceiverPhone)</p>
-                <p>預約地址：@Html.DisplayFor(model => model.ReceiverAddress)</p>
+                <p>收貨人姓名：@Html.DisplayFor(model => model.ReceiverName)</p>
+                <p>收貨人電話：@Html.DisplayFor(model => model.ReceiverPhone)</p>
+                <p>收貨人地址：@Html.DisplayFor(model => model.ReceiverAddress)</p>
             </div>
             <div class="col-5">
                 <p>
@@ -73,16 +75,18 @@
                     {
                         <span>未付款</span>}
                 </p>
+                <div class="row">
+                    <p class="col-3">立即付款：</p>
+                    <div class="col-9">
+                        <div class="w-75" id="payment-button"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
 <p></p>
-
-<div>
-    <a class="btn btn-sm btn-outline-secondary" asp-action="Index"><i class="fa fa-arrow-left"></i> 返回訂單管理</a>
-</div>
 
 
 <script>

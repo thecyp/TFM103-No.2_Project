@@ -1,4 +1,4 @@
-﻿<div  class="product">
+﻿<div id="app" class="product">
     <div id="carouselExampleSlidesOnly" class="carousel slide MyProduct"  data-bs-ride="carousel">
         <div class="carousel-inner" style="text-align:center">
             <div class="carousel-item active">
@@ -9,7 +9,7 @@
     <div class="card mb-3 MyProduct color" style="max-width: 100%;">
         <div class="row g-0">
             <div class="col-md-8">
-                <div id="app" class="card-body" style="">
+                <div  class="card-body" style="">
                     <h1 class="card-title">{{products.productName}}</h1>
                     <p class="card-text"><h2>服務內容:</h2><h6>{{products.description}}</h6></p>
                     <p class="card-text"><h6>服務地點:{{products.address}}</h6></p>
@@ -21,17 +21,22 @@
     </div>
 </div>
 <style>
-    body{
-        background-color:cornsilk
+    body {
+        background-color: cornsilk
     }
-    .color{
-        background-color:floralwhite
+
+    .color {
+        background-color: floralwhite
     }
+
     .MyProduct {
-       float: left;
+        float: left;
         width: 50%;
-        color:black
+        color: black
     }
+    .card {
+        margin-top: 30px;
+    }   
 </style>
 <script>
     var vm = new Vue({

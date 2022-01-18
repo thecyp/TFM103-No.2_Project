@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,8 +72,12 @@ namespace TwenGo
                 options.LoginPath = new PathString("/Login/Index");
                 //other properties
             });
+<<<<<<< HEAD
             services.AddHttpContextAccessor();
 
+=======
+           
+>>>>>>> main
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

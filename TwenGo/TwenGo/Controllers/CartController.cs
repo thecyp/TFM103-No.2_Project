@@ -99,7 +99,7 @@ namespace TwenGo.Controllers
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
 
-            return Json(true); // HttpStatus 204: 請求成功但不更新畫面
+            return Content("成功加入購物車!"); // HttpStatus 204: 請求成功但不更新畫面
         }
         [HttpPost]
         public IActionResult CleanCart([FromForm] int id)
@@ -122,7 +122,7 @@ namespace TwenGo.Controllers
             }
 
             //return RedirectToAction("Index", "Products", null);
-            return Json(true);
+            return Content("商品移除成功");
 
         }
 

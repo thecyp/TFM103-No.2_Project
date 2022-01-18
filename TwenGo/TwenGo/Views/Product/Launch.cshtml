@@ -29,7 +29,7 @@
             <div class="form-group col-md-12">
                 <label>服務敘述:</label>
                 <br />
-                <textarea name="Description"></textarea>
+                <textarea name="Description" style="width:100%;height:100px"></textarea>
             </div>
         </div>
         <label>服務價格:</label>
@@ -50,35 +50,16 @@
     body {
         background-color: #C5E1A5
     }
+
     #launch {
         background-color: #F1F8E9;
-        padding: 20px
+        padding: 20px;
+        margin-top: 30px;
+        border-radius:20px
     }
-    input,textarea{
-       
-    }
+
     h1 {
         color: #616161;
     }
 </style>
 
-@*<script>
-    var vm = new Vue({
-        el: "#app",
-        data: {
-            categories: []
-        },
-        mounted: function () {
-            let self = this;
-            fetch('https://localhost:44390/api/categories')
-                .then(function (res) {
-                    return res.json();
-                })
-                .then(function (myjson) {
-                    for (let i = 0; i < myjson.length; i++) {
-                        self.categories.push(myjson[i])
-                    }
-                })
-        }
-    })
-</script>*@

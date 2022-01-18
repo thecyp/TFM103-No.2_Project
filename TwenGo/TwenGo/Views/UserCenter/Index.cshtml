@@ -1,19 +1,75 @@
-﻿
+﻿@model TwenGo.Models.ViewModels.CustomerViewModel
 <div id="app">
-    {{100*100}}
-    <div class="row" v-for="users in users">
-        <div class="col-sm-3" >
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text">姓名:<br>{{users.realName}}</p>
-                    <p class="card-text">服務地點:{{users.identityNumber}}</p>
-                    <p class="card-text">:{{users.gender}}</p>
 
+    <div class="card bg-light" v-for="item in users">
+        <article class="card-body mx-auto" style="width: 48rem">
 
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <p>{{item.realName}}</p>
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <p>{{item.email}}</p>
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
+                    </div>
+                    <p>{{item.cellphone}}</p>
+                </div> <!-- form-group// -->
+
+                <div class="input-group-prepend">
+                    <div class="form-group input-group">
+                        <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
+                        <p>{{item.gender}}</p>
+                    </div>
+                </div> <!-- form-group end.// -->
+
+                <div class="form-group input-group">
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
+                    </div>
+                    <p>{{item.birthday}}</p>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                    </div>
+                    <p>{{item.identityNumber}}</p>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <p>{{item.phone}}</p>
+                </div> <!-- form-group// -->
+
+                <div>
+                    <div id="twzipcode" class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                        </div>
+                    </div>
+                    <p>{{item.address}}</p>
+                </div>
+
+                <br />
+            </form>
+
+        </article>
+    </div> <!-- card.// -->
 </div>
 <script>
     var v = new Vue({
@@ -30,10 +86,10 @@
                 .then(function (d) {
                     for (var i = 0; i < d.length; i++)
                         self.users.push(d[i])
-                    })
-                
+                })
+
         },//mounted
-       
-  
+
+
     })//vue
 </script>

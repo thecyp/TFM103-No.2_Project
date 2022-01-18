@@ -1,109 +1,133 @@
 ﻿@model TwenGo.Models.Product
-<div id="app">
-    <div class="row">
-        <div class="col-sm-3" v-for="item in products">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title">{{item.productName}}</h2>
-                    <p class="card-text">服務內容:<br>{{item.description}}</p>
-                    <p class="card-text">服務地點:{{item.address}}</p>
-                    <p class="card-text">價格:{{item.price}}元</p>
-                    <img :src="item.picturePath" class="card-img-top">
-                    <p style="height:10px"></p>
-                    @*<button v-on:click="show()">編輯</button>*@
-                    <button class="btn btn-primary" onclick="show()">編輯</button>
-                    <button class="btn btn-danger" v-on:click="del(item.id)">刪除</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog" id="dia">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">編輯資料</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <label for="name">服務名稱:</label>
-                    <input type="text" class="form-control" id="name" name="ProductName">
-                </div>
-                <label>服務地點:</label>
-                <div id="twzipcode" class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" name="Address"> <i class="fas fa-map-marker-alt"></i> </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label>服務敘述:</label>
-                        <br />
-                        <textarea name="Description"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <label>服務價格:</label>
-                    <br />
-                    <input type="number" name="Price" />
-                </div>
-                <div>
-                    <label>上傳圖片</label>
-                    <br />
-                    <input type="file" name="pic" id="inputpic" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消變更</button>
-                <button type="button" class="btn btn-primary">儲存修改</button>
-            </div>
-        </div>
-    </div>
-</div>
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $("#twzipcode").twzipcode({
+                zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+                css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+                countyName: "countyName", // 自訂城市 select 標籤的 name 值
+                districtName: "districtName" // 自訂區別 select 標籤的 name 值
+            });
+        });
+    </script>
+    <div id="app">
+        <div class="row">
+            <div class="col-sm-3" v-for="item in products">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">{{item.productName}}</h2>
+                        <p class="card-text">服務內容:<br>{{item.description}}</p>
+                        <p class="card-text">服務地點:{{item.address}}</p>
+                        <p class="card-text">價格:{{item.price}}元</p>
+                        <img :src="item.picturePath" class="card-img-top">
+                        <p style="height:10px"></p>
+                        <button class="btn btn-primary" v-on:click="show(item.id)">編輯</button>
+                        <button class="btn btn-danger" v-on:click="del(item.id)">刪除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">編輯資料</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <label for="name">服務名稱:</label>
+                            <input type="text" class="form-control" id="name" name="ProductName" v-model:text="put.productName">
+                        </div>
+                        <label>服務地點:</label>
+                        <div id="twzipcode" class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" name="Address" v-model:value="put.address"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>服務敘述:</label>
+                                <br />
+                                <textarea name="Description" v-model:text="put.description"  style="width:100%;height:100px">{{put.description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>服務價格:</label>
+                            <br />
+                            <input type="number" name="Price" v-model:text="put.price" />
+                        </div>
+                        <div>
+                            <label>上傳圖片</label>
+                            <br />
+                            <input type="file" name="pic" id="inputpic" v-model:text="put.picturePath"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">取消變更</button>
+                        <button type="submit" class="btn btn-primary" v-on:click="edit(put.id)">儲存修改</button>
+                    </div>
+                </div>
+            </div>@*#dia*@
+        </form>
+    </div>@*#app*@
+
+
+    @*<script>
         $(window).ready(() => {
             $('#myModal').modal("hide");
-
-        })
-        function show(){
-            $('#myModal').modal();
-        }
-    </script>
-
+            //})
+            //function show() {
+            //    $('#myModal').modal();
+            //}
+    </script>*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
     <style>
-        .modal.fade .modal-dialog {
+        body{
+            background-color:ivory
+        }
+        .card {
+            margin-top: 30px;
+            
+        }
+        .card-text {
+            color:black
+        }
+        .hidding {
+            z-index: -1  ;
+        }
+
+        /*.modal.fade .modal-dialog {
             transform: translateY(10vh);
         }
 
         .modal.show .modal-dialog {
             transform: translateY(0);
-        }
+        }*/
+
         .modal-backdrop {
-           z-index: 0;
+            z-index: 0;
         }
-      
-    
+
     </style>
 
     <script>
         var v = new Vue({
             el: "#app",
             data: {
-                products: []
+                products: [],
+                put: [],
             },//data
             mounted: function () {
                 let self = this;
                 fetch("/products")
                     .then(function (res) {
                         return res.json();
-                    })
-                    .then(function (myjson) {
+                    }).then(function (myjson) {
                         for (let i = 0; i < myjson.length; i++) {
                             self.products.push(myjson[i])
                         }
@@ -119,27 +143,69 @@
                             response.text()
                                 .then(text => {
                                     alert(text);
-                                    window.location.reload();
+                                    window.location.reload();//F5重整
                                 }))
                     }//if
                 },//delete
+                show: function (id) {
+                    $('#myModal').modal("show");
+                    /*$(".card").toggleClass("hidding")*/
+                    let self = this;
+                    fetch("/products/" + id,)
+                        .then(response =>
+                            response.json()
+                                .then(d => {
+                                    self.put = d
+                                }))
 
+                },//getid
                 edit: function (id) {
-                    confirm("test")
-                    fetch("/product/" + id, {
-                        method: 'PUT'
-                    }).then(response =>
-                        response.text()
-                            .then(text => {
-                        }))
+                    var p = document.getElementsByName("Price")
+                    const putdata = {
+                        id: 7,
+                        productName: v.put.productName,
+                        address: v.put.address,
+                        description: v.put.description,
+                        price: v.put.price,
+                        picturePath: v.put.picturePath
+
+                    }
+                    let jsonstring = JSON.stringify(putdata);
+                    alert(jsonstring);
+                    fetch("/products/" + id, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: jsonstring
+                    }).then(res => {
+                        return res.json()
+                    }).then(data => {
+                        console.log(data)
+                    })
+
+                    alert("更新成功")
+                    $('#myModal').modal("hide");
 
                 }//edit
             }//methods
         })//vue
+
+    //var vm = new Vue({
+    //    el: "#myModal",
+    //    data: {
+    //        put: []
+    //    }, mounted: function (id) {
+    //        let self = this;
+    //        fetch("/products/" + id)
+    //                .then(res => {
+    //                    return res.json();
+    //                })
+    //                .then(d => {
+    //                    self.put = d
+    //                })
+
+    //    }//mounted
+    //})//vue_2
     </script>
-    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-    //setTimeout(() => $('#myModal').modal('show'), 1000);
-    //setTimeout(() => $('#myModal').modal('hide'), 4000);
-    @*integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"*@
-    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>*@
+   

@@ -10,7 +10,11 @@ using TwenGo.Models.Repository;
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
+<<<<<<<< HEAD:TwenGo/TwenGo/Migrations/20220117064208_init.Designer.cs
     [Migration("20220117064208_init")]
+========
+    [Migration("20220118083851_init")]
+>>>>>>>> main:TwenGo/TwenGo/Migrations/20220118083851_init.Designer.cs
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
