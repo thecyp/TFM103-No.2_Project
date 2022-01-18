@@ -13,7 +13,8 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Administrator")]
+    //[Authorize]
     public class UserManagementController : Controller
     {
         private readonly TwenGoContext _context;
@@ -26,7 +27,7 @@ namespace TwenGo.Controllers
         }
 
 
-        
+
         public IActionResult Index()
         {
             List<Users> users = _context.Users.ToList();
@@ -40,7 +41,7 @@ namespace TwenGo.Controllers
         }
 
         //新增功能
-        
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -60,18 +61,20 @@ namespace TwenGo.Controllers
         [HttpGet]
         public IActionResult Delete(string Id)
         {
-            
+
             Users users = _context.Users
                 .Where(a => a.Id == Id).FirstOrDefault();
+
             return View(users);
         }
 
         [HttpPost]
         public IActionResult Delete(Users users)
         {
-            _context.Attach(users);
-            _context.Entry(users).State = EntityState.Deleted;
+
+            _context.Users.Remove(users);
             _context.SaveChanges();
+
             return RedirectToAction("index");
         }
 
