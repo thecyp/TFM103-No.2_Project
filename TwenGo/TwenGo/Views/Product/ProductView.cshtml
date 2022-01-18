@@ -17,10 +17,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">{{item.productName}}</h2>
-                        <p class="card-text">服務內容:<br>{{item.description}}</p>
+                        <p class="card-text" >服務內容:<br>{{item.description}}</p>
                         <p class="card-text">服務地點:{{item.address}}</p>
                         <p class="card-text">價格:{{item.price}}元</p>
-                        <img :src="item.picturePath" class="card-img-top">
+                        <img :src="item.picturePath" class="card-img-top" >
                         <p style="height:10px"></p>
                         <button class="btn btn-primary" v-on:click="show(item.id)">編輯</button>
                         <button class="btn btn-danger" v-on:click="del(item.id)">刪除</button>
