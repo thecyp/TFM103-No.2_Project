@@ -46,8 +46,10 @@ namespace TwenGo.Controllers.API
         }
 
         // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public void Put(int id,[FromRoute] Product product)
+        [HttpPut]
+        [Route("{id}")]
+        [Consumes("application/json")]
+        public void Put([FromRoute]int id,[FromBody] Product product)
         {
             
             var edit = _context.Products.Find(id);
