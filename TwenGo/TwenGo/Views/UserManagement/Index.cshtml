@@ -59,6 +59,9 @@
                     <thead>
                         <tr>
                             <th>
+                                @Html.DisplayName("使用者名稱")
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.RealName)
                             </th>
                             <th>
@@ -80,27 +83,30 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RealName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdentityNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.City)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Town)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
-                                </td>
-                                <td>
-                                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a>*@
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RealName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdentityNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Town)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a>*@
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

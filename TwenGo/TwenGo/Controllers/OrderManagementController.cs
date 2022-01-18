@@ -39,7 +39,6 @@ namespace TwenGo.Controllers
         }
 
 
-
         ////新增功能
         //[HttpGet]
         //public IActionResult Create()
@@ -57,11 +56,41 @@ namespace TwenGo.Controllers
         //    return RedirectToAction("index");
         //}
 
-        public IActionResult Details(int Id)
+        public async Task<IActionResult> DetailsAsync(int? Id)
         {
-            Order orders = _context.Orders
-                .Where(a => a.Id == Id).FirstOrDefault();
-            return View(orders);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == Id);
+
+
+            order.OrderItem = await _context.OrderItem.Where(p => p.OrderId == Id).ToListAsync();
+            ViewBag.orderItems = GetOrderItems(order.Id);
+
+
+            return View(order);
+
+            //Order orders = _context.Orders
+            //    .Where(a => a.Id == Id).FirstOrDefault();
+            //return View(orders);
+        }
+
+        private List<CartItem> GetOrderItems(int orderId)
+        {
+
+            var OrderItems = _context.OrderItem.Where(p => p.OrderId == orderId).ToList();
+
+            List<CartItem> orderItems = new List<CartItem>();
+            foreach (var orderitem in OrderItems)
+            {
+                CartItem item = new CartItem(orderitem);
+                item.Product = _context.Products.Single(x => x.Id == orderitem.ProductId);
+                orderItems.Add(item);
+            }
+
+            return orderItems;
         }
 
 

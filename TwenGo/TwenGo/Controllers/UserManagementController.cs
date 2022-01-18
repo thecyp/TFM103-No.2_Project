@@ -13,15 +13,16 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class UserManagementController : Controller
     {
         private readonly TwenGoContext _context;
-        //private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Users> _userManager;
 
-        public UserManagementController(TwenGoContext context)
+        public UserManagementController(TwenGoContext context, UserManager<Users> _userMananger)
         {
             _context = context;
-            //_userManager = userManager;
+            _userManager = _userMananger;
         }
 
 
@@ -59,6 +60,7 @@ namespace TwenGo.Controllers
         [HttpGet]
         public IActionResult Delete(string Id)
         {
+            
             Users users = _context.Users
                 .Where(a => a.Id == Id).FirstOrDefault();
             return View(users);
@@ -72,6 +74,7 @@ namespace TwenGo.Controllers
             _context.SaveChanges();
             return RedirectToAction("index");
         }
+
 
     }
 }

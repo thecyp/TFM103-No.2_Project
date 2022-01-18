@@ -34,7 +34,7 @@ namespace TwenGo.Models
         public string ReceiverAddress { get; set; }
 
         [Required]
-        [Display(Name = "預約電話")]
+        [Display(Name = "預約者電話")]
         public string ReceiverPhone { get; set; }
         public string Memo { get; set; }
 
