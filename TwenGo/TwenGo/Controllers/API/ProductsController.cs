@@ -47,9 +47,11 @@ namespace TwenGo.Controllers.API
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public void Patch(int id, [FromBody] Product product)
+        public void Put(int id,[FromRoute] Product product)
         {
+            
             var edit = _context.Products.Find(id);
+           
             if (edit != null)
             {
                 edit.ProductName = product.ProductName;
@@ -59,23 +61,37 @@ namespace TwenGo.Controllers.API
                 edit.PicturePath = product.PicturePath;
                 _context.SaveChanges();
             }
-            //====================================================
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ProductExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-            //return NoContent();
+        //    ====================================================
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ProductExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //    return NoContent();
+        //}
+
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutProduct(int id)
+        //{
+        //    var edit = await _context.Products.FindAsync(id);
+        //    if (edit == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    _context.Products.Update(edit);
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok("更新成功");
         }
 
         // POST: api/Products

@@ -78,14 +78,14 @@
     </div>@*#app*@
 
 
-    <script>
+    @*<script>
         $(window).ready(() => {
             $('#myModal').modal("hide");
             //})
             //function show() {
             //    $('#myModal').modal();
             //}
-    </script>
+    </script>*@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
@@ -130,8 +130,7 @@
                 fetch("/products")
                     .then(function (res) {
                         return res.json();
-                    })
-                    .then(function (myjson) {
+                    }).then(function (myjson) {
                         for (let i = 0; i < myjson.length; i++) {
                             self.products.push(myjson[i])
                         }
@@ -164,20 +163,26 @@
 
                 },//getid
                 edit: function (id) {
+                   /* var p = document.getElementsByName("Price")*/
                     const putdata = {
-                     
+                        id: 7,
+                        Price: 1111
                     }
                     fetch("/product/" + id, {
                         method: 'PUT',
                         headers: {
-                            'Accept': 'application/json',
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(putdata)
-                    }).then(res => { return res.json() })
-                    .then
+                    }).then(res => {
+                        return res.json()
+                    }).then(data => {
+                        console.log(data)
+                    })
+
                     alert("更新成功")
                     $('#myModal').modal("hide");
+
                 }//edit
             }//methods
         })//vue

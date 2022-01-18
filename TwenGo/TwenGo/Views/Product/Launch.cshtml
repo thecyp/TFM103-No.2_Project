@@ -54,10 +54,8 @@
     #launch {
         background-color: #F1F8E9;
         padding: 20px;
-        margin-top: 30px
-    }
-
-    input, textarea {
+        margin-top: 30px;
+        border-radius:20px
     }
 
     h1 {
@@ -65,30 +63,3 @@
     }
 </style>
 
-
-<template>
-    <div id="app" class="container">
-        <div class="card">
-            <div class="card-header">Vue Fetch PUT - BezKoder.com</div>
-            <div class="card-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" ref="put_id" placeholder="Id" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" ref="put_title" placeholder="Title" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" ref="put_description" placeholder="Description" />
-                </div>
-                <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" ref="put_published" />
-                    <label class="form-check-label" for="put_published">Publish</label>
-                </div>
-                <button class="btn btn-sm btn-primary">Update Data</button>
-                <button class="btn btn-sm btn-warning ml-2" >Clear</button>
-
-                <div v-if="putResult" class="alert alert-secondary mt-2" role="alert"><pre>{{putResult}}</pre></div>
-            </div>
-        </div>
-    </div>
-</template>
