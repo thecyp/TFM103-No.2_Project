@@ -23,6 +23,7 @@ namespace TwenGo.Models
 
         [Required]
         [Display(Name = "預約日期")]
+        [DataType(DataType.Date)]
         public DateTime ReciveDate { get; set; }
 
         [Required]
@@ -30,7 +31,7 @@ namespace TwenGo.Models
         public string ReceiverName { get; set; }
 
         [Required]
-        [Display(Name = "預約地址")]
+        [Display(Name = "預約者地址")]
         public string ReceiverAddress { get; set; }
 
         [Required]
