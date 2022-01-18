@@ -86,9 +86,9 @@ namespace TwenGo.Controllers
                 MerchantOrderNo = $"T{DateTime.Now.ToString("yyyyMMddHHmm")}",
                 //MerchantOrderNo = ,
                 // * 訂單金額
-                Amt = amount,
+                Amt = 1000,
                 // * 商品資訊
-                ItemDesc = "商品資訊(自行修改)",
+                ItemDesc = "Test",
                 // 繳費有效期限(適用於非即時交易)
                 ExpireDate = null,
                 // 支付完成 返回商店網址
