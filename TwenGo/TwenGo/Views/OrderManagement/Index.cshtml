@@ -12,22 +12,22 @@
         margin-bottom: 15px;
     }
 
-        .divider-text span {
-            padding: 7px;
-            font-size: 12px;
-            position: relative;
-            z-index: 2;
-        }
+    .divider-text span {
+        padding: 7px;
+        font-size: 12px;
+        position: relative;
+        z-index: 2;
+    }
 
-        .divider-text:after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            border-bottom: 1px solid #ddd;
-            top: 55%;
-            left: 0;
-            z-index: 1;
-        }
+    .divider-text:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        top: 55%;
+        left: 0;
+        z-index: 1;
+    }
 
     a:hover {
         text-decoration: none !important;
@@ -35,9 +35,6 @@
     }
 </style>
 
-@*<p>
-        <a asp-action="UserOrder" type="button" class="btn btn-secondary">委託訂單</a>
-    </p>*@
 
 
 <p>
@@ -77,8 +74,8 @@
                                     @Html.DisplayNameFor(model => model.isPaid)
                                 </th>
                                 @*<th>
-                                @Html.DisplayNameFor(model => model.Status)
-                            </th>*@
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>*@
                                 <th></th>
                             </tr>
                         </thead>
@@ -89,9 +86,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.OrderDate)
                                     </td>
-                                    @*<td>
-                                    @Html.DisplayFor(modelItem => item.UserId)
-                                </td>*@
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.UserName)
                                     </td>
@@ -110,7 +105,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.isPaid)
                                     </td>
-      
+
                                     <td>
                                         <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                                     </td>
@@ -138,8 +133,8 @@
                                     @Html.DisplayNameFor(model => model.ReceiverPhone)
                                 </th>
                                 @*<th>
-                                @Html.DisplayNameFor(model => model.UserId)
-                            </th>*@
+                                        @Html.DisplayNameFor(model => model.UserId)
+                                    </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.UserName)
                                 </th>
@@ -190,6 +185,6 @@
 
         </article>
     </div> <!-- card.// -->
-  
+
 </div>
 

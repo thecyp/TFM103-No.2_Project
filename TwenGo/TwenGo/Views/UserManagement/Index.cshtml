@@ -1,0 +1,133 @@
+﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
+
+
+<style>
+    .divider-text {
+        position: relative;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .divider-text span {
+            padding: 7px;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .divider-text:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            top: 55%;
+            left: 0;
+            z-index: 1;
+        }
+
+    .btn-facebook {
+        background-color: #405D9D;
+        color: #fff;
+    }
+
+    .btn-twitter {
+        background-color: #42AEEC;
+        color: #fff;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+        color: #000000;
+    }
+</style>
+
+<div class="container">
+    <br>
+    <hr>
+    <p>
+        <a asp-action="Create">新增</a>
+    </p>
+
+
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="width: 48rem">
+
+
+            <div class="tab-pane active" id="home">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RealName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdentityNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Town)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RealName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdentityNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Town)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a>*@
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script src="~/jquery/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#twzipcode").twzipcode({
+                    zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+                    css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+                    countyName: "City", // 自訂城市 select 標籤的 name 值
+                    districtName: "Town" // 自訂區別 select 標籤的 name 值
+                });
+            });
+        </script>
+
+    }*@
+

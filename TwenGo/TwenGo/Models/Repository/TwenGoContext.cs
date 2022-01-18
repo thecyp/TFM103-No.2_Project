@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TwenGo.Data;
 using TwenGo.Models;
@@ -17,6 +18,11 @@ namespace TwenGo.Models.Repository
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
 
         public override DbSet<Users> Users { get; set; }
+
+        internal object GetUserId(ClaimsPrincipal user)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual DbSet<CustomerViewModel> CustomerViewModels { get; set; }
         public  DbSet<Product> Products { get; set; }

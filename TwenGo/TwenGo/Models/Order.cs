@@ -22,19 +22,19 @@ namespace TwenGo.Models
         public int Total { get; set; }
 
         [Required]
-        [Display(Name = "接案日期")]
+        [Display(Name = "預約日期")]
         public DateTime ReciveDate { get; set; }
 
         [Required]
-        [Display(Name = "接案者")]
+        [Display(Name = "預約者")]
         public string ReceiverName { get; set; }
 
         [Required]
-        [Display(Name = "接案者地址")]
+        [Display(Name = "預約地址")]
         public string ReceiverAddress { get; set; }
 
         [Required]
-        [Display(Name = "接案者電話")]
+        [Display(Name = "預約電話")]
         public string ReceiverPhone { get; set; }
         public string Memo { get; set; }
 
