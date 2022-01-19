@@ -79,7 +79,7 @@
                         <input type="text" name="ordernumber" hidden value="@Html.DisplayFor(model => model.Id)" />
                         <input type="text" name="amount" hidden value="@Html.DisplayFor(model => model.Total)" />
                         <input type="text" name="productname" hidden value="@foreach (var item in ViewBag.orderitems) {@item.Product.ProductName}" />
-                        <select name="payType">
+                        <select name="payType" class="form-control">
                             <option value="CREDIT">信用卡</option>
                             <option value="WEBATM">WEBATM</option>
                             <option value="VACC">ATM 轉帳</option>
@@ -88,7 +88,7 @@
                         </select>
                     </div>
                     <div align="right">
-                        <button type="submit" class="continue-shopping w-50">立即付款</button>
+                        <button type="submit" class="add-to-cart w-50">立即付款</button>
                     </div>
                 </form>
             </div>

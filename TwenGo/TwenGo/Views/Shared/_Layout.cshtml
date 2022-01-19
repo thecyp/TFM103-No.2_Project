@@ -111,12 +111,12 @@
                                     <ul class="cart-list">
                                         <li v-for="item in product">
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">
+                                            <a class="product-title fz-16 fw-bolder">
                                                 <img :src=item.image alt="" />
                                                 {{item.name}}&nbsp;
                                             </a>
-                                            <span class="card-text">x{{item.amount}}</span>
-                                            <span class="quantity"> NT${{item.subtotal}}</span>
+                                            <span class="amount">x{{item.amount}}</span>
+                                            <span class="quantity">小計: NT${{item.subtotal}}</span>
                                         </li>
                                     </ul>
                                     <p class="total">
@@ -240,7 +240,6 @@
                         .then(function (d) { self.product = d })
                 },
                 CleanCart: function (id) {
-                    console.log(id);
                     let data = new FormData();
                     data.append("id", id);
                     fetch("/Cart/CleanCart", {

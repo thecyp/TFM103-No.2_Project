@@ -74,23 +74,6 @@
                     {
                         <span>未付款</span>}
                 </p>
-                <form class="form-horizontal" role="form" action="@Url.Action("SpgatewayPayBill", "Home")" method="POST">
-                    <div class="col-md-5" style="padding-left: 0px;">
-                        <input type="text" name="ordernumber" hidden value="@Html.DisplayFor(model => model.Id)" />
-                        <input type="text" name="amount" hidden value="@Html.DisplayFor(model => model.Total)" />
-                        <input type="text" name="productname" hidden value="@foreach (var item in ViewBag.orderitems) {@item.Product.ProductName}" />
-                        <select name="payType">
-                            <option value="CREDIT">信用卡</option>
-                            <option value="WEBATM">WEBATM</option>
-                            <option value="VACC">ATM 轉帳</option>
-                            <option value="CVS">超商代碼繳費</option>
-                            <option value="BARCODE">超商條碼繳費</option>
-                        </select>
-                    </div>
-                    <div align="right">
-                        <button type="submit" class="continue-shopping w-50">立即付款</button>
-                    </div>
-                </form>
             </div>
         </div>
 
