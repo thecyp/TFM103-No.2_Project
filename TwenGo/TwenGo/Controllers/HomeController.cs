@@ -26,9 +26,9 @@ namespace TwenGo.Controllers
             this.httpContextAccessor = httpContextAccessor;
             _bankInfoModel = new BankInfoModel
             {
-                MerchantID = "MS128471947",
-                HashKey = "99KvQF3FyZU8lzAx2uDCabC7SsmNXCHw",
-                HashIV = "C04i8uRBXUhHWs1P",
+                MerchantID = "MS130347314",
+                HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
+                HashIV = "CumZ6y4XhGDUAOVP",
                 ReturnURL = "http://yourWebsitUrl/Bank/SpgatewayReturn",
                 NotifyURL = "http://yourWebsitUrl/Bank/SpgatewayNotify",
                 CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
@@ -186,4 +186,5 @@ namespace TwenGo.Controllers
         }
 
     }
+
 }
