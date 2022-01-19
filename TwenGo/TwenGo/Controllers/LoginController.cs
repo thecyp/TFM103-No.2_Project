@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
 using TwenGo.Models.ViewModels;
+using System.Data.SqlClient;
+using Microsoft.AspNetCore.Http;
 
 namespace TwenGo.Controllers
 {
@@ -48,8 +50,23 @@ namespace TwenGo.Controllers
             var result = await _signInManager.PasswordSignInAsync(LoginData.Email, LoginData.Password, true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
+                ////query for roles
+                //SqlConnection conn = new SqlConnection();
+                //conn.ConnectionString = "Server=tcp:servego.database.windows.net,1433;Initial Catalog=ServerGo;Persist Security Info=False;User ID=servego;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //conn.Open();
+                //SqlCommand comm = conn.CreateCommand();
+                //String sql = "select Name from VwUserInRole where UserName=@UserName";
+                //comm.CommandText = sql;
+                //comm.Parameters.AddWithValue("UserName", LoginData.Email);
+                ////scalar
+                //String roleName=comm.ExecuteScalar() as String;
+                ////into Session
+                //HttpContext.Session.SetString("role",roleName);
+
                 return RedirectToAction("Index", "Home");
             }
+
+
 
             return RedirectToAction("Index");
         }
