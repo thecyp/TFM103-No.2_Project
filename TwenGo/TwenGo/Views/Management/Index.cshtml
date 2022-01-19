@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TwenGo.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "訂單總覽";
 }
 
-@*買家*@
+@*管理者*@
 
 <div class="section border-bottom pt-2 pb-2">
     <div class="container">
@@ -26,9 +26,6 @@
 </div>
 
 <div class="container">
-
-
-
     <div class="tab-pane active" id="home">
         <table class="table table-success table-striped">
             <thead>
@@ -42,7 +39,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ReceiverName)
                     </th>
-     
+
                     <th>
                         @Html.DisplayNameFor(model => model.Total)
                     </th>
@@ -66,7 +63,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ReceiverName)
                         </td>
-                      
+
                         <td>
                             @Html.DisplayFor(modelItem => item.Total)
                         </td>
