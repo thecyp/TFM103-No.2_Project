@@ -25,7 +25,7 @@
     else if (principal.IsInRole("Administrator"))
     {
         <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
-        <li><a asp-controller="OrderManagement" asp-action="index">訂單管理</a></li>
+        <li><a asp-controller="Management" asp-action="index">訂單管理</a></li>
         <li><a asp-controller="Product" asp-action="Launch">商品上架</a></li>
         <li><a asp-controller="Product" asp-action="ProductView">商品管理</a></li>
         <li>
