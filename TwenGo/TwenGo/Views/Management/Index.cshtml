@@ -6,6 +6,7 @@
 
 @*管理者*@
 
+
 <div class="section border-bottom pt-2 pb-2">
     <div class="container">
         <div class="row">
@@ -24,6 +25,8 @@
     <h4>訂單管理</h4>
     <p></p>
 </div>
+
+
 
 <div class="container">
     <div class="tab-pane active" id="home">
@@ -74,10 +77,45 @@
                         <td>
                             <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
                         </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-remove"></i>刪除</a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+
+<style>
+    body {
+        background-color: ivory
+    }
+
+    .card {
+        margin-top: 30px;
+    }
+
+    .card-text {
+        color: black
+    }
+
+    .hidding {
+        z-index: -1;
+    }
+
+    /*.modal.fade .modal-dialog {
+            transform: translateY(10vh);
+        }
+
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }*/
+
+    .modal-backdrop {
+        z-index: 0;
+    }
+</style>
+
 

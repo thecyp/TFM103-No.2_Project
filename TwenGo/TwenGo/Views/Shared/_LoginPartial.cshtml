@@ -25,9 +25,10 @@
     else if (principal.IsInRole("Administrator"))
     {
         <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
-        <li><a asp-controller="Management" asp-action="index">訂單管理</a></li>
+        <li><a asp-controller="Management" asp-action="Index">訂單管理</a></li>
         <li><a asp-controller="Product" asp-action="Launch">商品上架</a></li>
         <li><a asp-controller="Product" asp-action="ProductView">商品管理</a></li>
+        <li><a asp-controller="UserManagement" asp-action="Index">會員管理</a></li>
         <li>
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">登出</button>

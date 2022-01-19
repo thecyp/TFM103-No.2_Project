@@ -42,41 +42,41 @@ namespace TwenGo.Controllers
 
         //新增功能
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Users users = new Users();
-            return View(users);
-        }
+        //[HttpGet]
+        //public IActionResult Create()
+        //{
+        //    Users users = new Users();
+        //    return View(users);
+        //}
 
-        [HttpPost]
-        public IActionResult Create(Users users)
-        {
-            _context.Add(users);
-            _context.SaveChanges();
-            return RedirectToAction("index");
-        }
+        //[HttpPost]
+        //public IActionResult Create(Users users)
+        //{
+        //    _context.Add(users);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("index");
+        //}
 
         //刪除功能
-        [HttpGet]
-        public IActionResult Delete(string Id)
-        {
+        //[HttpGet]
+        //public IActionResult Delete(string Id)
+        //{
 
-            Users users = _context.Users
-                .Where(a => a.Id == Id).FirstOrDefault();
+        //    Users users = _context.Users
+        //        .Where(a => a.Id == Id).FirstOrDefault();
 
-            return View(users);
-        }
+        //    return View(users);
+        //}
 
-        [HttpPost]
-        public IActionResult Delete(Users users)
-        {
+        //[HttpPost]
+        //public IActionResult Delete(Users users)
+        //{
 
-            _context.Users.Remove(users);
-            _context.SaveChanges();
+        //    _context.Users.Remove(users);
+        //    _context.SaveChanges();
 
-            return RedirectToAction("index");
-        }
+        //    return RedirectToAction("index");
+        //}
 
 
     }
