@@ -41,13 +41,13 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <label for="name">服務名稱:</label>
-                        <input type="text" class="form-control" id="name" name="ProductName" v-model="put.productName">
+                        <input type="text" class="form-control" id="name" name="ProductName" v-model:text="put.productName">
                     </div>
                     <label>服務地點:</label>
                     <div id="twzipcode" class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" name="Address" v-model="put.address"></span>
-                        </div>
+                        <div data-role="county" data-style="Style Name"></div>
+                        <div data-role="district" data-style="Style Name"></div>
+                        @*<div data-role="zipcode" data-style="Style Name"></div>*@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
@@ -65,7 +65,7 @@
                         <label>上傳圖片</label>
                         <br />
                         <img :src="put.picturePath" />
-                        <input type="file" name="pic" id="inputpic" v-model="put.picturePath" />
+                        <input type="file" name="pic" id="inputpic" v-on:change="updatePath"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -136,6 +136,10 @@
                 })
         },//mounted
         methods: {
+            updatePath: function (event) {
+                this.put.pic = event.target.files;
+                console.log(event.target.files);
+            },
             del: function (id) {
                 var q = confirm("確定要刪除此項服務?")
                 if (q) {
@@ -150,34 +154,44 @@
                 }//if
             },//delete
             show: function (id) {
-                $('#myModal').modal("show");
-                /*$(".card").toggleClass("hidding")*/
+                console.log(id);
+               
                 let self = this;
                 fetch("/products/" + id,)
                     .then(response =>
                         response.json()
                             .then(d => {
-                                self.put = d
+                                console.log(d);
+                                let county = d.address.substring(0, 3);
+                                let district = d.address.substring(3);
+                                self.put = d;
+                                $('#twzipcode').twzipcode('set', {
+                                    'county': county,
+                                    'district': district,
+                                    'zipcode': 110
+                                });
+
+
+                                $('#myModal').modal("show");
                             }))
 
             },//getid
             edit: function (id) {
-                const putdata = {
-                    productName: v.put.productName,
-                    address: v.put.address,
-                    description: v.put.description,
-                    price: v.put.price,
-                    picturePath:"\\Picture\\"+v.put.picturePath
-                }
+                let county = $('#twzipcode').twzipcode('get', 'county')[0];
+                let district = $('#twzipcode').twzipcode('get', 'district')[0];
+                let data = new FormData();
+                data.append('ProductName', this.put.productName);
+                data.append('countyName', county);
+                data.append('districtName', district);
+                data.append('Description', this.put.description);
+                data.append('Price', this.put.price);
+                data.append('pic', this.put.pic);
                 var q = confirm("確定要更新服務資料?")
-                alert(JSON.stringify(putdata))
                 if (q) {
                     fetch("/products/" + id, {
                         method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(putdata)
+                        
+                        body: data
                     }).then(res => {
                         return res.json()
                     })
@@ -190,21 +204,4 @@
             }//edit
         }//methods
     })//vue
-
-    //var vm = new Vue({
-    //    el: "#myModal",
-    //    data: {
-    //        put: []
-    //    }, mounted: function (id) {
-    //        let self = this;
-    //        fetch("/products/" + id)
-    //                .then(res => {
-    //                    return res.json();
-    //                })
-    //                .then(d => {
-    //                    self.put = d
-    //                })
-
-    //    }//mounted
-    //})//vue_2
 </script>

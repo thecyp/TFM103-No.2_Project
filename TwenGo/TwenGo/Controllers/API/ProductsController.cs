@@ -48,8 +48,8 @@ namespace TwenGo.Controllers.API
         // PUT: api/Products/5
         [HttpPut]
         [Route("{id}")]
-        [Consumes("application/json")]
-        public void Put([FromRoute]int id,[FromBody] Product product)
+        //[Consumes("application/json")]
+        public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
             
             var edit = _context.Products.Find(id);
@@ -57,10 +57,9 @@ namespace TwenGo.Controllers.API
             if (edit != null)
             {
                 edit.ProductName = product.ProductName;
-                edit.Address = product.Address;
                 edit.Description = product.Description;
                 edit.Price = product.Price;
-                edit.PicturePath = product.PicturePath;
+                edit.PicturePath = product.pic.ToString();
                 _context.SaveChanges();
             }
         //    ====================================================

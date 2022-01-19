@@ -121,7 +121,7 @@
                                     </ul>
                                     <p class="total">
                                         <strong style="font-size:20px">總價 </strong>
-                                        <span class="amount">NT$ {{product[0].total}}</span>
+                                        <span class="amount">NT$ {{GetTotal(product)}}</span>
                                     </p>
                                     <p class="buttons">
                                         <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
@@ -251,6 +251,12 @@
                             vcart.GetCartProduct();
                         })
                 },
+                GetTotal: function (prod) {                    
+                    if (prod == null || prod.length == 0) {
+                        return 0;
+                    }
+                    return prod[0].total;
+                }
             },
         });
     </script>
