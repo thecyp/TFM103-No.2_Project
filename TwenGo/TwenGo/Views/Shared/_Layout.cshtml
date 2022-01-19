@@ -240,7 +240,6 @@
                         .then(function (d) { self.product = d })
                 },
                 CleanCart: function (id) {
-                    console.log(id);
                     let data = new FormData();
                     data.append("id", id);
                     fetch("/Cart/CleanCart", {
@@ -249,6 +248,7 @@
                     }).then(response => response.text())
                         .then(function (d) {
                             vcart.GetCartProduct();
+                            window.location.reload();
                         })
                 },
             },
