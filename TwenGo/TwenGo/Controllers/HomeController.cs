@@ -65,13 +65,15 @@ namespace TwenGo.Controllers
         /// <param name="payType">請款類型</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> SpgatewayPayBillAsync(string ordernumber, int amount, string payType)
+        public async Task<ActionResult> SpgatewayPayBillAsync(string productname, string ordernumber, int amount, string payType)
         {
             string version = "1.5";
 
             // 目前時間轉換 +08:00, 防止傳入時間或Server時間時區不同造成錯誤
             DateTimeOffset taipeiStandardTimeOffset = DateTimeOffset.Now.ToOffset(new TimeSpan(8, 0, 0));
 
+            var userid = HttpContext.User.Claims.Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").FirstOrDefault().Value;
+            var aaa = _context.Orders.Where(x => x.UserId == userid).ToList();
             TradeInfo tradeInfo = new TradeInfo()
             {
                 // * 商店代號
@@ -83,12 +85,12 @@ namespace TwenGo.Controllers
                 // * 串接程式版本
                 Version = version,
                 // * 商店訂單編號
-                MerchantOrderNo = $"T{DateTime.Now.ToString("yyyyMMddHHmm")}",
-                //MerchantOrderNo = ,
+                //MerchantOrderNo = $"T{DateTime.Now.ToString("yyyyMMddHHmm")}",
+                MerchantOrderNo = ordernumber,
                 // * 訂單金額
-                Amt = 1000,
+                Amt = amount,
                 // * 商品資訊
-                ItemDesc = "Test",
+                ItemDesc = productname,
                 // 繳費有效期限(適用於非即時交易)
                 ExpireDate = null,
                 // 支付完成 返回商店網址
