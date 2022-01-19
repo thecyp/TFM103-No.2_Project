@@ -38,24 +38,6 @@ namespace TwenGo.Controllers
             _userManager = _userMananger;
         }
 
-
-        ////新增功能
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    Order orders = new Order();
-
-        //    return View(orders);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Create(Order orders)
-        //{
-        //    _context.Add(orders);
-        //    _context.SaveChanges();
-        //    return RedirectToAction("index");
-        //}
-
         public async Task<IActionResult> DetailsAsync(int? Id)
         {
             if (Id == null)
@@ -69,12 +51,7 @@ namespace TwenGo.Controllers
             order.OrderItem = await _context.OrderItem.Where(p => p.OrderId == Id).ToListAsync();
             ViewBag.orderItems = GetOrderItems(order.Id);
 
-
-            return View(order);
-
-            //Order orders = _context.Orders
-            //    .Where(a => a.Id == Id).FirstOrDefault();
-            //return View(orders);
+            return View(order);        
         }
 
         private List<CartItem> GetOrderItems(int orderId)
@@ -95,23 +72,6 @@ namespace TwenGo.Controllers
 
 
 
-        ////刪除功能
-        //[HttpGet]
-        //public IActionResult Delete(int Id)
-        //{
-        //    Order orders = _context.Orders
-        //        .Where(a => a.Id == Id).FirstOrDefault();
-        //    return View(orders);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Delete(Order orders)
-        //{
-        //    _context.Attach(orders);
-        //    _context.Entry(orders).State = EntityState.Deleted;
-        //    _context.SaveChanges();
-        //    return RedirectToAction("index");
-        //}
 
 
     }
