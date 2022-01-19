@@ -1,7 +1,10 @@
 ﻿@model TwenGo.Models.Order
 
-@{ ViewData["Title"] = "ReviewOrder"; }
+@{
+    ViewData["Title"] = "Delete";
+}
 
+<h2>刪除訂單</h2>
 
 <div class="section border-bottom pt-2 pb-2">
     <div class="container">
@@ -79,32 +82,24 @@
                         <input type="text" name="ordernumber" hidden value="@Html.DisplayFor(model => model.Id)" />
                         <input type="text" name="amount" hidden value="@Html.DisplayFor(model => model.Total)" />
                         <input type="text" name="productname" hidden value="@foreach (var item in ViewBag.orderitems) {@item.Product.ProductName}" />
-                        <select name="payType">
-                            <option value="CREDIT">信用卡</option>
-                            <option value="WEBATM">WEBATM</option>
-                            <option value="VACC">ATM 轉帳</option>
-                            <option value="CVS">超商代碼繳費</option>
-                            <option value="BARCODE">超商條碼繳費</option>
-                        </select>
                     </div>
-                    <div align="right">
-                        <button type="submit" class="continue-shopping w-50">立即付款</button>
-                    </div>
+
                 </form>
             </div>
         </div>
 
     </div>
+
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> 
+    </form>
 </div>
-<p></p>
 <hr>
 <div>
     <a class="btn btn-sm btn-outline-secondary" asp-action="Index"><i class="fa fa-arrow-left"></i> 返回訂單管理</a>
 </div>
-
-
-<script>
-</script>
 
 
 <style>

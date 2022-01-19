@@ -97,7 +97,7 @@ namespace TwenGo.Controllers.API
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("刪除成功");
         }
 
         private bool OrderExists(int id)

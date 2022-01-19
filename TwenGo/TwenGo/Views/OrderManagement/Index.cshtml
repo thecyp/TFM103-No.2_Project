@@ -58,27 +58,27 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReceiverName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Total)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.isPaid)
-                        </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiverName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isPaid)
+                    </td>
 
-                        <td>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
-                        </td>
-                    </tr>
+                    <td>
+                        <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -89,3 +89,33 @@
 
 </div>
 
+
+<style>
+    body {
+        background-color: ivory
+    }
+
+    .card {
+        margin-top: 30px;
+    }
+
+    .card-text {
+        color: black
+    }
+
+    .hidding {
+        z-index: -1;
+    }
+
+    /*.modal.fade .modal-dialog {
+            transform: translateY(10vh);
+        }
+
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }*/
+
+    .modal-backdrop {
+        z-index: 0;
+    }
+</style>
