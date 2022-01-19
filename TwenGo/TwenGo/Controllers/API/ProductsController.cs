@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,15 @@ namespace TwenGo.Controllers.API
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IWebHostEnvironment env;
         private readonly TwenGoContext _context;
+        private readonly TwenGoContext db;
+        private readonly string fileRoot = @"\Pictures\";
 
-        public ProductsController(TwenGoContext context)
+        public ProductsController(IWebHostEnvironment env, TwenGoContext context, TwenGoContext db)
         {
+            this.db = db;
+            this.env = env;
             _context = context;
         }
 
@@ -51,48 +57,25 @@ namespace TwenGo.Controllers.API
         //[Consumes("application/json")]
         public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
-            
             var edit = _context.Products.Find(id);
+
+            var file = product.img.First();
+            var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
+            using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
+            {
+                file.CopyTo(fileStream);
+            }
            
             if (edit != null)
             {
                 edit.ProductName = product.ProductName;
                 edit.Description = product.Description;
                 edit.Price = product.Price;
-                edit.PicturePath = product.pic.ToString();
+                edit.Address = product.countyName + product.districtName;
+                //edit.PicturePath = combineFileName;
+                //edit.PicturePath = product.img;
                 _context.SaveChanges();
             }
-        //    ====================================================
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ProductExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //    return NoContent();
-        //}
-
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutProduct(int id)
-        //{
-        //    var edit = await _context.Products.FindAsync(id);
-        //    if (edit == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    _context.Products.Update(edit);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok("更新成功");
         }
 
         // POST: api/Products
