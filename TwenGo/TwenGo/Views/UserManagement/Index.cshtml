@@ -1,0 +1,165 @@
+﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
+<style>
+    .divider-text {
+        position: relative;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .divider-text span {
+            padding: 7px;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .divider-text:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            top: 55%;
+            left: 0;
+            z-index: 1;
+        }
+
+    .btn-facebook {
+        background-color: #405D9D;
+        color: #fff;
+    }
+
+    .btn-twitter {
+        background-color: #42AEEC;
+        color: #fff;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+        color: #000000;
+    }
+</style>
+
+<div class="container" id="app">
+    <br>
+    <hr>
+    <div class="card bg-light">
+        <div class="tab-pane active" id="home">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("使用者名稱")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RealName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdentityNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Town)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-for="item in users">
+                    <tr>
+                        <td>
+                            {{item.userName}}
+                        </td>
+                        <td>
+                            {{item.realName}}
+                        </td>
+                        <td>
+                            {{item.identityNumber}}
+                        </td>
+                        <td>
+                            {{item.city}}
+                        </td>
+                        <td>
+                            {{item.town}}
+                        </td>
+                        <td>
+                            {{item.address}}
+                        </td>
+                        <td><button v-on:click="del(item.id)">刪除</button></td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var v = new Vue({
+        el: "#app",
+        data: {
+            users: [],
+        },//data
+        mounted: function () {
+            let self = this;
+            fetch("/users")
+                .then(function (res) {
+                    return res.json();
+                }).then(function (myjson) {
+                    for (let i = 0; i < myjson.length; i++) {
+                        self.users.push(myjson[i])
+                    }
+                })
+        },//mounted
+        methods: {
+            del: function (id) {
+                var q = confirm("確認要刪除此項服務?")
+                if (q) {
+                    fetch("/users/" + id, {
+                        method: 'DELETE'
+                    }).then(response =>
+                        response.text()
+                            .then(text => {
+                                alert(text);
+                                window.location.reload();//F5重整
+                            }))
+                }//if
+            },//delete
+        }//methods
+    })//vue
+</script>
+
+<style>
+    body {
+        background-color: ivory
+    }
+
+    .card {
+        margin-top: 30px;
+    }
+
+    .card-text {
+        color: black
+    }
+
+    .hidding {
+        z-index: -1;
+    }
+
+    /*.modal.fade .modal-dialog {
+            transform: translateY(10vh);
+        }
+
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }*/
+
+    .modal-backdrop {
+        z-index: 0;
+    }
+</style>

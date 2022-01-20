@@ -3,23 +3,21 @@
     ViewData["Title"] = "搜尋結果";
 }
 <h2>搜尋結果</h2>
-@foreach (var item in Model)
-{
-    <div class="section pt-7 pb-7">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card" style="width:20rem;float:left;display:inline;margin:10px;">
-                        <img src="@item.PicturePath" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">產品名稱:@item.ProductName</h5>
-                            <p class="card-text">描述: @item.Description</p>
-                            <p class="card-text">優惠價:@item.Price</p>
-                            <a href="/shop/introduce?id=@item.Id" class="btn btn-dark">產品介紹</a>
-                        </div>
-                    </div>
+
+<div class="section pt-7 pb-7">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-4">
+                <img src="@item.PicturePath" class="card-img-top" style="width:340px;height:220px">
+                <div class="card-body">
+                    <h5 class="card-title">產品名稱:@item.ProductName</h5>
+                    <p class="card-text">優惠價:@item.Price</p>
+                    <a href="/shop/introduce?id=@item.Id" class="btn btn-dark">產品介紹</a>
                 </div>
             </div>
+            }
+        </div>
         </div>
     </div>
-}

@@ -13,19 +13,21 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    //[Authorize]
     public class UserManagementController : Controller
     {
         private readonly TwenGoContext _context;
-        //private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Users> _userManager;
 
-        public UserManagementController(TwenGoContext context)
+        public UserManagementController(TwenGoContext context, UserManager<Users> _userMananger)
         {
             _context = context;
-            //_userManager = userManager;
+            _userManager = _userMananger;
         }
 
 
-        
+
         public IActionResult Index()
         {
             List<Users> users = _context.Users.ToList();
@@ -39,39 +41,43 @@ namespace TwenGo.Controllers
         }
 
         //新增功能
-        
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Users users = new Users();
-            return View(users);
-        }
 
-        [HttpPost]
-        public IActionResult Create(Users users)
-        {
-            _context.Add(users);
-            _context.SaveChanges();
-            return RedirectToAction("index");
-        }
+        //[HttpGet]
+        //public IActionResult Create()
+        //{
+        //    Users users = new Users();
+        //    return View(users);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Create(Users users)
+        //{
+        //    _context.Add(users);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("index");
+        //}
 
         //刪除功能
-        [HttpGet]
-        public IActionResult Delete(string Id)
-        {
-            Users users = _context.Users
-                .Where(a => a.Id == Id).FirstOrDefault();
-            return View(users);
-        }
+        //[HttpGet]
+        //public IActionResult Delete(string Id)
+        //{
 
-        [HttpPost]
-        public IActionResult Delete(Users users)
-        {
-            _context.Attach(users);
-            _context.Entry(users).State = EntityState.Deleted;
-            _context.SaveChanges();
-            return RedirectToAction("index");
-        }
+        //    Users users = _context.Users
+        //        .Where(a => a.Id == Id).FirstOrDefault();
+
+        //    return View(users);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Delete(Users users)
+        //{
+
+        //    _context.Users.Remove(users);
+        //    _context.SaveChanges();
+
+        //    return RedirectToAction("index");
+        //}
+
 
     }
 }

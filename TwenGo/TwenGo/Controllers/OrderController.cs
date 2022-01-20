@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using TwenGo.Helper;
 using TwenGo.Models;
@@ -12,11 +13,10 @@ using TwenGo.Models.Repository;
 
 namespace TwenGo.Controllers
 {
-    [Authorize(Roles ="Customer")]
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly TwenGoContext _context;
-
 
         public OrderController(TwenGoContext context)
         {
@@ -28,15 +28,18 @@ namespace TwenGo.Controllers
         // 結帳
         public IActionResult Index()
         {
+            
             //確認 Session 內存在購物車
             if (SessionHelper.GetObjectFromJson<List<OrderItem>>(HttpContext.Session, "cart") == null)
             {
                 return RedirectToAction("Index", "Cart");
             }
+            var userid = HttpContext.User.Claims.Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").FirstOrDefault().Value;
 
             //建立新的訂單
-            var myOrder = new Order()
+            var myOrder = new Order
             {
+                UserId = userid,
                 OrderItem = SessionHelper.GetObjectFromJson<List<OrderItem>>(HttpContext.Session, "cart")
             };
             myOrder.Total = myOrder.OrderItem.Sum(m => m.SubTotal);
@@ -74,6 +77,7 @@ namespace TwenGo.Controllers
             }
 
             var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == Id);
+
 
                 order.OrderItem = await _context.OrderItem.Where(p => p.OrderId == Id).ToListAsync();
                 ViewBag.orderItems = GetOrderItems(order.Id);

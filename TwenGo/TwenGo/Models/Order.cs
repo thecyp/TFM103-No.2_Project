@@ -8,7 +8,7 @@ namespace TwenGo.Models
 {
     public class Order
     {
-
+        [DisplayFormat(DataFormatString = "{0:000000}")]
         public int Id { get; set; }
 
         [Display(Name = "訂單日期")]
@@ -22,19 +22,20 @@ namespace TwenGo.Models
         public int Total { get; set; }
 
         [Required]
-        [Display(Name = "接案日期")]
+        [Display(Name = "預約日期")]
+        [DataType(DataType.Date)]
         public DateTime ReciveDate { get; set; }
 
         [Required]
-        [Display(Name = "接案者")]
+        [Display(Name = "預約者")]
         public string ReceiverName { get; set; }
 
         [Required]
-        [Display(Name = "接案者地址")]
+        [Display(Name = "預約者地址")]
         public string ReceiverAddress { get; set; }
 
         [Required]
-        [Display(Name = "接案者電話")]
+        [Display(Name = "預約者電話")]
         public string ReceiverPhone { get; set; }
         public string Memo { get; set; }
 

@@ -56,6 +56,6 @@ namespace TwenGo.Controllers
             });
             db.SaveChanges();
             return View("Center");
-        }     
+        }
     }
 }

@@ -11,6 +11,7 @@ using TwenGo.Models.ViewModels;
 
 namespace TwenGo.Controllers
 {
+    
     public class AdminController : Controller
     {
         private readonly TwenGoContext _db;

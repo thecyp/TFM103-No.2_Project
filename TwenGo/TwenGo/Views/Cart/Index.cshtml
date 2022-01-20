@@ -1,4 +1,6 @@
 ﻿<body>
+    <div>
+        <div>
             <div class="section border-bottom pt-2 pb-2">
                 <div class="container">
                     <div class="row">
@@ -23,22 +25,22 @@
                                             <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                         </td>
                                         <td class="product-thumbnail">
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">
+                                            <a >
                                                 <img :src=item.image alt="" />
                                             </a>
                                         </td>
                                         <td class="product-info">
-                                            <a asp-area="" asp-controller="ShopDetail" asp-action="index">{{item.name}}</a>
-                                            <span class="sub-title">{{item.description}}</span>
-                                            <span class="amount">${{item.price}}</span>
+                                            <a  class="product-title fz-20 fw-bolder">{{item.name}}</a>
+                                            <span class="sub-title" >{{item.description}}</span>
+                                            <span class="amount" style="color:#5fbd74">單價: NT${{item.price}}</span>
                                         </td>
                                         <td class="product-quantity">
                                             <div class="quantity">
                                                 <input id="qty-2" type="number" min="0" name="number" :value="item.amount" class="input-text qty text" size="4">
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">NT$ {{item.subtotal}}</span>
+                                        <td class="product-subtotal" width="200px">
+                                            <span class="amount" style="color:#5fbd74">小計: NT$ {{item.subtotal}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,8 +56,8 @@
                                 <table>
                                     <tbody>
                                         <tr class="order-total">
-                                            <th>總計</th>
-                                            <td><strong>$ {{product[0].total}}</strong></td>
+                                            <th>總金額</th>
+                                            <td><strong>NT$ {{GetTotal(product)}}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -87,7 +89,6 @@
                         .then(function (d) { self.product = d })
                 },
                 CleanCart: function (id) {
-                    console.log(id);
                     let data = new FormData();
                     data.append("id", id);
                     fetch("/Cart/CleanCart", {
@@ -96,16 +97,17 @@
                     }).then(response => response.text())
                         .then(function (d) {
                             vcart.GetCartProduct();
-                            alert(d);
-
+                            history.go(0);
                         })
+                },
+                GetTotal: function (prod) {                    
+                    if (prod == null || prod.length == 0) {
+                        return 0;
+                    }
+                    return prod[0].total;
                 }
-
             },
-
         });
-
-
     </script>
 </body>
 

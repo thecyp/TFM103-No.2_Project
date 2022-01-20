@@ -35,17 +35,17 @@ namespace TwenGo
                     Configuration.GetConnectionString("TwenGoConnection")));
 
 
-            //«Å§i¼W¥[ÅçÃÒ¤è¦¡¡A¨Ï¥Î cookie ÅçÃÒ
+            //ï¿½Å§iï¿½Wï¿½[ï¿½ï¿½ï¿½Ò¤è¦¡ï¿½Aï¿½Ï¥ï¿½ cookie ï¿½ï¿½ï¿½ï¿½
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
-                //¹w³]ªºÅçÃÒ¾÷¨î,¸Ì­±ªº¦W¦r¹w³]¥sCookies
+                //ï¿½wï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½Ò¾ï¿½ï¿½ï¿½,ï¿½Ì­ï¿½ï¿½ï¿½ï¿½Wï¿½rï¿½wï¿½]ï¿½sCookies
             ).AddCookie(opt => 
             {
-                //ÂsÄý¾¹·|­­¨îcookie ¥u¯à¸g¥ÑHTTP(S) ¨ó©w¨Ó¦s¨ú
+                //ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½cookie ï¿½uï¿½ï¿½gï¿½ï¿½HTTP(S) ï¿½ï¿½wï¿½Ó¦sï¿½ï¿½
                 opt.Cookie.HttpOnly = true;
-                //¥¼µn¤J®É·|¦Û°Ê¾É¨ì³o­Óºô§}
+                //ï¿½ï¿½ï¿½nï¿½Jï¿½É·|ï¿½Û°Ê¾É¨ï¿½oï¿½Óºï¿½ï¿½}
                 opt.LoginPath = new PathString("~/Login/Index");
-                //µn¤J¦³®Ä®É¶¡
+                //ï¿½nï¿½Jï¿½ï¿½ï¿½Ä®É¶ï¿½
                 opt.ExpireTimeSpan = TimeSpan.FromDays(7);
 
             }).AddFacebook(opt =>
@@ -86,9 +86,7 @@ namespace TwenGo
                 options.LoginPath = new PathString("/Login/Index");
                 //other properties
             });
-           
-
-
+            services.AddHttpContextAccessor();
 
         }
 
@@ -112,7 +110,7 @@ namespace TwenGo
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+           
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
