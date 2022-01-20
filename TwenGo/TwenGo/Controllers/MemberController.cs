@@ -121,31 +121,6 @@ namespace TwenGo.Controllers
         {
             return View();
         }
-        //public async Task<IActionResult> RegisterEmailConfirm(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return RedirectToPage("/Index");
-        //    }
-
-        //    var user = await _userManager.FindByIdAsync(userId);
-        //    if (user == null)
-        //    {
-        //        return NotFound($"Unable to load user with ID '{userId}'.");
-        //    }
-
-        //    code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-        //    var result = await _userManager.ConfirmEmailAsync(user, code);
-        //    StatusMessage = result.Succeeded ? "您的信箱已驗證,歡迎使用ServerGo" : "您的信箱未驗證";
-        //    return View();
-        //}
-
-
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+        
     }
 }

@@ -18,13 +18,7 @@ namespace TwenGo.Models.Repository
         public virtual DbSet<UserOfCustomer> UserOfCustomer { get; set; }
 
         public override DbSet<Users> Users { get; set; }
-
-        internal object GetUserId(ClaimsPrincipal user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual DbSet<CustomerViewModel> CustomerViewModels { get; set; }
+        
         public  DbSet<Product> Products { get; set; }
 
         public  DbSet<Group> Groups { get; set; }
@@ -39,7 +33,7 @@ namespace TwenGo.Models.Repository
 
         public DbSet<Shipper> Shippers { get; set; }
 
-        public DbSet<TwenGo.Models.ViewModels.AdminViewModel> AdminViewModel { get; set; }
+        
 
         
     }
