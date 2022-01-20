@@ -16,15 +16,15 @@ namespace TwenGo.Models.Repository.Entity
 
         
 
-        [Required]
+        
         [Display(Name = "城市")]
         public string City { get; set; }
 
-        [Required]
+       
         [Display(Name = "區域")]
         public string Town { get; set; }
 
-        [Required]
+        
         [Display(Name = "地址")]
         public string Address { get; set; }
 

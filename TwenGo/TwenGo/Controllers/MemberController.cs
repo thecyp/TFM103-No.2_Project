@@ -1,9 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
 using TwenGo.Models.ViewModels;
@@ -16,10 +22,13 @@ namespace TwenGo.Controllers
         private readonly UserManager<Users> _userManager;
         private readonly IPasswordHasher<Users> passwordHasher;
         private readonly ILogger<MemberController> _logger;
-       
+        private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _config;
 
-        public MemberController(ILogger<MemberController> logger, TwenGoContext twenGoContext,UserManager<Users> userManager,IPasswordHasher<Users> passwordHasher)
+        public MemberController(ILogger<MemberController> logger, TwenGoContext twenGoContext,UserManager<Users> userManager,IPasswordHasher<Users> passwordHasher, IEmailSender emailSender, IConfiguration config)
         {
+            _config = config;
+            _emailSender = emailSender;
             _db = twenGoContext;
             _userManager = userManager;
             this.passwordHasher = passwordHasher;
@@ -76,19 +85,61 @@ namespace TwenGo.Controllers
 
             if (result.Succeeded )
             {
-                _userManager.AddToRoleAsync(data, "Customer").Wait();
-                return RedirectToAction("Index", "Home");
+                 _userManager.AddToRoleAsync(data, "Customer").Wait();
+
+                _logger.LogInformation("User created a new account with password.");
+                var userId = await _userManager.GetUserIdAsync(data);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(data);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = "https://localhost:44390/Identity/Account/ConfirmEmail?userId=" + userId + "&code=" + code;
+                await _emailSender.SendEmailAsync(
+                    data.Email,
+                    "Email驗證",
+                    $"請點選此連結開通帳號 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>開通連結</a>。");
+
+                ModelState.AddModelError(string.Empty, "確認信已發送，請至您的信箱確認。");
+
+                return RedirectToAction("EmailCheck", "Member");
+                
 
             }
-            else
+            foreach (var error in result.Errors)
             {
-                return RedirectToAction("Error");
+                ModelState.AddModelError(string.Empty, error.Description);
             }
-
+        
             
-        }
+           return RedirectToAction("Index", "Home");
+
+    }
 
         
+        [TempData]
+        public string StatusMessage { get; set; }
+
+        public IActionResult EmailCheck()
+        {
+            return View();
+        }
+        //public async Task<IActionResult> RegisterEmailConfirm(string userId, string code)
+        //{
+        //    if (userId == null || code == null)
+        //    {
+        //        return RedirectToPage("/Index");
+        //    }
+
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user == null)
+        //    {
+        //        return NotFound($"Unable to load user with ID '{userId}'.");
+        //    }
+
+        //    code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+        //    var result = await _userManager.ConfirmEmailAsync(user, code);
+        //    StatusMessage = result.Succeeded ? "您的信箱已驗證,歡迎使用ServerGo" : "您的信箱未驗證";
+        //    return View();
+        //}
+
 
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
