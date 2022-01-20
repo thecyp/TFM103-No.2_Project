@@ -35,17 +35,17 @@ namespace TwenGo
                     Configuration.GetConnectionString("TwenGoConnection")));
 
 
-            //�ŧi�W�[���Ҥ覡�A�ϥ� cookie ����
+           
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
-                //�w�]�����Ҿ���,�̭����W�r�w�]�sCookies
+               
             ).AddCookie(opt => 
             {
-                //�s�����|����cookie �u��g��HTTP(S) ��w�Ӧs��
+               
                 opt.Cookie.HttpOnly = true;
-                //���n�J�ɷ|�۰ʾɨ�o�Ӻ��}
+                
                 opt.LoginPath = new PathString("~/Login/Index");
-                //�n�J���Įɶ�
+              
                 opt.ExpireTimeSpan = TimeSpan.FromDays(7);
 
             }).AddFacebook(opt =>
