@@ -40,7 +40,7 @@ namespace TwenGo.Models.Repository
         public DbSet<Shipper> Shippers { get; set; }
 
         public DbSet<TwenGo.Models.ViewModels.AdminViewModel> AdminViewModel { get; set; }
-        public DbSet<SpgatewayResponce> SpgatewayResponces { get; set; }
+        public DbSet<SpGatewayResponse> SpgatewayResponces { get; set; }
 
 
     }

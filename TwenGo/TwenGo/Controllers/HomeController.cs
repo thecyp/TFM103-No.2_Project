@@ -188,20 +188,25 @@ namespace TwenGo.Controllers
         [HttpPost]
         public IActionResult SpgatewayResponce()
         {
-            SpgatewayResponce sp = new SpgatewayResponce();
-            sp.Status =
-            sp.Message =
-            sp.MerchantID =
-            sp.Amt = 
-            sp.TradeNo =
-            sp.MerchantOrderNo=
-            sp.PaymentType=
-            sp.RespondType=
-            sp.PayTime=
-            sp.IP=
-            _context.SpgatewayResponces.Add(sp);
-            _context.SaveChanges();
-            return RedirectToAction("");
+            
+            SpgatewayResponce sr = new SpgatewayResponce();
+
+            //sr.Status =
+            //sr.Message =
+            //sr.MerchantID =
+            //sr.Amt =
+            //sr.TradeNo =
+            //sr.MerchantOrderNo=
+            //sr.PaymentType=
+            //sr.RespondType=
+            //sr.PayTime=
+            //sr.IP=
+
+
+
+            //_context.SpgatewayResponces.Add();
+            //_context.SaveChanges();
+            return View();
         }
     }
 
