@@ -29,7 +29,7 @@ namespace TwenGo.Controllers
                 MerchantID = "MS130347314",
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
-                ReturnURL = "https://servego.azurewebsites.net/Home/Index",
+                ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayResponce",
                 NotifyURL = "http://yourWebsitUrl/Bank/SpgatewayNotify",
                 CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
@@ -185,19 +185,24 @@ namespace TwenGo.Controllers
 
         }
 
-        //public IActionResult SpgatewayResponce()
-        //{
-        //    SpgatewayResponce sp = new SpgatewayResponce();
-        //    sp.MemberId = 
-        //    sp.MerchantTradeDate = 
-        //    sp.MerchantTradeNo =
-        //    sp.TradeDesc = "";
-        //    sp.ItemName =
-        //    sp.CheckMacValue = 
-        //    db.SpgatewayResponce.Add(sp);
-        //    db.SaveChanges();
-        //    return RedirectToAction("");
-        //}
+        [HttpPost]
+        public IActionResult SpgatewayResponce()
+        {
+            SpgatewayResponce sp = new SpgatewayResponce();
+            sp.Status =
+            sp.Message =
+            sp.MerchantID =
+            sp.Amt = 
+            sp.TradeNo =
+            sp.MerchantOrderNo=
+            sp.PaymentType=
+            sp.RespondType=
+            sp.PayTime=
+            sp.IP=
+            _context.SpgatewayResponces.Add(sp);
+            _context.SaveChanges();
+            return RedirectToAction("");
+        }
     }
 
 }
