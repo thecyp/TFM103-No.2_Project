@@ -1,95 +1,60 @@
-﻿@model TwenGo.Models.ViewModels.CustomerViewModel
-<div id="app">
+﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
+    <h1>會員中心</h1>
+    @*<div id="app">*@
 
-    <div class="card bg-light" v-for="item in users">
-        <article class="card-body mx-auto" style="width: 48rem">
+        <div class="container">
 
-            <form>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <p>{{item.realName}}</p>
-                </div> <!-- form-group// -->
+            <div class="tab-pane active" id="home">
+                <table class="table table-success table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RealName)
+                            </th>
+                            <th>
+                                @Html.DisplayName("會員帳號")
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdentityNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                    </div>
-                    <p>{{item.email}}</p>
-                </div> <!-- form-group// -->
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
-                    </div>
-                    <p>{{item.cellphone}}</p>
-                </div> <!-- form-group// -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RealName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdentityNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                           
+                            
+                            <td>
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>編輯會員資料</a>
+                            </td>
+                        </tr>
+                        }
 
-                <div class="input-group-prepend">
-                    <div class="form-group input-group">
-                        <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
-                        <p>{{item.gender}}</p>
-                    </div>
-                </div> <!-- form-group end.// -->
-
-                <div class="form-group input-group">
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
-                    </div>
-                    <p>{{item.birthday}}</p>
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
-                    </div>
-                    <p>{{item.identityNumber}}</p>
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                    </div>
-                    <p>{{item.phone}}</p>
-                </div> <!-- form-group// -->
-
-                <div>
-                    <div id="twzipcode" class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
-                        </div>
-                    </div>
-                    <p>{{item.address}}</p>
-                </div>
-
-                <br />
-            </form>
-
-        </article>
-    </div> <!-- card.// -->
-</div>
-<script>
-    var v = new Vue({
-        el: "#app",
-        data: {
-            users: []
-        },//data
-        mounted: function () {
-            let self = this;
-            fetch("/api/users")
-                .then(function (res) {
-                    return res.json();
-                })
-                .then(function (d) {
-                    for (var i = 0; i < d.length; i++)
-                        self.users.push(d[i])
-                })
-
-        },//mounted
-
-
-    })//vue
-</script>
+                    </tbody>
+                </table>
+            </div>
+        </div>

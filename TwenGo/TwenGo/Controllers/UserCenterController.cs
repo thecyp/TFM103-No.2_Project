@@ -24,18 +24,26 @@ namespace TwenGo.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            //var aaa = HttpContext.User.Identity.Name;
+                // get logined user
+                var user = await this._userManager.GetUserAsync(User);
 
-            var data = new CustomerViewModel()
-            {
-                CustomerName = "123",
-                Email = "AAA",
+                // filter orders by user
+                List<Users> users = _context.Users.ToList();
+                var list = (from u in users
+                            where u.RealName == user.RealName
+                            select u).ToList();
+                return View(list);
 
-            };
+            //var data = new CustomerViewModel()
+            //{
+            //    CustomerName = "123",
+            //    Email = "AAA",
 
-            return View();
+            //};
+
+            //return View();
 
         }
 
