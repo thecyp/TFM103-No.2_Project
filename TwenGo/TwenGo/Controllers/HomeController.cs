@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Spgateway.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using ThirdPartyPay.Models;
 using TwenGo.Models;
 using TwenGo.Models.Repository;
+using TwenGo.Util;
 
 namespace TwenGo.Controllers
 {
@@ -29,8 +34,8 @@ namespace TwenGo.Controllers
                 MerchantID = "MS130347314",
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
-                ReturnURL = "http://yourWebsitUrl/Bank/SpgatewayReturn",
-                NotifyURL = "http://yourWebsitUrl/Bank/SpgatewayNotify",
+                ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayReturn",
+                NotifyURL = "https://servego.azurewebsites.net/Home/SpgatewayNotify",
                 CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
                 CloseUrl = "https://core.newebpay.com/API/CreditCard/Close"
@@ -191,14 +196,12 @@ namespace TwenGo.Controllers
         [HttpPost]
         public ActionResult SpgatewayReturn()
         {
-            Request.LogFormData("SpgatewayReturn(支付完成)");
-
             // Status 回傳狀態 
             // MerchantID 回傳訊息
             // TradeInfo 交易資料AES 加密
             // TradeSha 交易資料SHA256 加密
             // Version 串接程式版本
-            NameValueCollection collection = Request.Form;
+            NameValueCollection collection = new NameValueCollection();
 
             if (collection["MerchantID"] != null && string.Equals(collection["MerchantID"], _bankInfoModel.MerchantID) &&
                 collection["TradeInfo"] != null && string.Equals(collection["TradeSha"], CryptoUtil.EncryptSHA256($"HashKey={_bankInfoModel.HashKey}&{collection["TradeInfo"]}&HashIV={_bankInfoModel.HashIV}")))
@@ -208,19 +211,35 @@ namespace TwenGo.Controllers
                 // 取得回傳參數(ex:key1=value1&key2=value2),儲存為NameValueCollection
                 NameValueCollection decryptTradeCollection = HttpUtility.ParseQueryString(decryptTradeInfo);
                 SpgatewayOutputDataModel convertModel = LambdaUtil.DictionaryToObject<SpgatewayOutputDataModel>(decryptTradeCollection.AllKeys.ToDictionary(k => k, k => decryptTradeCollection[k]));
-
-                LogUtil.WriteLog(JsonConvert.SerializeObject(convertModel));
+                Console.WriteLine(convertModel);
 
                 // TODO 將回傳訊息寫入資料庫
 
-                return Content(JsonConvert.SerializeObject(convertModel));
-            }
-            else
-            {
-                LogUtil.WriteLog("MerchantID/TradeSha驗證錯誤");
             }
 
-            return Content(string.Empty);
+            return Content("交易成功!");
+        }
+
+        /// <summary>
+        /// [智付通]金流介接(結果: 支付通知網址)
+        /// </summary>
+        [HttpPost]
+        public ActionResult SpgatewayNotify()
+        {
+            // Status 回傳狀態 
+            // MerchantID 回傳訊息
+            // TradeInfo 交易資料AES 加密
+            // TradeSha 交易資料SHA256 加密
+            // Version 串接程式版本
+            NameValueCollection collection = new NameValueCollection();
+
+            if (collection["MerchantID"] != null && string.Equals(collection["MerchantID"], _bankInfoModel.MerchantID) &&
+                collection["TradeInfo"] != null && string.Equals(collection["TradeSha"], CryptoUtil.EncryptSHA256($"HashKey={_bankInfoModel.HashKey}&{collection["TradeInfo"]}&HashIV={_bankInfoModel.HashIV}")))
+            {
+                var decryptTradeInfo = CryptoUtil.DecryptAESHex(collection["TradeInfo"], _bankInfoModel.HashKey, _bankInfoModel.HashIV);
+                Console.WriteLine(decryptTradeInfo);
+            }
+            return Content("支付成功!");
         }
     }
 
