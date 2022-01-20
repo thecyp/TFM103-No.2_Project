@@ -185,6 +185,43 @@ namespace TwenGo.Controllers
 
         }
 
+        /// <summary>
+        /// [智付通]金流介接(結果: 支付完成 返回商店網址)
+        /// </summary>
+        [HttpPost]
+        public ActionResult SpgatewayReturn()
+        {
+            Request.LogFormData("SpgatewayReturn(支付完成)");
+
+            // Status 回傳狀態 
+            // MerchantID 回傳訊息
+            // TradeInfo 交易資料AES 加密
+            // TradeSha 交易資料SHA256 加密
+            // Version 串接程式版本
+            NameValueCollection collection = Request.Form;
+
+            if (collection["MerchantID"] != null && string.Equals(collection["MerchantID"], _bankInfoModel.MerchantID) &&
+                collection["TradeInfo"] != null && string.Equals(collection["TradeSha"], CryptoUtil.EncryptSHA256($"HashKey={_bankInfoModel.HashKey}&{collection["TradeInfo"]}&HashIV={_bankInfoModel.HashIV}")))
+            {
+                var decryptTradeInfo = CryptoUtil.DecryptAESHex(collection["TradeInfo"], _bankInfoModel.HashKey, _bankInfoModel.HashIV);
+
+                // 取得回傳參數(ex:key1=value1&key2=value2),儲存為NameValueCollection
+                NameValueCollection decryptTradeCollection = HttpUtility.ParseQueryString(decryptTradeInfo);
+                SpgatewayOutputDataModel convertModel = LambdaUtil.DictionaryToObject<SpgatewayOutputDataModel>(decryptTradeCollection.AllKeys.ToDictionary(k => k, k => decryptTradeCollection[k]));
+
+                LogUtil.WriteLog(JsonConvert.SerializeObject(convertModel));
+
+                // TODO 將回傳訊息寫入資料庫
+
+                return Content(JsonConvert.SerializeObject(convertModel));
+            }
+            else
+            {
+                LogUtil.WriteLog("MerchantID/TradeSha驗證錯誤");
+            }
+
+            return Content(string.Empty);
+        }
     }
 
 }
