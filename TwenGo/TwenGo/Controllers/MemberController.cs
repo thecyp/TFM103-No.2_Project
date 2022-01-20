@@ -98,43 +98,30 @@ namespace TwenGo.Controllers
                     $"請點選此連結開通帳號 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>開通連結</a>。");
 
                 ModelState.AddModelError(string.Empty, "確認信已發送，請至您的信箱確認。");
-                
 
-                return View();
+                return RedirectToAction("EmailCheck", "Member");
+                
 
             }
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
         
-            
-            return RedirectToAction("Index","Home");
-
-    }
-
         [TempData]
         public string StatusMessage { get; set; }
 
-        public async Task<IActionResult> RegisterEmailConfirm(string userId, string code)
+        public IActionResult EmailCheck()
         {
-            if (userId == null || code == null)
-            {
-                return RedirectToPage("/Index");
-            }
-
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{userId}'.");
-            }
-
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "您的信箱已驗證,歡迎使用ServerGo" : "您的信箱未驗證";
             return View();
         }
-
+        
 
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
