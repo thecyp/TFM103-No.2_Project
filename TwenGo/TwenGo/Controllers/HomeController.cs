@@ -29,7 +29,7 @@ namespace TwenGo.Controllers
                 MerchantID = "MS130347314",
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
-                ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayResponce",
+                ReturnURL = "https://servego.azurewebsites.net/Home/SpGatewayResponse",
                 NotifyURL = "http://yourWebsitUrl/Bank/SpgatewayNotify",
                 CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
@@ -186,28 +186,41 @@ namespace TwenGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult SpgatewayResponce()
+        public ActionResult SpGatewayResponse(SpGatewayResponse response)
         {
-            
-            SpgatewayResponce sr = new SpgatewayResponce();
-
-            //sr.Status =
-            //sr.Message =
-            //sr.MerchantID =
-            //sr.Amt =
-            //sr.TradeNo =
-            //sr.MerchantOrderNo=
-            //sr.PaymentType=
-            //sr.RespondType=
-            //sr.PayTime=
-            //sr.IP=
-
-
-
-            //_context.SpgatewayResponces.Add();
-            //_context.SaveChanges();
+            response.Key = _bankInfoModel.HashKey;
+            response.Iv = _bankInfoModel.HashIV;
+            var success = response.Validate(_bankInfoModel.MerchantID);
+            if (success)
+            {
+                var tradInfoModel = response.GetResponseModel<TradeInfoModel>();
+            }
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult SpgatewayResponce()
+        //{
+
+        //    SpgatewayResponce sr = new SpgatewayResponce();
+
+        //    sr.Status =
+        //    sr.Message =
+        //    sr.MerchantID =
+        //    sr.Amt =
+        //    sr.TradeNo =
+        //    sr.MerchantOrderNo =
+        //    sr.PaymentType =
+        //    sr.RespondType =
+        //    sr.PayTime =
+        //    sr.IP =
+
+
+
+        //    _context.SpgatewayResponces.Add();
+        //    _context.SaveChanges();
+        //    return View();
+        //}
     }
 
 }
