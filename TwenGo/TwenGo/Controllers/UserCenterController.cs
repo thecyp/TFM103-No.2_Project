@@ -39,9 +39,9 @@ namespace TwenGo.Controllers
 
         }
 
-        public ActionResult EditProfile()
+        public ActionResult EditProfileAsync(CustomerViewModel customer)
         {
-        
+           
             return View();
         }
 
