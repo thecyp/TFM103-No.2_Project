@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,11 @@ namespace TwenGo.Controllers
         private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
         private readonly TwenGoContext context;
-        
-        public LoginController(TwenGoContext twenGoContext, SignInManager<Users> signInManager, UserManager<Users>userManager) 
+        private readonly ILogger<LoginController> _logger;
+
+        public LoginController(TwenGoContext twenGoContext, SignInManager<Users> signInManager, UserManager<Users>userManager, ILogger<LoginController> logger) 
         {
+            _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
             context = twenGoContext;
@@ -78,6 +81,7 @@ namespace TwenGo.Controllers
             
             return RedirectToAction("Index", "Login");
         }
+
 
        
     }

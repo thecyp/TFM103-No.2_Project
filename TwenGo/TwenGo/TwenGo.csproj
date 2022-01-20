@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\backstage\**" />
+    <Content Remove="Areas\backstage\**" />
+    <EmbeddedResource Remove="Areas\backstage\**" />
+    <None Remove="Areas\backstage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
   </ItemGroup>
 
@@ -15,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mailjet.Api" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.12" />
@@ -37,10 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\backstage\Controllers\" />
-    <Folder Include="Areas\backstage\Data\" />
-    <Folder Include="Areas\backstage\Models\" />
-    <Folder Include="Areas\backstage\Views\" />
     <Folder Include="wwwroot\Pictures\" />
   </ItemGroup>
 
