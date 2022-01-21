@@ -59,8 +59,8 @@ namespace TwenGo.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "重設密碼",
+                    $"重設ServerGo密碼請按 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>此處</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
