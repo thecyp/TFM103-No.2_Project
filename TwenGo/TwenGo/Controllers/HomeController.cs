@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Spgateway.Models;
@@ -35,14 +36,22 @@ namespace TwenGo.Controllers
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
                 ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayReturn",
-                NotifyURL = "https://servego.azurewebsites.net/Home/SpgatewayNotify",
-                CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
+                NotifyURL = "",
+                CustomerURL = "",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
                 CloseUrl = "https://core.newebpay.com/API/CreditCard/Close"
             };
 
 
 
+        }
+
+        public IActionResult PayReturn()
+        {
+
+
+
+            return View();
         }
 
         public IActionResult Index()
@@ -196,8 +205,6 @@ namespace TwenGo.Controllers
         [HttpPost]
         public ActionResult SpgatewayReturn()
         {
-
-
             // Status 回傳狀態 
             // MerchantID 回傳訊息
             // TradeInfo 交易資料AES 加密
