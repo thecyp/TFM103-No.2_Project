@@ -66,14 +66,14 @@ namespace TwenGo.Controllers
             if (result.Succeeded)
             {
                 _userManager.AddToRoleAsync(data, "Administrator").Wait();
-                return RedirectToAction("Index", "Home");
+                
 
             }
-            else
+            foreach (var error in result.Errors)
             {
-                return RedirectToAction("Error");
+                ModelState.AddModelError(string.Empty, error.Description);
             }
-
+            return RedirectToAction("Index", "Home");
 
         }
 
