@@ -65,6 +65,7 @@
                 <p>預約地址：@Html.DisplayFor(model => model.ReceiverAddress)</p>
             </div>
             <div class="col-5">
+                <p>訂單備註：@Html.DisplayFor(model => model.Memo)</p>
                 <p>
                     訂單狀態：
                     @if (@Model.isPaid)
@@ -74,23 +75,30 @@
                     {
                         <span>未付款</span>}
                 </p>
-                <form class="form-horizontal" role="form" action="@Url.Action("SpgatewayPayBill", "Home")" method="POST">
-                    <div class="col-md-5" style="padding-left: 0px;">
-                        <input type="text" name="ordernumber" hidden value="@Html.DisplayFor(model => model.Id)" />
-                        <input type="text" name="amount" hidden value="@Html.DisplayFor(model => model.Total)" />
-                        <input type="text" name="productname" hidden value="@foreach (var item in ViewBag.orderitems) {@item.Product.ProductName}" />
-                        <select name="payType" class="form-control">
-                            <option value="CREDIT">信用卡</option>
-                            <option value="WEBATM">WEBATM</option>
-                            <option value="VACC">ATM 轉帳</option>
-                            <option value="CVS">超商代碼繳費</option>
-                            <option value="BARCODE">超商條碼繳費</option>
-                        </select>
-                    </div>
-                    <div align="right">
-                        <button type="submit" class="add-to-cart w-50">立即付款</button>
-                    </div>
-                </form>
+                @if (Model.isPaid)
+                {
+
+                }
+                else
+                {
+                    <form class="form-horizontal" role="form" action="@Url.Action("SpgatewayPayBill", "Home")" method="POST">
+                        <div class="col-md-5" style="padding-left: 0px;">
+                            <input type="text" name="ordernumber" hidden value="@Html.DisplayFor(model => model.Id)" />
+                            <input type="text" name="amount" hidden value="@Html.DisplayFor(model => model.Total)" />
+                            <input type="text" name="productname" hidden value="@foreach (var item in ViewBag.orderitems) {@item.Product.ProductName}" />
+                            <select name="payType" class="form-control">
+                                <option value="CREDIT">信用卡</option>
+                                <option value="WEBATM">WEBATM</option>
+                                <option value="VACC">ATM 轉帳</option>
+                                <option value="CVS">超商代碼繳費</option>
+                                <option value="BARCODE">超商條碼繳費</option>
+                            </select>
+                        </div>
+                        <div align="right">
+                            <button type="submit" class="add-to-cart w-50">立即付款</button>
+                        </div>
+                    </form>
+                }
             </div>
         </div>
 
