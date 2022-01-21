@@ -63,8 +63,8 @@
                     <div>
                         <label>上傳圖片</label>
                         <br />
-                        <img :src="put.picturePath" />
-                        <input type="file" name="img"  v-on:change="updatePath"/>
+                        <img id="img" :src="put.picturePath" />
+                        <input type="file" name="img" id="imgInp"  v-on:change="updatePath"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -116,6 +116,20 @@
 </style>
 
 <script>
+    $("#imgInp").change(function () {
+        //當檔案改變後，做一些事 
+        readURL(this);   // this代表<input id="imgInp">
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#img").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     var v = new Vue({
         el: "#app",
         data: {
@@ -136,7 +150,7 @@
         methods: {
             updatePath: function (event) {
                 this.put.img = event.target.files;
-                console.log(event.target.files);
+         
             },
             del: function (id) {
                 var q = confirm("確定要刪除此項服務?")
@@ -178,10 +192,8 @@
                 data.append('Address', this.put.address);
                 data.append('Description', this.put.description);
                 data.append('Price', this.put.price);
-                data.append('img', this.put.img);
-                console.log(data)
+                data.append('img', this.put.img[0]);
                 var q = confirm("確定要更新服務資料?")
-                
                 if (q) {
                     fetch("/products/" + id, {
                         method: 'PUT',

@@ -57,12 +57,12 @@ namespace TwenGo.Controllers.API
         public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
 
-            //var file = product.img.First();
-            //var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
-            //using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
-            //{
-            //    file.CopyTo(fileStream);
-            //}
+            var file = product.img[0];
+            var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
+            using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
+            {
+                file.CopyTo(fileStream);
+            }
 
             var edit = _context.Products.Find(id);
 
@@ -72,7 +72,7 @@ namespace TwenGo.Controllers.API
                 edit.Description = product.Description;
                 edit.Price = product.Price;
                 edit.Address = product.countyName + product.districtName;
-                //edit.PicturePath = combineFileName;
+                edit.PicturePath = combineFileName;
 
                 //var a  = JsonConvert.SerializeObject(product.img)[0];
 
