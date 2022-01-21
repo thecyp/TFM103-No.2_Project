@@ -55,7 +55,7 @@ namespace TwenGo.Controllers
                 PicturePath = combineFileName
             });
             db.SaveChanges();
-            return View("Center");
+            return RedirectToAction("index","home");
         }
     }
 }

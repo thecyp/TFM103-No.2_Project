@@ -4,55 +4,101 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>確定要刪除嗎?</h3>
-<div>
-    <h4>Users</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RealName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RealName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdentityNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdentityNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Town)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Town)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-    </dl>
-
-    <form asp-action="delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="delete" class="btn btn-default" /> |
-        <a asp-action="index">back to list</a>
-    </form>
-
-
+<div class="section border-bottom pt-2 pb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="breadcrumbs">
+                    <li><a a asp-controller="Home" asp-action="index">首頁</a></li>
+                    <li><a a asp-controller="UserManagement" asp-action="index">會員管理</a></li>
+                    <li>會員刪除</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="text-center">
+    <p></p>
+    <h4>會員刪除</h4>
+    <p></p>
+</div>
+
+
+<div>
+    <hr />
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="width: 48rem">
+
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input asp-for="RealName" class="form-control" placeholder="@Html.DisplayNameFor(model => model.RealName)" />
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <input asp-for="Email" class="form-control" placeholder="@Html.DisplayNameFor(model => model.Email)" />
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                    </div>
+                    <input asp-for="IdentityNumber" class="form-control" placeholder="@Html.DisplayNameFor(model => model.IdentityNumber)" />
+                </div>
+                <div>
+                    <div id="twzipcode" class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                        </div>
+                        <input asp-for="Address" class="form-control" placeholder="@Html.DisplayNameFor(model => model.Address)" />
+                    </div>
+                   
+
+                </div>
+
+            </form>
+
+
+
+        </article>
+    </div> <!-- card.// -->
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </form>
+</div>
+
+<hr />
+<div>
+    <a class="btn btn-sm btn-outline-secondary" asp-action="Index"><i class="fa fa-arrow-left"></i> 返回會員管理</a>
+</div>
+
+<style>
+    body {
+        background-color: ivory
+    }
+
+    .card {
+        margin-top: 30px;
+    }
+
+    .card-text {
+        color: black
+    }
+
+    .hidding {
+        z-index: -1;
+    }
+
+    .modal-backdrop {
+        z-index: 0;
+    }
+</style>
+

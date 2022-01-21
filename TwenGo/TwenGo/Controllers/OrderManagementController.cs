@@ -26,16 +26,29 @@ namespace TwenGo.Controllers
             _userManager = _userMananger;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync(int pg=1)
         {
             // get logined user
             var user = await this._userManager.GetUserAsync(HttpContext.User);
 
             // filter orders by user
-            List<Order> orders = _context.Orders.ToList();
+            List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id).ToList();
+
+            const int pageSize = 10;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = orders.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+
             var list = (from order in orders
                        where order.UserId == user.Id
-                       select order).ToList();
+                       select order).Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
             return View(list);
         }
 

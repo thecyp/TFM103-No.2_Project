@@ -1,4 +1,16 @@
 ﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
+@{
+    ViewData["Title"] = "會員管理";
+
+    Pager pager = new Pager();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
 <style>
     .divider-text {
         position: relative;
@@ -24,81 +36,140 @@
             z-index: 1;
         }
 
-    .btn-facebook {
-        background-color: #405D9D;
-        color: #fff;
-    }
-
-    .btn-twitter {
-        background-color: #42AEEC;
-        color: #fff;
-    }
-
     a:hover {
         text-decoration: none !important;
         color: #000000;
     }
 </style>
 
-<div class="container" id="app">
-    <br>
-    <hr>
-    <div class="card bg-light">
-        <div class="tab-pane active" id="home">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayName("使用者名稱")
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RealName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IdentityNumber)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.City)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Town)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Address)
-                        </th>
-                    </tr>
-                </thead>
-                <tbody v-for="item in users">
-                    <tr>
-                        <td>
-                            {{item.userName}}
-                        </td>
-                        <td>
-                            {{item.realName}}
-                        </td>
-                        <td>
-                            {{item.identityNumber}}
-                        </td>
-                        <td>
-                            {{item.city}}
-                        </td>
-                        <td>
-                            {{item.town}}
-                        </td>
-                        <td>
-                            {{item.address}}
-                        </td>
-                        <td><button v-on:click="del(item.id)">刪除</button></td>
-                    </tr>
-                   
-                </tbody>
-            </table>
+@*會員管理*@
+
+<div class="section border-bottom pt-2 pb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="breadcrumbs">
+                    <li><a a asp-controller="Home" asp-action="index">首頁</a></li>
+                    <li>會員管理</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
+<div class="text-center">
+    <p></p>
+    <h4>會員管理</h4>
+    <p></p>
+</div>
 
-<script>
+<hr />
+<p>第@(pager.CurrentPage)頁</p>
+
+
+<div class="container" id="app">
+
+    <div class="tab-pane active" id="home">
+
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RealName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdentityNumber)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Town)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayName("刪除資料")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityNumber)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Town)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="ion-android-delete"></i>Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="cotainer">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (pager.CurrentPage > 0)
+            {
+                <li class="page-item">
+                    <a class="btn btn-dark" asp-controller="UserManagement" asp-action="Index" asp-route-pg="1">第一頁</a>
+                </li>
+                <li class="page-item">
+                    <a class="btn btn-dark" asp-controller="UserManagement" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage + 1; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge==pager.CurrentPage? "active":"")">
+                    <a class="btn btn-dark" asp-controller="UserManagement" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+
+
+            @if (pager.CurrentPage < pager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="btn btn-dark" id="next" asp-controller="UserManagement" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
+                </li>
+            }
+            else { }
+            <li class="page-item">
+                <a class="btn btn-dark" asp-controller="UserManagement" asp-action="Index" asp-route-pg="@(pager.EndPage)">最後一頁</a>
+            </li>
+
+        </ul>
+    }
+</div>
+
+@*<script>
 
     var v = new Vue({
         el: "#app",
@@ -118,7 +189,7 @@
         },//mounted
         methods: {
             del: function (id) {
-                var q = confirm("確認要刪除此項服務?")
+                var q = confirm("確認要刪除這筆使用者?")
                 if (q) {
                     fetch("/users/" + id, {
                         method: 'DELETE'
@@ -132,7 +203,7 @@
             },//delete
         }//methods
     })//vue
-</script>
+</script>*@
 
 <style>
     body {
@@ -150,14 +221,6 @@
     .hidding {
         z-index: -1;
     }
-
-    /*.modal.fade .modal-dialog {
-            transform: translateY(10vh);
-        }
-
-        .modal.show .modal-dialog {
-            transform: translateY(0);
-        }*/
 
     .modal-backdrop {
         z-index: 0;

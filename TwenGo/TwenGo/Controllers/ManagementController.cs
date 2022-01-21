@@ -10,6 +10,9 @@ using TwenGo.Models;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
 
+
+
+
 namespace TwenGo.Controllers
 {
     [Authorize(Roles = "Administrator")]
@@ -21,12 +24,30 @@ namespace TwenGo.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+
+        
+        public IActionResult Index(int pg=1)
         {
+
             List<Order> orders = _context.Orders.ToList();
-          
-            return View(orders);
+            
+            const int pageSize = 10;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = orders.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = orders.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
+            //return View(orders);
+            return View(data);
         }
+
+ 
 
         public async Task<IActionResult> DetailsAsync(int? Id)
         {
