@@ -213,18 +213,21 @@ namespace TwenGo.Controllers
                 NameValueCollection decryptTradeCollection = HttpUtility.ParseQueryString(decryptTradeInfo);
                 SpgatewayOutputDataModel convertModel = LambdaUtil.DictionaryToObject<SpgatewayOutputDataModel>(decryptTradeCollection.AllKeys.ToDictionary(k => k, k => decryptTradeCollection[k]));
 
+
                 // TODO 將回傳訊息寫入資料庫
                 _context.SpgatewayOutputDataModels.Add(convertModel);
+                var reChar = convertModel.MerchantOrderNo.ToArray();
+                var notZero = reChar.FirstOrDefault(x => x != '0');
+                int index =  new string(reChar).IndexOf(notZero);
+                convertModel.MerchantOrderNo = convertModel.MerchantOrderNo.Substring(index, reChar.Length - index);
+                var changeOId = _context.Orders.FirstOrDefault(x => (x.Id.ToString() == convertModel.MerchantOrderNo) && (!x.isPaid)).isPaid=true;
                 _context.SaveChanges();
-                //var oId = _context.Orders.Select(x => x.Id).ToString();
-                //var mOderId = 
-                //var payStatus = _context.Orders.Where(x => x.isPaid == false).Select(x=>x.isPaid);
-                //payStatus.Append(true);
 
-                return Content(JsonConvert.SerializeObject(convertModel));
+
+                return View(convertModel);
             }
 
-            return Content("交易成功!");
+            return Content("交易失敗! 請重新嘗試付款!");
         }
     }
 
