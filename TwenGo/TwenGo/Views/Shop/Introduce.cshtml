@@ -14,12 +14,13 @@
                     <p class="card-text"><h2>服務內容:</h2><h6>{{products.description}}</h6></p>
                     <p class="card-text"><h6>服務地點:{{products.address}}</h6></p>
                     <p class="card-text"><h6>服務價格:{{products.price}}元</h6></p>
-                    <a href="#" v-on:click="addToCart(products.Id)" class="btn btn-success">加入購物車</a>
+                    <button onclick="toastr['success']('商品成功加入購物車!');" href="#" v-on:click="addToCart(products.Id)">加入購物車</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <style>
     body {
         background-color: cornsilk
@@ -39,6 +40,7 @@
         margin-top: 30px;
     }
 </style>
+
 <script>
     var vm = new Vue({
         el: "#app",
@@ -56,7 +58,6 @@
         },//mounted
         methods: {
             addToCart: function (id) {
-                console.log(id);
                 let data = new FormData();
                 data.append("id", @ViewBag.Id);
                 fetch("/Cart/AddtoCart", {
@@ -65,9 +66,7 @@
                 }).then(response => response.text())
                     .then(function (d) {
                         vcart.GetCartProduct();
-                        alert(d);
-
-                    });
+                    })
             },//addToCart
         }
     })//app

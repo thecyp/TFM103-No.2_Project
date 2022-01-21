@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/css/custom.css" type="text/css" media="all">
     <link rel='stylesheet' href='~/css/prettyPhoto.css' type='text/css' media='all'>
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
     <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
@@ -46,7 +47,7 @@
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     @*<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">*@
+        <link rel="stylesheet" href="/resources/demos/style.css">*@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -69,7 +70,7 @@
             </ul>
         </div>
     </div>
-  
+
     <div class="site">
         <header>
             <div class="topbar">
@@ -77,7 +78,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="topbar-menu">
-                                <partial name="_LoginPartial" /> 
+                                <partial name="_LoginPartial" />
                             </div>
                         </div>
                     </div>
@@ -110,7 +111,7 @@
                                 <div class="widget-shopping-cart-content" id="cartMenu">
                                     <ul class="cart-list">
                                         <li v-for="item in product">
-                                            <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
+                                            <a onclick="toastr['warning']('商品已從購物車移除!');" href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                             <a class="product-title fz-16 fw-bolder">
                                                 <img :src=item.image alt="" />
                                                 {{item.name}}&nbsp;
@@ -125,7 +126,7 @@
                                     </p>
                                     <p class="buttons">
                                         <a asp-area="" asp-controller="Cart" asp-action="index" class="view-cart">檢視購物車</a>
-                                        <a asp-area="" asp-controller="Cart" asp-action="index" class="checkout">立即購買</a>
+                                        <a asp-area="" asp-controller="Order" asp-action="index" class="checkout">立即購買</a>
                                     </p>
                                 </div>
                             </div>
@@ -159,15 +160,15 @@
                         <a asp-controller="Home" asp-action="index">
                             <img src="~/images/frog128.png" class="footer-logo" alt="" />
                         </a>
-                            <p>
-                                歡迎來到ServeGo，我們將為您提供最完善的生活服務。
-                            </p>
-                            <div class="footer-social">
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
-                            </div>
+                        <p>
+                            歡迎來到ServeGo，我們將為您提供最完善的生活服務。
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <div class="widget">
@@ -207,10 +208,8 @@
             </div>
         </footer>
         <div class="copyright">
-            <a  asp-controller="Home" asp-action="index"><div class="backtotop" id="backtotop"></div></a>
+            <a asp-controller="Home" asp-action="index"><div class="backtotop" id="backtotop"></div></a>
         </div>
-
-     
     </div>@*site*@
     @await RenderSectionAsync("Scripts", required: false)
     <style>
@@ -223,6 +222,27 @@
         }
     </style>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
     <script>
         var vcart = new Vue({
             el: '#cartMenu',
@@ -250,7 +270,7 @@
                             vcart.GetCartProduct();
                         })
                 },
-                GetTotal: function (prod) {                    
+                GetTotal: function (prod) {
                     if (prod == null || prod.length == 0) {
                         return 0;
                     }

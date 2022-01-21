@@ -39,7 +39,7 @@
                             會員功能
                         </button>
                     </h2>
-                    <div id="flush-collapse_M" class="accordion-collapse collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapse_M" class="accordion-collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ul>
                                 <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
@@ -65,7 +65,7 @@
                             管理員功能
                         </button>
                     </h2>
-                    <div id="flush-collapse_A" class="accordion-collapse collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapse_A" class="accordion-collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ul>
                                 <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
@@ -87,7 +87,6 @@
         else
         {
             <ul>
-                <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">會員中心</a></li>
                 <li><a asp-area="" asp-controller="Login" asp-action="Index">登入</a></li>
                 <li><a asp-area="" asp-controller="Member" asp-action="CustomerRegister">註冊</a></li>
             </ul>
