@@ -12,6 +12,7 @@ namespace Spgateway.Models
     /// </summary>
     public class SpgatewayOutputDataModel
     {
+        public int Id { get; set; }
 
         /// <summary>
         /// 回傳狀態

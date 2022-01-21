@@ -221,28 +221,6 @@ namespace TwenGo.Controllers
 
             return Content("交易成功!");
         }
-
-        /// <summary>
-        /// [智付通]金流介接(結果: 支付通知網址)
-        /// </summary>
-        [HttpPost]
-        public ActionResult SpgatewayNotify()
-        {
-            // Status 回傳狀態 
-            // MerchantID 回傳訊息
-            // TradeInfo 交易資料AES 加密
-            // TradeSha 交易資料SHA256 加密
-            // Version 串接程式版本
-            NameValueCollection collection = new NameValueCollection();
-
-            if (collection["MerchantID"] != null && string.Equals(collection["MerchantID"], _bankInfoModel.MerchantID) &&
-                collection["TradeInfo"] != null && string.Equals(collection["TradeSha"], CryptoUtil.EncryptSHA256($"HashKey={_bankInfoModel.HashKey}&{collection["TradeInfo"]}&HashIV={_bankInfoModel.HashIV}")))
-            {
-                var decryptTradeInfo = CryptoUtil.DecryptAESHex(collection["TradeInfo"], _bankInfoModel.HashKey, _bankInfoModel.HashIV);
-                Console.WriteLine(decryptTradeInfo);
-            }
-            return Content("支付成功!");
-        }
     }
 
 }
