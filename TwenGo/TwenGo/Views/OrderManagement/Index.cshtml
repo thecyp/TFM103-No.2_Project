@@ -36,6 +36,20 @@
     <p></p>
 </div>
 
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    @*<li><a href="#home" data-toggle="tab">首頁</a></li>*@
+    <li class="nav-item" role="presentation">
+        <button class="nav-link alert-dark" type="button" href="#home" data-toggle="tab">目前訂單</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" type="button" href="#receiver" data-toggle="tab">歷史訂單</button>
+    </li>
+
+</ul>
+
+
+
+
 <hr />
 <p>第@(pager.CurrentPage)頁</p>
 <div class="container">
@@ -94,6 +108,8 @@
             </tbody>
         </table>
     </div>
+
+
 </div>
 
 
