@@ -16,9 +16,9 @@ namespace TwenGo.Models
         public String Description { get; set; }
         public int Price { get; set; }
         //public String img { get; set; }
-        [MaxLength]
+      
         public List<IFormFile> pic { get; set; }
-        public  List<IFormFile> img { get; set; }
+        public List<IFormFile> img { get; set; }
 
     }
 }

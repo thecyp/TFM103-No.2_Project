@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using TwenGo.Data;
 using TwenGo.Models;
 using TwenGo.Models.Repository;
@@ -19,12 +20,10 @@ namespace TwenGo.Controllers.API
     {
         private readonly IWebHostEnvironment env;
         private readonly TwenGoContext _context;
-        private readonly TwenGoContext db;
         private readonly string fileRoot = @"\Pictures\";
 
-        public ProductsController(IWebHostEnvironment env, TwenGoContext context, TwenGoContext db)
+        public ProductsController(IWebHostEnvironment env, TwenGoContext context)
         {
-            this.db = db;
             this.env = env;
             _context = context;
         }
@@ -54,26 +53,30 @@ namespace TwenGo.Controllers.API
         // PUT: api/Products/5
         [HttpPut]
         [Route("{id}")]
-        //[Consumes("application/json")]
+        [Consumes("multipart/form-data")]
         public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
-            var edit = _context.Products.Find(id);
 
-            var file = product.img.First();
+            var file = product.img[0];
             var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
             using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
             {
                 file.CopyTo(fileStream);
             }
-           
+
+            var edit = _context.Products.Find(id);
+
             if (edit != null)
             {
                 edit.ProductName = product.ProductName;
                 edit.Description = product.Description;
                 edit.Price = product.Price;
                 edit.Address = product.countyName + product.districtName;
-                //edit.PicturePath = combineFileName;
-                //edit.PicturePath = product.img;
+                edit.PicturePath = combineFileName;
+
+                //var a  = JsonConvert.SerializeObject(product.img)[0];
+
+                //edit.PicturePath =a
                 _context.SaveChanges();
             }
         }

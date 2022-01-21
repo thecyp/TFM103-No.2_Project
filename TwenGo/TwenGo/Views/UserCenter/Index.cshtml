@@ -1,95 +1,135 @@
-﻿@model TwenGo.Models.ViewModels.CustomerViewModel
-<div id="app">
+﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
 
-    <div class="card bg-light" v-for="item in users">
-        <article class="card-body mx-auto" style="width: 48rem">
+@*<div id="app">*@
 
-            <form>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <p>{{item.realName}}</p>
-                </div> <!-- form-group// -->
+<div class="container">
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                    </div>
-                    <p>{{item.email}}</p>
-                </div> <!-- form-group// -->
+    <div class="tab-pane active" id="home">
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
-                    </div>
-                    <p>{{item.cellphone}}</p>
-                </div> <!-- form-group// -->
+        @*<a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i></a>*@
 
-                <div class="input-group-prepend">
+        @foreach (var item in Model)
+        {
+           
+        <div class="card bg-light" style="margin-top:30px">
+            <h1 style="text-align:center">會員中心</h1>
+            <article class="card-body mx-auto" style="width: 48rem">
+                <form asp-action="CustomerRegister">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group input-group">
-                        <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
-                        <p>{{item.gender}}</p>
-                    </div>
-                </div> <!-- form-group end.// -->
-
-                <div class="form-group input-group">
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
-                    </div>
-                    <p>{{item.birthday}}</p>
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
-                    </div>
-                    <p>{{item.identityNumber}}</p>
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                    </div>
-                    <p>{{item.phone}}</p>
-                </div> <!-- form-group// -->
-
-                <div>
-                    <div id="twzipcode" class="form-group input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
-                    </div>
-                    <p>{{item.address}}</p>
-                </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.RealName)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                    </div> <!-- form-group// -->
 
-                <br />
-            </form>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.Email)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                    </div> <!-- form-group// -->
 
-        </article>
-    </div> <!-- card.// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                        </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.IdentityNumber)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                        <button><img src="~/images/circle_edit_line_pen_design_icon.png"></button>
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                        </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.City)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                        </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.Town)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                        </div>
+                        <input class="form-control" value="@Html.DisplayFor(modelItem => item.Address)" disabled="disabled" />
+                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                    </div> <!-- form-group// -->
+        
+                    <br />
+
+                    <div class="form-group" style="padding-left:300px">
+                        <button type="submit" class="btn">訂單管理</button>
+                    </div> <!-- form-group// -->
+                </form>
+            </article>
+        </div> <!-- card.// -->
+        }
+    </div>
 </div>
-<script>
-    var v = new Vue({
-        el: "#app",
-        data: {
-            users: []
-        },//data
-        mounted: function () {
-            let self = this;
-            fetch("/api/users")
-                .then(function (res) {
-                    return res.json();
-                })
-                .then(function (d) {
-                    for (var i = 0; i < d.length; i++)
-                        self.users.push(d[i])
-                })
 
-        },//mounted
+            <style>
+                .divider-text {
+                    position: relative;
+                    text-align: center;
+                    margin-top: 15px;
+                    margin-bottom: 15px;
+                }
+
+                    .divider-text span {
+                        padding: 7px;
+                        font-size: 12px;
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    .divider-text:after {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        border-bottom: 1px solid #ddd;
+                        top: 55%;
+                        left: 0;
+                        z-index: 1;
+                    }
+
+                .btn-facebook {
+                    background-color: #405D9D;
+                    color: #fff;
+                }
+
+                a:hover {
+                    text-decoration: none !important;
+                    color: #000000;
+                }
+            </style>
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                <script src="~/jquery/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $("#twzipcode").twzipcode({
+                            zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+                            css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱
+                            countyName: "City", // 自訂城市 select 標籤的 name 值
+                            districtName: "Town" // 自訂區別 select 標籤的 name 值
+                        });
+                    });
+
+                    var edit = document.getElementById
+                </script>
+            }
 
 
-    })//vue
-</script>
+

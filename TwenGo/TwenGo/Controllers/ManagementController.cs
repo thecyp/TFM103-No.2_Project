@@ -31,7 +31,7 @@ namespace TwenGo.Controllers
 
             List<Order> orders = _context.Orders.ToList();
             
-            const int pageSize = 5;
+            const int pageSize = 10;
             if (pg < 1)
                 pg = 1;
 

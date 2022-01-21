@@ -31,9 +31,9 @@
     <h4>訂單管理</h4>
     <p></p>
 </div>
+<hr />
 
-
-
+<p>第@(pager.CurrentPage)頁</p>
 <div class="container">
     <div class="tab-pane active" id="home">
         <table class="table table-success table-striped">
@@ -48,14 +48,18 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ReceiverName)
                     </th>
-
                     <th>
                         @Html.DisplayNameFor(model => model.Total)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.isPaid)
                     </th>
-
+                    <th>
+                        @Html.DisplayName("訂單資訊")
+                    </th>
+                    <th>
+                        @Html.DisplayName("訂單刪除")
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -102,17 +106,17 @@
         @if (pager.CurrentPage > 0)
         {
             <li class="page-item">
-                <a class="page-link" asp-controller="Management" asp-action="Index" asp-route-pg="1">第一頁</a>
+                <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="1">第一頁</a>
             </li>
             <li class="page-item">
-                <a class="page-link" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
+                <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
             </li>
         }
 
         @for (var pge = pager.StartPage + 1; pge <= pager.EndPage; pge++)
         {
             <li class="page-item @(pge==pager.CurrentPage? "active":"")">
-                <a class="page-link"  asp-controller="Management" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                <a class="btn btn-dark"  asp-controller="Management" asp-action="Index" asp-route-pg="@pge">@pge</a>
             </li>
         }
 
@@ -120,12 +124,12 @@
         @if (pager.CurrentPage < pager.EndPage)
         {
             <li class="page-item">
-                <a class="page-link" id="next" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
+                <a class="btn btn-dark" id="next" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
             </li>
         }
         else { }
         <li class="page-item">
-            <a class="page-link" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.EndPage)">最後一頁</a>
+            <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.EndPage)">最後一頁</a>
         </li>
 
     </ul>
