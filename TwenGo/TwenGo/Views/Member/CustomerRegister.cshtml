@@ -30,10 +30,7 @@
         color: #fff;
     }
 
-    .btn-twitter {
-        background-color: #42AEEC;
-        color: #fff;
-    }
+
 
     a:hover {
         text-decoration: none !important;
@@ -50,20 +47,15 @@
 
             <h3 class="card-title mt-3 text-center">買家會員註冊</h3>
             <br />
-            <p>
-                <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login in Twitter</a>
-                <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login in facebook</a>
-            </p>
-            <p class="divider-text">
-                <span class="bg-light">OR</span>
-            </p>
+           
+           
             <form asp-action="CustomerRegister">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input asp-for="CustomerName" class="form-control"  placeholder="請輸入姓名 例：周杰倫" />
+                    <input asp-for="CustomerName" class="form-control" placeholder="請輸入姓名 例：周杰倫" />
                 </div> <!-- form-group// -->
 
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
@@ -150,23 +142,23 @@
                             <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
                         </div>
                     </div>
-                   
+
                     <input asp-for="Address" class="form-control" placeholder="請輸入地址" style="width:100%" />
                 </div>
-                
+
                 <br />
-                              
+
 
                 <div class="form-group">
                     <button type="submit" class="btn  btn-block"> 確定送出  </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">已經有帳戶了? <a href="~/Login/Index">登入</a> </p>
+                <p class="text-center">已經有帳戶了? <a asp-controller="Login" asp-action="Index">登入</a> </p>
             </form>
 
 
 
-    </article>
-</div> <!-- card.// -->
+        </article>
+    </div> <!-- card.// -->
 
 </div>
 
@@ -183,7 +175,7 @@
                 districtName: "Town" // 自訂區別 select 標籤的 name 值
             });
         });
-     </script>
-
+    </script>
+    
 }
 

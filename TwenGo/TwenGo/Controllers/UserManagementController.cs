@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TwenGo.Helper;
+using TwenGo.Models;
 using TwenGo.Models.Repository;
 using TwenGo.Models.Repository.Entity;
-using TwenGo.Models.ViewModels;
+
 
 namespace TwenGo.Controllers
 {
@@ -28,16 +29,23 @@ namespace TwenGo.Controllers
 
 
 
-        public IActionResult Index()
+        public IActionResult Index(int pg=1)
         {
             List<Users> users = _context.Users.ToList();
-            //var a =_userManager.GetUserId(User);
-            //Console.WriteLine(a);
-            //Users users = _context.Users
-            //   .Where(a => a.Id == Id).FirstOrDefault();
-            return View(users);
+            const int pageSize = 5;
+            if (pg < 1)
+                pg = 1;
 
-            //List<CustomerViewModel> customerViewModels = _context.CustomerViewModels.ToList();
+            int recsCount = users.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = users.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
+   
+            return View(data);
         }
 
         //新增功能
