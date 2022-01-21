@@ -288,77 +288,77 @@ namespace Spgateway.Models
         
         #endregion
 
-        #region Pay2go 電子錢包回傳參數
-
-        /// <summary>
-        /// P2G 交易序號
-        /// <para>P2G 在筆交易所產生的序號。</para>
-        /// </summary>
-        public string P2GTradeNo { get; set; }
-
-        /// <summary>
-        /// P2G 支付方式
-        /// <para>前面會為 P2G_ 開頭，說明如下：</para>
-        /// <para>  P2G 信用卡交易 P2GPaymentType = P2G_CREDIT</para>
-        /// <para>  P2G WEBATM 交易 P2GPaymentType = P2G_WEBATM</para>
-        /// <para>  P2G ATM 轉帳交易 P2GPaymentType = P2G_VACC</para>
-        /// <para>  P2G 超商代碼繳費交易 P2GPaymentType = P2G_CVS</para>
-        /// <para>  P2G 電子帳戶交易 P2GPaymentType = P2GEACC</para>
-        /// </summary>
-        public string P2GPaymentType { get; set; }
-
-        /// <summary>
-        /// P2G 交易金額
-        /// </summary>
-        public int? P2GAmt { get; set; }
-
-        #endregion
-
-        #region 超商物流回傳參數
+        //#region Pay2go 電子錢包回傳參數
 
         ///// <summary>
-        ///// 超商門市編號
-        ///// <para>取貨門市編號。</para>
+        ///// P2G 交易序號
+        ///// <para>P2G 在筆交易所產生的序號。</para>
         ///// </summary>
-        //public string StoreCode { get; set; }
+        //public string P2GTradeNo { get; set; }
 
         ///// <summary>
-        ///// 超商門市名稱
-        ///// <para>取貨門市中文名稱</para>
+        ///// P2G 支付方式
+        ///// <para>前面會為 P2G_ 開頭，說明如下：</para>
+        ///// <para>  P2G 信用卡交易 P2GPaymentType = P2G_CREDIT</para>
+        ///// <para>  P2G WEBATM 交易 P2GPaymentType = P2G_WEBATM</para>
+        ///// <para>  P2G ATM 轉帳交易 P2GPaymentType = P2G_VACC</para>
+        ///// <para>  P2G 超商代碼繳費交易 P2GPaymentType = P2G_CVS</para>
+        ///// <para>  P2G 電子帳戶交易 P2GPaymentType = P2GEACC</para>
         ///// </summary>
-        //public string StoreName { get; set; }
+        //public string P2GPaymentType { get; set; }
 
         ///// <summary>
-        ///// 超商類別名稱
-        ///// <para>回傳[全家] 、[OK] 、[萊爾富]</para>
+        ///// P2G 交易金額
         ///// </summary>
-        //public string StoreType { get; set; }
+        //public int? P2GAmt { get; set; }
 
-        ///// <summary>
-        ///// 超商門市地址
-        ///// <para>取貨門市地址</para>
-        ///// </summary>
-        //public string StoreAddr { get; set; }
+        //#endregion
 
-        ///// <summary>
-        ///// 取件交易方式
-        ///// <para>1 = 取貨付款</para>
-        ///// <para>3 = 取貨不付款</para>
-        ///// </summary>
-        //public int? TradeType { get; set; }
+        //#region 超商物流回傳參數
 
-        ///// <summary>
-        ///// 取貨人
-        ///// <para>取貨人姓名</para>
-        ///// </summary>
-        //public string CVSCOMName { get; set; }
+        /////// <summary>
+        /////// 超商門市編號
+        /////// <para>取貨門市編號。</para>
+        /////// </summary>
+        ////public string StoreCode { get; set; }
 
-        ///// <summary>
-        ///// 取貨人手機號碼
-        ///// <para>取貨人手機號碼</para>
-        ///// </summary>
-        //public string CVSCOMPhone { get; set; }
+        /////// <summary>
+        /////// 超商門市名稱
+        /////// <para>取貨門市中文名稱</para>
+        /////// </summary>
+        ////public string StoreName { get; set; }
 
-        #endregion
+        /////// <summary>
+        /////// 超商類別名稱
+        /////// <para>回傳[全家] 、[OK] 、[萊爾富]</para>
+        /////// </summary>
+        ////public string StoreType { get; set; }
+
+        /////// <summary>
+        /////// 超商門市地址
+        /////// <para>取貨門市地址</para>
+        /////// </summary>
+        ////public string StoreAddr { get; set; }
+
+        /////// <summary>
+        /////// 取件交易方式
+        /////// <para>1 = 取貨付款</para>
+        /////// <para>3 = 取貨不付款</para>
+        /////// </summary>
+        ////public int? TradeType { get; set; }
+
+        /////// <summary>
+        /////// 取貨人
+        /////// <para>取貨人姓名</para>
+        /////// </summary>
+        ////public string CVSCOMName { get; set; }
+
+        /////// <summary>
+        /////// 取貨人手機號碼
+        /////// <para>取貨人手機號碼</para>
+        /////// </summary>
+        ////public string CVSCOMPhone { get; set; }
+
+        //#endregion
     }
 }

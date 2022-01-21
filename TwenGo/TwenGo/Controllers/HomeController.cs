@@ -214,7 +214,12 @@ namespace TwenGo.Controllers
                 SpgatewayOutputDataModel convertModel = LambdaUtil.DictionaryToObject<SpgatewayOutputDataModel>(decryptTradeCollection.AllKeys.ToDictionary(k => k, k => decryptTradeCollection[k]));
 
                 // TODO 將回傳訊息寫入資料庫
-                
+                _context.SpgatewayOutputDataModels.Add(convertModel);
+                _context.SaveChanges();
+                //var oId = _context.Orders.Select(x => x.Id).ToString();
+                //var mOderId = 
+                //var payStatus = _context.Orders.Where(x => x.isPaid == false).Select(x=>x.isPaid);
+                //payStatus.Append(true);
 
                 return Content(JsonConvert.SerializeObject(convertModel));
             }
