@@ -34,7 +34,7 @@ namespace TwenGo.Controllers
             // filter orders by user
             List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id).ToList();
 
-            const int pageSize = 5;
+            const int pageSize = 10;
             if (pg < 1)
                 pg = 1;
 
