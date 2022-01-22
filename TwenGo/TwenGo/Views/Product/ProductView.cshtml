@@ -63,8 +63,8 @@
                     <div>
                         <label>上傳圖片</label>
                         <br />
-                        <img id="img" :src="put.picturePath" />
-                        <input type="file" name="img" v-on:change="updatePath"/>
+                        <img id="demo"  :src="put.picturePath" />
+                        <input id="uploadimg" type="file" name="img" v-on:change="updatePath"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -161,7 +161,10 @@
                 data.append('Address', this.put.address);
                 data.append('Description', this.put.description);
                 data.append('Price', this.put.price);
-                data.append('img', this.put.img[0]);
+                if (this.put.img != undefined) {
+                    data.append('img', this.put.img[0]);
+                }
+                
                 var q = confirm("確定要更新服務資料?")
                 if (q) {
                     fetch("/products/"+id, {
@@ -175,4 +178,13 @@
             }//edit
         }//methods
     })//vue
+
+    $('#uploadimg').change(function () {
+        var file = $('#uploadimg')[0].files[0];
+        var reader = new FileReader;
+        reader.onload = function (e) {
+            $('#demo').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
 </script>
