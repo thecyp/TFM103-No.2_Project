@@ -66,8 +66,6 @@ namespace TwenGo.Controllers.API
                     file.CopyTo(fileStream);
                 }
             }
-          
-
             var edit = _context.Products.Find(id);
 
             if (edit != null)
