@@ -13,7 +13,7 @@
 
 <div class="dropdown">
     <div class="topbar-menu">
-        @if (principal.IsInRole("Customer"))
+        @if (User.IsInRole("Customer"))
         {
             <nav>
                 <ul>
@@ -56,7 +56,7 @@
                 </div>
             </div>
         }
-        else if (principal.IsInRole("Administrator"))
+        else if (User.IsInRole("Administrator"))
         {
             <div class="accordion accordion-flush open" id="accordion_A">
                 <div class="accordion-item">
