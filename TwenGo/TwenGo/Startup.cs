@@ -34,7 +34,7 @@ namespace TwenGo
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
 
-            services.Configure<RecaptchaOption>(Configuration.GetSection(nameof(RecaptchaOption)));
+           
             services.AddControllersWithViews();
 
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme

@@ -1,7 +1,7 @@
 ﻿@page
 @model TwenGo.Areas.Identity.Pages.Account.LoginModel
 @using Microsoft.Extensions.Options
-
+@*@using GoogleRecaptchaMvc*@
 
 <style>
 
@@ -151,7 +151,7 @@
 
 
                     <div class="form-group">
-                        <div class="g-recaptcha" data-sitekey="6LcPLyweAAAAAM6c5GAma8Qg4iq0TnYJB3Q9sDi9"></div>
+                        <div class="g-recaptcha" data-sitekey="6LdNAy4eAAAAAGZhLjicx_8rZqhWeRaPhhFMgCAa"></div>
 
                     </div>
 
@@ -167,7 +167,7 @@
 
                 </form>
 
-                
+
 
                 <p class="divider-text">
                     <span class="bg-white">OR</span>
@@ -188,13 +188,8 @@
 </body>
 
 
-<script>
-    function onClick(e) {
-        e.preventDefault();
-        grecaptcha.ready(function () {
-            grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }).then(function (token) {
-                console.log(token);
-            });
-        });
-    }
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
 </script>
+

@@ -15,6 +15,10 @@ using TwenGo.Models.ViewModels;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
+using GoogleRecaptcha;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace TwenGo.Controllers
 {
@@ -46,14 +50,27 @@ namespace TwenGo.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel LoginData)
         {
-
-            var result = await _signInManager.PasswordSignInAsync(LoginData.Email, LoginData.Password, true, lockoutOnFailure: false);
-            if (result.Succeeded)
+            var apiKey = "6LdNAy4eAAAAAKpRqJUNHxi96ac7JjYEI2W7rhru";
+            var url = "https://www.google.com/recaptcha/api/siteverify";
+            var wc = new System.Net.WebClient();
+            wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            var data = "secret=" + apiKey + "&response=" + Request.Form["g-recaptcha-response"];
+            var json = wc.UploadString(url, data);
+            // JSON 反序化取 .success 屬性 true/false 判斷
+            var success = JsonConvert.DeserializeObject<JObject>(json).Value<bool>("success");
+            if (!success)
             {
-                
+                return View();
+
+            }
+            // TODO: 檢查帳號密碼
+            var result2 = await _signInManager.PasswordSignInAsync(LoginData.Email, LoginData.Password, true, lockoutOnFailure: false);
+            if (result2.Succeeded)
+            {
 
                 return RedirectToAction("Index", "Home");
             }
+
 
 
 
