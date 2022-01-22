@@ -74,9 +74,6 @@ namespace TwenGo.Controllers.API
                 edit.Address = product.countyName + product.districtName;
                 edit.PicturePath = combineFileName;
 
-                //var a  = JsonConvert.SerializeObject(product.img)[0];
-
-                //edit.PicturePath =a
                 _context.SaveChanges();
             }
         }
