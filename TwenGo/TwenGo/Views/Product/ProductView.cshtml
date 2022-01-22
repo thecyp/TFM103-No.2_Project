@@ -193,6 +193,7 @@
                 data.append('Description', this.put.description);
                 data.append('Price', this.put.price);
                 data.append('img', this.put.img[0]);
+                console.log(data)
                 var q = confirm("確定要更新服務資料?")
                 if (q) {
                     fetch("/products/" + id, {
