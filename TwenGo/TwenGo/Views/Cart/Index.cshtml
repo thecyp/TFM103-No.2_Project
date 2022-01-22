@@ -22,7 +22,7 @@
                                 <tbody >
                                     <tr class="cart_item" v-for="item in product">
                                         <td class="product-remove">
-                                            <a href="#" class="remove" v-on:click="CleanCart(item.id)">×</a>
+                                            <a href="#" onclick="toastr['warning']('商品已從購物車移除!');" class="remove" v-on:click="CleanCart(item.id)">×</a>
                                         </td>
                                         <td class="product-thumbnail">
                                             <a >
@@ -36,7 +36,7 @@
                                         </td>
                                         <td class="product-quantity">
                                             <div class="quantity">
-                                                <input id="qty-2" type="number" min="0" name="number" :value="item.amount" class="input-text qty text" size="4">
+                                                <input id="qty-2" type="number" min="0" name="amount" readonly :value="item.amount" class="input-text qty text" size="4">
                                             </div>
                                         </td>
                                         <td class="product-subtotal" width="200px">
@@ -97,7 +97,7 @@
                     }).then(response => response.text())
                         .then(function (d) {
                             vcart.GetCartProduct();
-                            history.go(0);
+                            window.location.reload();
                         })
                 },
                 GetTotal: function (prod) {                    

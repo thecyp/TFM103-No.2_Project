@@ -172,7 +172,7 @@
               
                     
                 <form  asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" }) " method="post">
-                    <button type="submit" class="btn btn-default" name="provider" value="Facebook" title="Log in using your Facebook account">Facebook</button>
+                    <button type="submit" class="btn btn-block btn-facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="fab fa-facebook-f"></i>Login in facebook</button>
                 </form>
 
 
@@ -184,28 +184,3 @@
 
 </body>
 
-
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '1286609555139052',
-            cookie: true,
-            xfbml: true,
-            version: 'v12.0.'
-        });
-
-        FB.AppEvents.logPageView();
-
-    };
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0&appId=883922168979519&autoLogAppEvents=1" nonce="vKC7xSu6"></script>

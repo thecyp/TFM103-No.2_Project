@@ -35,11 +35,12 @@ namespace TwenGo.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "密碼")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "請再輸入一次密碼")]
+            [Compare("Password", ErrorMessage = "密碼不相符")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }

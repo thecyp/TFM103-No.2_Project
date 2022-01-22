@@ -1,15 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Spgateway.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using ThirdPartyPay.Models;
 using TwenGo.Models;
 using TwenGo.Models.Repository;
+using TwenGo.Util;
 
 namespace TwenGo.Controllers
 {
@@ -29,15 +35,23 @@ namespace TwenGo.Controllers
                 MerchantID = "MS130347314",
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
-                ReturnURL = "http://yourWebsitUrl/Bank/SpgatewayReturn",
-                NotifyURL = "http://yourWebsitUrl/Bank/SpgatewayNotify",
-                CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
+                ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayReturn",
+                NotifyURL = "",
+                CustomerURL = "",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
                 CloseUrl = "https://core.newebpay.com/API/CreditCard/Close"
             };
 
 
 
+        }
+
+        public IActionResult PayReturn()
+        {
+
+
+
+            return View();
         }
 
         public IActionResult Index()
@@ -185,6 +199,43 @@ namespace TwenGo.Controllers
 
         }
 
+        /// <summary>
+        /// [智付通]金流介接(結果: 支付完成 返回商店網址)
+        /// </summary>
+        [HttpPost]
+        public ActionResult SpgatewayReturn()
+        {
+            // Status 回傳狀態 
+            // MerchantID 回傳訊息
+            // TradeInfo 交易資料AES 加密
+            // TradeSha 交易資料SHA256 加密
+            // Version 串接程式版本
+            var collection = HttpContext.Request.Form;
+            if (string.Equals(collection["MerchantID"], _bankInfoModel.MerchantID) &&
+                string.Equals(collection["TradeSha"], CryptoUtil.EncryptSHA256($"HashKey={_bankInfoModel.HashKey}&{collection["TradeInfo"]}&HashIV={_bankInfoModel.HashIV}")))
+            {
+                var decryptTradeInfo = CryptoUtil.DecryptAESHex(collection["TradeInfo"], _bankInfoModel.HashKey, _bankInfoModel.HashIV);
+
+                // 取得回傳參數(ex:key1=value1&key2=value2),儲存為NameValueCollection
+                NameValueCollection decryptTradeCollection = HttpUtility.ParseQueryString(decryptTradeInfo);
+                SpgatewayOutputDataModel convertModel = LambdaUtil.DictionaryToObject<SpgatewayOutputDataModel>(decryptTradeCollection.AllKeys.ToDictionary(k => k, k => decryptTradeCollection[k]));
+
+
+                // TODO 將回傳訊息寫入資料庫
+                _context.SpgatewayOutputDataModels.Add(convertModel);
+                var reChar = convertModel.MerchantOrderNo.ToArray();
+                var notZero = reChar.FirstOrDefault(x => x != '0');
+                int index =  new string(reChar).IndexOf(notZero);
+                convertModel.MerchantOrderNo = convertModel.MerchantOrderNo.Substring(index, reChar.Length - index);
+                var changeOId = _context.Orders.FirstOrDefault(x => (x.Id.ToString() == convertModel.MerchantOrderNo) && (!x.isPaid)).isPaid=true;
+                _context.SaveChanges();
+
+
+                return View(convertModel);
+            }
+
+            return Content("交易失敗! 請重新嘗試付款!");
+        }
     }
 
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TwenGo.Models.Repository;
 
 namespace TwenGo.Migrations
 {
     [DbContext(typeof(TwenGoContext))]
-    partial class TwenGoContextModelSnapshot : ModelSnapshot
+    [Migration("20220121152001_intial2")]
+    partial class intial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

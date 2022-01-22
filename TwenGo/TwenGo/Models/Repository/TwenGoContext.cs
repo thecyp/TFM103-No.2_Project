@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Spgateway.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,8 @@ namespace TwenGo.Models.Repository
 
         public DbSet<Shipper> Shippers { get; set; }
 
-        
+        public DbSet<SpgatewayOutputDataModel> SpgatewayOutputDataModels { get; set; }
 
-        
+
     }
 }
