@@ -57,7 +57,7 @@ namespace TwenGo.Controllers.API
         public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
 
-            var file = product.img[0];
+            var file = product.img.First();
             var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
             using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
             {
