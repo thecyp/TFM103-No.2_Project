@@ -34,8 +34,9 @@ namespace TwenGo
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
 
+            services.Configure<RecaptchaOption>(Configuration.GetSection(nameof(RecaptchaOption)));
+            services.AddControllersWithViews();
 
-           
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
                
@@ -68,13 +69,15 @@ namespace TwenGo
                
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
-               options.SignIn.RequireConfirmedEmail = true;
+               options.SignIn.RequireConfirmedEmail = false;
 
             })
 
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TwenGoContext>()
                 .AddDefaultTokenProviders();
+
+            
 
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -87,7 +90,7 @@ namespace TwenGo
                 //other properties
             });
             services.AddHttpContextAccessor();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

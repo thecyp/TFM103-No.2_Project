@@ -14,6 +14,7 @@ using TwenGo.Models.Repository.Entity;
 using TwenGo.Models.ViewModels;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 
 namespace TwenGo.Controllers
 {
@@ -23,9 +24,10 @@ namespace TwenGo.Controllers
         private readonly SignInManager<Users> _signInManager;
         private readonly TwenGoContext context;
         private readonly ILogger<LoginController> _logger;
-
+        
         public LoginController(TwenGoContext twenGoContext, SignInManager<Users> signInManager, UserManager<Users>userManager, ILogger<LoginController> logger) 
         {
+           
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,17 +37,12 @@ namespace TwenGo.Controllers
         [Route("~/Login/Index")]
         public IActionResult Index()
         {
-            var h = HttpContext.Request;
-            var user = HttpContext.User;
-            //var name = user.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault()?.Value;
-            //if(name == "") 
-            //{
-            //    return Content("登入權限為Myth");
-            //}
+             
             return View();
         }
 
-        
+                
+
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel LoginData)
         {
