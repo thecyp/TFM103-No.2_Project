@@ -64,7 +64,7 @@
                         <label>上傳圖片</label>
                         <br />
                         <img id="img" :src="put.picturePath" />
-                        <input type="file" name="img" id="imgInp"  v-on:change="updatePath"/>
+                        <input type="file" name="img" v-on:change="updatePath"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -116,20 +116,6 @@
 </style>
 
 <script>
-    $("#imgInp").change(function () {
-        //當檔案改變後，做一些事 
-        readURL(this);   // this代表<input id="imgInp">
-    });
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("#img").attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
     var v = new Vue({
         el: "#app",
         data: {
@@ -150,7 +136,6 @@
         methods: {
             updatePath: function (event) {
                 this.put.img = event.target.files;
-         
             },
             del: function (id) {
                 var q = confirm("確定要刪除此項服務?")
@@ -202,12 +187,8 @@
                     }).then(res => {
                         return res.json()
                     })
-                    console.log(data)
                     alert("更新成功")
                 }//if
-                else {
-                }
-                $('#myModal').modal("hide");
             }//edit
         }//methods
     })//vue
