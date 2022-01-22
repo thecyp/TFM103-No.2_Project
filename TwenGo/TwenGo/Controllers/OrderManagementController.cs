@@ -32,7 +32,7 @@ namespace TwenGo.Controllers
             var user = await this._userManager.GetUserAsync(HttpContext.User);
 
             // filter orders by user
-            List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id).ToList();
+            List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id && m.isPaid == false).ToList();
 
             const int pageSize = 10;
             if (pg < 1)
@@ -59,7 +59,7 @@ namespace TwenGo.Controllers
             var user = await this._userManager.GetUserAsync(HttpContext.User);
 
             // filter orders by user
-            List<Order> orders = _context.Orders.Where(m => m.UserId == user.Id).ToList();
+            List<Order> orders = _context.Orders.Where(m => m.UserId == user.Id && m.isPaid==true).ToList();
 
             const int pageSize = 10;
             if (pg < 1)
