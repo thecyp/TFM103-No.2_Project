@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Spgateway.Models;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -35,14 +37,22 @@ namespace TwenGo.Controllers
                 HashKey = "7Ybh4jR2L41C3v1JUlax9eduyMBwBxmv",
                 HashIV = "CumZ6y4XhGDUAOVP",
                 ReturnURL = "https://servego.azurewebsites.net/Home/SpgatewayReturn",
-                NotifyURL = "https://servego.azurewebsites.net/Home/SpgatewayNotify",
-                CustomerURL = "http://yourWebsitUrl/Bank/SpgatewayCustomer",
+                NotifyURL = "",
+                CustomerURL = "",
                 AuthUrl = "https://ccore.spgateway.com/MPG/mpg_gateway",
                 CloseUrl = "https://core.newebpay.com/API/CreditCard/Close"
             };
 
 
 
+        }
+
+        public IActionResult PayReturn()
+        {
+
+
+
+            return View();
         }
 
         public IActionResult Index()
@@ -187,7 +197,6 @@ namespace TwenGo.Controllers
             await httpContextAccessor.HttpContext.Response.WriteAsync(s.ToString());
             await httpContextAccessor.HttpContext.Response.CompleteAsync();
             return Content(string.Empty);
-
         }
 
         /// <summary>
@@ -196,8 +205,6 @@ namespace TwenGo.Controllers
         [HttpPost]
         public ActionResult SpgatewayReturn()
         {
-
-
             // Status 回傳狀態 
             // MerchantID 回傳訊息
             // TradeInfo 交易資料AES 加密
@@ -223,11 +230,16 @@ namespace TwenGo.Controllers
                 var changeOId = _context.Orders.FirstOrDefault(x => (x.Id.ToString() == convertModel.MerchantOrderNo) && (!x.isPaid)).isPaid=true;
                 _context.SaveChanges();
 
-
-                return View(convertModel);
+                return RedirectToAction("SpgatewayReturnView", convertModel);
             }
 
             return Content("交易失敗! 請重新嘗試付款!");
+        }
+
+
+        public ActionResult SpgatewayReturnView(SpgatewayOutputDataModel data)
+        {
+            return View(data);        
         }
     }
 

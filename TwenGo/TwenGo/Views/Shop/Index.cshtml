@@ -2,22 +2,266 @@
 @{
     ViewData["Title"] = "搜尋結果";
 }
-<h2>搜尋結果</h2>
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Shop</title>
 
-<div class="section pt-7 pb-7">
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-            <div class="col-md-4">
-                <img src="@item.PicturePath" class="card-img-top" style="width:340px;height:220px">
-                <div class="card-body">
-                    <h5 class="card-title">產品名稱:@item.ProductName</h5>
-                    <p class="card-text">優惠價:@item.Price</p>
-                    <a href="/shop/introduce?id=@item.Id" class="btn btn-dark">產品介紹</a>
-                </div>
-            </div>
-            }
-        </div>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/ionicons.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/owl.theme.css" type="text/css" media="all">
+    <link rel='stylesheet' href='css/prettyPhoto.css' type='text/css' media='all'>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/custom.css" type="text/css" media="all">
+    <link href="http://fonts.googleapis.com/css?family=Great+Vibes%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="menu-slideout" class="slideout-menu hidden-md-up">
+        <div class="mobile-menu">
+            <ul id="mobile-menu" class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About us</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="shop-list.html">Shop List</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
         </div>
     </div>
+    <div class="site">
+
+        <div id="main">
+
+            <div class="section border-bottom pt-2 pb-2">
+                <div class="container">
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9  col-md-push-3">
+                <div class="shop-filter">
+                    <div class="col-md-12">
+                        @*<div id="app" class="shop-filter-right">
+                            <input type="submit" class="btnprice btn btn-outline-success" value="最熱門" />
+                            <input type="submit" class="btnprice btn btn-outline-success" value="最新上架" />
+                            <input type="submit" class="btnprice btn btn-outline-success" value="價錢由高至低" />
+                            <input type="submit" class="btnprice btn btn-outline-success" value="價錢由低至高" />
+                        </div>*@
+                    </div>
+                </div>
+                <div class="category-carousel-2 mb-3" data-auto-play="true" data-desktop="3" data-laptop="3" data-tablet="2" data-mobile="1">
+                    <div class="cat-item">
+                        <div class="cats-wrap" data-bg-color="#f8c9c2">
+                            <a href="#">
+                                <img src="images/shop/新增/打掃2.jpg" alt="" />
+                                <h2 class="category-title">
+                                    打掃 <mark class="count">(2)</mark>
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cat-item">
+                        <div class="cats-wrap" data-bg-color="#ebd3c3">
+                            <a href="#">
+                                <img src="images/shop/新增/狗1.jpg" alt="" />
+                                <h2 class="category-title">
+                                    遛狗 <mark class="count">(4)</mark>
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cat-item">
+                        <div class="cats-wrap" data-bg-color="#c6e6f6">
+                            <a href="#">
+                                <img src="images/shop/新增/接送.jpg" alt="" />
+                                <h2 class="category-title">
+                                    接送 <mark class="count">(1)</mark>
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cat-item">
+                        <div class="cats-wrap" data-bg-color="#e0d1a1">
+                            <a href="#">
+                                <img src="~/images/shop/新增/洗衣.jpg" alt="" />
+                                <h2 class="category-title">
+                                    洗衣 <mark class="count">(6)</mark>
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 col-sm-6 product-item text-center mb-3">
+                            <div class="product-thumb">
+                                <a href="/shop/introduce?id=@item.Id">
+                                    <div class="badges">
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                    <img src="@item.PicturePath" alt="" style="width:220px;height:160px;" />
+                                </a>
+
+                            </div>
+                            <div class="product-info">
+                                <a href="/shop/introduce?id=@item.Id">
+                                    <h2 class="title">@item.ProductName</h2>
+                                    <span class="price">
+                                        <ins>$@item.Price</ins>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="pagination">
+                    <a class="prev page-numbers" href="#">Prev</a>
+                    <a class="page-numbers current" href="#">1</a>
+                    <a class="next page-numbers" href="#">Next</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-md-pull-9">
+                <div class="sidebar">
+                    <div class="widget widget-product-categories">
+                        <h3 class="widget-title">服務分類</h3>
+                        <ul class="product-categories">
+                            <li><a href="#">遛狗</a> <span class="count">6</span></li>
+                            <li><a href="#">接送</a> <span class="count">5</span></li>
+                            <li><a href="#">洗衣</a> <span class="count">6</span></li>
+                            <li><a href="#">購物</a> <span class="count">6</span></li>
+                        </ul>
+                    </div>
+                    <div class="widget widget_price_filter">
+                        <h3 class="widget-title">價錢範圍</h3>
+                        <div class="price_slider_wrapper">
+                            <div class="price_slider" style="display:none;"></div>
+                            <div class="price_slider_amount">
+                                @using (Html.BeginForm())
+                                {
+                                    <input type="text" name="searchString" value="@ViewBag.searchText" hidden/>
+                                    <input type="text" id="min_price" name="min" value="" data-min="0" placeholder="Min price">
+                                    <input type="text" id="max_price" name="max" value="" data-max="2999" placeholder="Max price">
+                                    <button type="submit" class="button">篩選</button>
+                                }
+                                <div class="price_label" style="display:none;">
+                                    價錢: <span class="from"></span> &mdash; <span class="to"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget widget-products">
+                        <h3 class="widget-title">相關服務</h3>
+                        <ul class="product-list-widget">
+                            <li>
+                                <a href="shop-detail.html">
+                                    <img src="images/shop/新增/狗1.jpg" alt="" />
+                                    <span class="product-title">遛狗</span>
+                                </a>
+                                <ins>$12.00</ins>
+                            </li>
+                            <li>
+                                <a href="shop-detail.html">
+                                    <img src="images/shop/新增/接送.jpg" alt="" />
+                                    <span class="product-title">機場接送</span>
+                                </a>
+                                <ins>$9.00</ins>
+                            </li>
+                            <li>
+                                <a href="shop-detail.html">
+                                    <img src="images/shop/新增/洗衣.jpg" alt="" />
+                                    <span class="product-title">洗衣</span>
+                                </a>
+                                <ins>$15.00</ins>
+                            </li>
+                            <li>
+                                <a href="shop-detail.html">
+                                    <img src="images/shop/新增/打掃.jpg" alt="" />
+                                    <span class="product-title">打掃</span>
+                                </a>
+                                <ins>$35.00</ins>
+                            </li>
+                            <li>
+                                <a href="shop-detail.html">
+                                    <img src="images/shop/新增/購物.jpg" alt="" />
+                                    <span class="product-title">購物</span>
+                                </a>
+                                <ins>$12.00</ins>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget widget-tags">
+                        <h3 class="widget-title">標籤</h3>
+                        <div class="tagcloud">
+                            <a href="#">購物</a> <a href="#">打掃</a> <a href="#">接送</a> <a href="#">洗衣</a> <a href="#">陪伴</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/modernizr-2.7.1.min.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.countdown.min.js"></script>
+    <script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
+    <script type='text/javascript' src='js/jquery.prettyPhoto.init.min.js'></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <script type="text/javascript" src="js/core.min.js"></script>
+    <script type="text/javascript" src="js/widget.min.js"></script>
+    <script type="text/javascript" src="js/mouse.min.js"></script>
+    <script type="text/javascript" src="js/slider.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.js"></script>
+    <script type="text/javascript" src="js/price-slider.js"></script>
+</body>
+</html>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            products: []
+        },mounted: function(){
+            fetch("/products")
+                .then(res => res.json())
+                .then(data => this.products = data)
+                .catch(err => console.log(err.message))
+        },
+        methods: {
+            mapping: function () {
+
+            }
+        }
+    })
+</script>
+
+
+<style>
+    .btnprice {
+        /*float: left;*/
+        /*   display: inline*/
+    }
+
+    .shop-filter-right {
+        display: inline-block
+    }
+</style>

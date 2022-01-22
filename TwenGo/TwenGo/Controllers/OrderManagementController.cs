@@ -32,7 +32,34 @@ namespace TwenGo.Controllers
             var user = await this._userManager.GetUserAsync(HttpContext.User);
 
             // filter orders by user
-            List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id).ToList();
+            List<Order> orders = _context.Orders.Where(m=>m.UserId==user.Id && m.isPaid == false).ToList();
+
+            const int pageSize = 10;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = orders.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+      
+            var list = (from order in orders
+                       where order.UserId == user.Id
+                       where order.isPaid ==false
+                       select order).Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
+            return View(list);
+        }
+
+        public async Task<IActionResult> HistoryOrderAsync(int pg = 1)
+        {
+            // get logined user
+            var user = await this._userManager.GetUserAsync(HttpContext.User);
+
+            // filter orders by user
+            List<Order> orders = _context.Orders.Where(m => m.UserId == user.Id && m.isPaid==true).ToList();
 
             const int pageSize = 10;
             if (pg < 1)
@@ -44,8 +71,9 @@ namespace TwenGo.Controllers
 
 
             var list = (from order in orders
-                       where order.UserId == user.Id
-                       select order).Skip(recSkip).Take(pager.PageSize).ToList();
+                        where order.UserId == user.Id
+                        where order.isPaid == true
+                        select order).Skip(recSkip).Take(pager.PageSize).ToList();
 
             this.ViewBag.Pager = pager;
 

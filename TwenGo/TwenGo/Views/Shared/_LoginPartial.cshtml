@@ -10,63 +10,24 @@
     var principal = new ClaimsPrincipal(identity);
 }
 
-
 <div class="dropdown">
     <div class="topbar-menu">
-        @if (principal.IsInRole("Customer"))
+        @if (User.IsInRole("Customer"))
         {
-            <nav>
-                <ul>
-                    <li>
-                        <a id="title" class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a>
-                        <ul>
-                            <li><a asp-controller="UserCenter" asp-action="">會員中心</a></li>
-                            <li><a asp-controller="OrderManagement" asp-action="index">訂單管理</a></li>
-                            <li>
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">登出</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        
-            <div class="accordion accordion-flush open" id="accordion_M">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed btn-dark" style="width:130px;font-size:10px;" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            會員功能
-                        </button>
-                    </h2>
-                    <div id="flush-collapse_M" class="accordion-collapse collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul>
-                                <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
-                                <li><a asp-controller="UserCenter" asp-action="">會員中心</a></li>
-                                <li><a asp-controller="OrderManagement" asp-action="index">訂單管理</a></li>
-                                <li>
-                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="nav-link btn btn-link text-dark">登出</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <ul>
+                                    <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
+                                    <li><a asp-controller="UserCenter" asp-action="">會員中心</a></li>
+                                    <li><a asp-controller="OrderManagement" asp-action="index">訂單管理</a></li>
+                                    <li>
+                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                            <button type="submit" class="nav-link btn btn-link text-dark">登出</button>
+                                        </form>
+                                    </li>
+                                </ul>
+              
         }
-        else if (principal.IsInRole("Administrator"))
+        else if (User.IsInRole("Administrator"))
         {
-            <div class="accordion accordion-flush open" id="accordion_A">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed btn-dark" style="width:130px;font-size:10px" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            管理員功能
-                        </button>
-                    </h2>
-                    <div id="flush-collapse_A" class="accordion-collapse collapse open" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
                             <ul>
                                 <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
                                 <li><a asp-controller="Management" asp-action="Index">訂單管理</a></li>
@@ -79,15 +40,10 @@
                                     </form>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         }
         else
         {
             <ul>
-                <li><a asp-area="" asp-controller="UserCenter" asp-action="Index">會員中心</a></li>
                 <li><a asp-area="" asp-controller="Login" asp-action="Index">登入</a></li>
                 <li><a asp-area="" asp-controller="Member" asp-action="CustomerRegister">註冊</a></li>
             </ul>
@@ -110,89 +66,3 @@
     })
 </script>
 
-<style>
-    #title {
-    }
-
-
-    nav ul {
-        border-radius: 10px;
-        background: linear-gradient(to bottom,#efefef,#bbbbbb);
-        /*padding:10px;*/
-        display: inline-table;
-        position: relative;
-        box-shadow: 1px 1px 3px #666;
-        list-style: none;
-    }
-
-        nav ul ul {
-            display: none;
-            list-style: none;
-        }
-
-        nav ul li {
-            float: left;
-            list-style: none;
-        }
-
-        nav ul::after {
-            display: block;
-            clear: both;
-            list-style: none;
-        }
-
-        nav ul li a {
-            display: block;
-            padding: 10px 10px;
-            /*text-decoration: none;*/
-            font-family: "微軟雅黑";
-        }
-
-        nav ul li:hover > ul {
-            display: block;
-            list-style: none;
-        }
-
-        nav ul li:hover {
-            background: linear-gradient(to bottom,#efefef,#bbbbbb);
-            list-style: none;
-        }
-
-            nav ul li:hover a {
-                color: #000;
-            }
-
-        nav ul ul {
-            border-radius: 0;
-            /*position: absolute;*/
-            top: 100%;
-            padding: 0;
-            list-style: none;
-        }
-
-            nav ul ul li {
-                float: none;
-                /*border-top: 1px solid #6b727c;
-                    border-bottom: 1px solid #575f6a;*/
-                list-style: none;
-            }
-
-                nav ul ul li a {
-                    color: #FFF;
-                }
-
-
-                    nav ul ul li a:hover {
-                        background: #efefef;
-                    }
-
-    /*   nav ul ul ul {
-                    width: 100%;
-                    position: absolute;
-                    left: 100%;
-                    top: 50%;
-                    list-style: none;
-                }*/
-
-
-</style>

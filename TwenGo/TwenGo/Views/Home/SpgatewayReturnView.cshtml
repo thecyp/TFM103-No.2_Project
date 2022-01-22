@@ -1,0 +1,83 @@
+﻿@model Spgateway.Models.SpgatewayOutputDataModel
+
+@{
+    ViewData["Title"] = "交易成功!";
+}
+<div>
+    <div id="content">
+        <div class="notify successbox">
+            <h1>交易成功!</h1><br />
+            <span class="alerticon"><img src="~/images/success.jpg" style="width:100px" alt="checkmark" /></span><br />
+        </div>
+
+        <table class="table table-hover" style="width: 50%; margin: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <th scope="row">總金額</th>
+                    <td>@Html.DisplayFor(model => model.Amt)</td>
+                </tr>
+                <tr>
+                    <th scope="row">交易編號</th>
+                    <td>@Html.DisplayFor(model => model.TradeNo)</td>
+                </tr>
+                <tr>
+                    <th scope="row">訂單編號</th>
+                    <td>@Html.DisplayFor(model => model.MerchantOrderNo)</td>
+                </tr>
+                <tr>
+                    <th scope="row">支付方式</th>
+                    <td>@Html.DisplayFor(model => model.PaymentType)</td>
+                </tr>
+                <tr>
+                    <th scope="row">交易時間</th>
+                    <td>@Html.DisplayFor(model => model.PayTime)</td>
+                </tr>
+                @if (Model.Card4No != null)
+                {
+                    <tr>
+                        <th scope="row">交易信用卡號末4碼</th>
+                        <td>@Html.DisplayFor(model => model.Card4No)</td>
+                    </tr>
+                }
+                @if (Model.PayBankCode != null)
+                {
+                    <tr>
+                        <th scope="row">付款銀行代碼</th>
+                        <td>@Html.DisplayFor(model => model.PayBankCode)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">付款帳戶末五碼</th>
+                        <td>@Html.DisplayFor(model => model.PayerAccount5Code)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    #content {
+        text-align: center;
+        display: block;
+        width: 100%;
+        background: #fff;
+        padding: 25px 20px;
+        padding-bottom: 15px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    }
+
+    dt, dd {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+
+    #Box {
+        margin: auto;
+        width: 50%;
+        padding: 100px;
+    }
+</style>
