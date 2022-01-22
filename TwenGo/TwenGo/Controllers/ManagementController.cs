@@ -29,7 +29,7 @@ namespace TwenGo.Controllers
         public IActionResult Index(int pg=1)
         {
 
-            List<Order> orders = _context.Orders.ToList();
+            List<Order> orders = _context.Orders.Where(m=>m.isPaid==false).ToList();
             
             const int pageSize = 10;
             if (pg < 1)
@@ -39,15 +39,41 @@ namespace TwenGo.Controllers
             var pager = new Pager(recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
 
-            var data = orders.Skip(recSkip).Take(pager.PageSize).ToList();
+            //var data = orders.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            var list = (from order in orders
+                        //where order.isPaid == false
+                        select order).Skip(recSkip).Take(pager.PageSize).ToList();
 
             this.ViewBag.Pager = pager;
 
             //return View(orders);
-            return View(data);
+            return View(list);
         }
 
- 
+        public IActionResult HistoryOrder(int pg = 1)
+        {
+
+            List<Order> orders = _context.Orders.Where(m => m.isPaid == true).ToList();
+
+            const int pageSize = 10;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = orders.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+
+            var list = (from order in orders
+                        //where order.isPaid == true
+                        select order).Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
+            return View(list);
+        }
+
 
         public async Task<IActionResult> DetailsAsync(int? Id)
         {

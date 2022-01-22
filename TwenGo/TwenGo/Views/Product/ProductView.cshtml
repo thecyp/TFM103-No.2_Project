@@ -63,8 +63,8 @@
                     <div>
                         <label>上傳圖片</label>
                         <br />
-                        <img id="img" :src="put.picturePath" />
-                        <input type="file" name="img" v-on:change="updatePath"/>
+                        <img id="demo"  :src="put.picturePath" />
+                        <input id="uploadimg" type="file" name="img" v-on:change="updatePath"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -76,15 +76,6 @@
     </form>
 </div>@*#app*@
 
-
-@*<script>
-        $(window).ready(() => {
-            $('#myModal').modal("hide");
-            //})
-            //function show() {
-            //    $('#myModal').modal();
-            //}
-    </script>*@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
     body {
@@ -103,13 +94,6 @@
         z-index: -1;
     }
 
-    /*.modal.fade .modal-dialog {
-            transform: translateY(10vh);
-        }
-
-        .modal.show .modal-dialog {
-            transform: translateY(0);
-        }*/
     .modal-backdrop {
         z-index: 0;
     }
@@ -177,10 +161,13 @@
                 data.append('Address', this.put.address);
                 data.append('Description', this.put.description);
                 data.append('Price', this.put.price);
-                data.append('img', this.put.img[0]);
+                if (this.put.img != undefined) {
+                    data.append('img', this.put.img[0]);
+                }
+                
                 var q = confirm("確定要更新服務資料?")
                 if (q) {
-                    fetch("/products/" + id, {
+                    fetch("/products/"+id, {
                         method: 'PUT',
                         body: data
                     }).then(res => {
@@ -188,10 +175,16 @@
                     })
                     alert("更新成功")
                 }//if
-                else {
-                }
-                $('#myModal').modal("hide");
             }//edit
         }//methods
     })//vue
+
+    $('#uploadimg').change(function () {
+        var file = $('#uploadimg')[0].files[0];
+        var reader = new FileReader;
+        reader.onload = function (e) {
+            $('#demo').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
 </script>
