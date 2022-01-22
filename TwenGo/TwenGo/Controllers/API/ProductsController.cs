@@ -57,7 +57,7 @@ namespace TwenGo.Controllers.API
         public void Put([FromRoute]int id,[FromForm] LaunchViewModel product)
         {
 
-            var file = product.img[0];
+            var file = product.img.First();
             var combineFileName = $@"{fileRoot}{DateTime.Now.Ticks}{file.FileName}";
             using (var fileStream = System.IO.File.Create($@"{env.WebRootPath}{combineFileName}"))
             {
@@ -74,9 +74,6 @@ namespace TwenGo.Controllers.API
                 edit.Address = product.countyName + product.districtName;
                 edit.PicturePath = combineFileName;
 
-                //var a  = JsonConvert.SerializeObject(product.img)[0];
-
-                //edit.PicturePath =a
                 _context.SaveChanges();
             }
         }
