@@ -181,7 +181,7 @@
                 console.log(data)
                 var q = confirm("確定要更新服務資料?")
                 if (q) {
-                    fetch("/products/" + id, {
+                    fetch("/products/"+id, {
                         method: 'PUT',
                         body: data
                     }).then(res => {

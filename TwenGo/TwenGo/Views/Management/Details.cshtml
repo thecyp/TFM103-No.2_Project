@@ -65,6 +65,7 @@
                 <p>預約地址：@Html.DisplayFor(model => model.ReceiverAddress)</p>
             </div>
             <div class="col-5">
+                <p>訂單備註：@Html.DisplayFor(model => model.Memo)</p>
                 <p>
                     訂單狀態：
                     @if (@Model.isPaid)
