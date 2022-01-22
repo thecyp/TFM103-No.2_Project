@@ -60,7 +60,7 @@ namespace TwenGo.Controllers
             var success = JsonConvert.DeserializeObject<JObject>(json).Value<bool>("success");
             if (!success)
             {
-                return View();
+                return RedirectToAction("Index", "Login");
 
             }
             // TODO: 檢查帳號密碼
@@ -70,11 +70,14 @@ namespace TwenGo.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
 
 
-
-            return RedirectToAction("Index");
+            
         }
 
         [Authorize(Roles = "Customer")]
