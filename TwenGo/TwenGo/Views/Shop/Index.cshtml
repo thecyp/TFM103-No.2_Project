@@ -26,10 +26,6 @@
     <![endif]-->
 </head>
 <body>
-
-
-
-
     <div id="menu-slideout" class="slideout-menu hidden-md-up">
         <div class="mobile-menu">
             <ul id="mobile-menu" class="menu">
@@ -57,13 +53,12 @@
             <div class="col-md-9  col-md-push-3">
                 <div class="shop-filter">
                     <div class="col-md-12">
-                        <div id="app" class="shop-filter-right">
-
+                        @*<div id="app" class="shop-filter-right">
                             <input type="submit" class="btnprice btn btn-outline-success" value="最熱門" />
                             <input type="submit" class="btnprice btn btn-outline-success" value="最新上架" />
                             <input type="submit" class="btnprice btn btn-outline-success" value="價錢由高至低" />
                             <input type="submit" class="btnprice btn btn-outline-success" value="價錢由低至高" />
-                        </div>
+                        </div>*@
                     </div>
                 </div>
                 <div class="category-carousel-2 mb-3" data-auto-play="true" data-desktop="3" data-laptop="3" data-tablet="2" data-mobile="1">
@@ -155,9 +150,13 @@
                         <div class="price_slider_wrapper">
                             <div class="price_slider" style="display:none;"></div>
                             <div class="price_slider_amount">
-                                <input type="text" id="min_price" name="min_price" value="" data-min="0" placeholder="Min price">
-                                <input type="text" id="max_price" name="max_price" value="" data-max="2999" placeholder="Max price">
-                                <button type="submit" class="button">篩選</button>
+                                @using (Html.BeginForm())
+                                {
+                                    <input type="text" name="searchString" value="@ViewBag.searchText" hidden/>
+                                    <input type="text" id="min_price" name="min" value="" data-min="0" placeholder="Min price">
+                                    <input type="text" id="max_price" name="max" value="" data-max="2999" placeholder="Max price">
+                                    <button type="submit" class="button">篩選</button>
+                                }
                                 <div class="price_label" style="display:none;">
                                     價錢: <span class="from"></span> &mdash; <span class="to"></span>
                                 </div>
@@ -246,6 +245,11 @@
                 .then(res => res.json())
                 .then(data => this.products = data)
                 .catch(err => console.log(err.message))
+        },
+        methods: {
+            mapping: function () {
+
+            }
         }
     })
 </script>

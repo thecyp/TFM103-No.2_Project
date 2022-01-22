@@ -18,16 +18,19 @@ namespace TwenGo.Controllers
         {
             _context = twenGoContext;
         }
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString,int? min,int? max)
         {
-
-            var products = from p in _context.Products
-                           select p;
-            if (!string.IsNullOrEmpty(searchString))
+            var query = _context.Products.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(searchString))
             {
-                products = products.Where(s => s.ProductName.Contains(searchString));
+                query = query.Where(x => x.ProductName.Contains(searchString));
             }
-            return View(await products.ToListAsync());
+            if (min.HasValue && max.HasValue)
+            {
+                query = query.Where(x => x.Price > min.Value && x.Price <= max.Value);
+            }
+            ViewBag.searchText = searchString;
+            return View(await query.ToListAsync());
         }
 
         public ActionResult Introduce(int id)
