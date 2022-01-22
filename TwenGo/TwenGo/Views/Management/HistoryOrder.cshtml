@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<TwenGo.Models.Order>
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "訂單總覽";
 
     Pager pager = new Pager();
     int pageNo = 0;
@@ -12,14 +11,7 @@
     }
 }
 
-<style>
-    #isPaid {
-    }
-</style>
-
-
-@*訂單管理*@
-
+@*管理者*@
 
 <div class="section border-bottom pt-2 pb-2">
     <div class="container">
@@ -39,21 +31,21 @@
     <h4>訂單管理</h4>
     <p></p>
 </div>
-
 <hr />
+
 <ul class="nav nav-tabs" role="tablist">
     <li>
-        <a class="btn btn-outline-success" asp-controller="OrderManagement" asp-action="Index">目前訂單</a>
+        <a class="btn btn-outline-success" asp-controller="Management" asp-action="Index">目前訂單</a>
     </li>
     <li>
-        <a class="btn btn-success" asp-controller="OrderManagement" asp-action="HistoryOrder">歷史訂單</a>
+        <a class="btn btn-success" asp-controller="Management" asp-action="HistoryOrder">歷史訂單</a>
     </li>
 </ul>
+
+
+
 <p>第@(pager.CurrentPage)頁</p>
 <div class="container">
-
-
-
     <div class="tab-pane active" id="home">
         <table class="table table-success table-striped">
             <thead>
@@ -79,6 +71,9 @@
                     <th>
                         @Html.DisplayName("訂單資訊")
                     </th>
+                    <th>
+                        @Html.DisplayName("訂單刪除")
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -97,24 +92,26 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ReceiverName)
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Total)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.isPaid)*@
+                        @*@Html.DisplayFor(modelitem => item.isPaid)*@
                         <i class="fa fa-check-square">已付款</i>
                     </td>
 
                     <td>
                         <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
                     </td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i>刪除</a>
+                    </td>
                 </tr>
                 }
             </tbody>
         </table>
     </div>
-
-
 </div>
 
 
@@ -126,17 +123,17 @@
             @if (pager.CurrentPage > 0)
             {
                 <li class="page-item">
-                    <a class="btn btn-dark" asp-controller="OrderManagement" asp-action="HistoryOrder" asp-route-pg="1" )">第一頁</a>
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="HistoryOrder" asp-route-pg="1">第一頁</a>
                 </li>
                 <li class="page-item">
-                    <a class="btn btn-dark" asp-controller="OrderManagement" asp-action="HistoryOrder" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="HistoryOrder" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
                 </li>
             }
 
             @for (var pge = pager.StartPage + 1; pge <= pager.EndPage; pge++)
             {
                 <li class="page-item @(pge==pager.CurrentPage? "active":"")">
-                    <a class="btn btn-dark" asp-controller="OrderManagement" asp-action="HistoryOrder" asp-route-pg="@pge">@pge</a>
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="HistoryOrder" asp-route-pg="@pge">@pge</a>
                 </li>
             }
 
@@ -144,17 +141,18 @@
             @if (pager.CurrentPage < pager.EndPage)
             {
                 <li class="page-item">
-                    <a class="btn btn-dark" id="next" asp-controller="OrderManagement" asp-action="HistoryOrder" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
+                    <a class="btn btn-dark" id="next" asp-controller="Management" asp-action="HistoryOrder" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
                 </li>
             }
             else { }
             <li class="page-item">
-                <a class="btn btn-dark" asp-controller="OrderManagement" asp-action="HistoryOrder" asp-route-pg="@(pager.EndPage)">最後一頁</a>
+                <a class="btn btn-dark" asp-controller="Management" asp-action="HistoryOrder" asp-route-pg="@(pager.EndPage)">最後一頁</a>
             </li>
 
         </ul>
     }
 </div>
+
 
 
 <style>
@@ -174,15 +172,9 @@
         z-index: -1;
     }
 
-    /*.modal.fade .modal-dialog {
-            transform: translateY(10vh);
-        }
-
-        .modal.show .modal-dialog {
-            transform: translateY(0);
-        }*/
-
     .modal-backdrop {
         z-index: 0;
     }
 </style>
+
+

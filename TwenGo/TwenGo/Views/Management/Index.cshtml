@@ -33,6 +33,17 @@
 </div>
 <hr />
 
+<ul class="nav nav-tabs" role="tablist">
+    <li>
+        <a class="btn btn-success" asp-controller="Management" asp-action="Index">目前訂單</a>
+    </li>
+    <li>
+        <a class="btn btn-outline-success" asp-controller="Management" asp-action="HistoryOrder">歷史訂單</a>
+    </li>
+</ul>
+
+
+
 <p>第@(pager.CurrentPage)頁</p>
 <div class="container">
     <div class="tab-pane active" id="home">
@@ -41,6 +52,9 @@
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayName("訂單編號")
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UserName)
@@ -65,32 +79,35 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderDate)
-                        </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiverName)
+                    </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReceiverName)
-                        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.isPaid)*@
+                        <i class="fa fa-remove">未付款</i>
+                    </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Total)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.isPaid)
-                        </td>
-
-                        <td>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-remove"></i>刪除</a>
-                        </td>
-                    </tr>
+                    <td>
+                        <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-list-ul"></i>訂單資訊</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i>刪除</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -101,38 +118,38 @@
 <div class="cotainer">
     @if (pager.TotalPages > 0)
     {
-    <ul class="pagination justify-content-end">
+        <ul class="pagination justify-content-end">
 
-        @if (pager.CurrentPage > 0)
-        {
+            @if (pager.CurrentPage > 0)
+            {
+                <li class="page-item">
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="1">第一頁</a>
+                </li>
+                <li class="page-item">
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage + 1; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge==pager.CurrentPage? "active":"")">
+                    <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+
+
+            @if (pager.CurrentPage < pager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="btn btn-dark" id="next" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
+                </li>
+            }
+            else { }
             <li class="page-item">
-                <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="1">第一頁</a>
+                <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.EndPage)">最後一頁</a>
             </li>
-            <li class="page-item">
-                <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">前一頁</a>
-            </li>
-        }
 
-        @for (var pge = pager.StartPage + 1; pge <= pager.EndPage; pge++)
-        {
-            <li class="page-item @(pge==pager.CurrentPage? "active":"")">
-                <a class="btn btn-dark"  asp-controller="Management" asp-action="Index" asp-route-pg="@pge">@pge</a>
-            </li>
-        }
-
-
-        @if (pager.CurrentPage < pager.EndPage)
-        {
-            <li class="page-item">
-                <a class="btn btn-dark" id="next" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">下一頁</a>
-            </li>
-        }
-        else { }
-        <li class="page-item">
-            <a class="btn btn-dark" asp-controller="Management" asp-action="Index" asp-route-pg="@(pager.EndPage)">最後一頁</a>
-        </li>
-
-    </ul>
+        </ul>
     }
 </div>
 
