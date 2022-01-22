@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<TwenGo.Models.Repository.Entity.Users>
-
 @*<div id="app">*@
-
 <div class="container">
 
     <div class="tab-pane active" id="home">
@@ -21,7 +19,7 @@
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.RealName)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
+                        @*<button id="btnRealName" class="btn btn-light"><img src="~/images/circle_edit_line_pen_design_icon.png"></button>*@
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
@@ -29,7 +27,6 @@
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.Email)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
@@ -37,8 +34,6 @@
                             <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.IdentityNumber)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
-                        <button><img src="~/images/circle_edit_line_pen_design_icon.png"></button>
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
@@ -46,7 +41,6 @@
                             <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.City)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
@@ -54,7 +48,6 @@
                             <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.Town)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
@@ -62,20 +55,22 @@
                             <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                         </div>
                         <input class="form-control" value="@Html.DisplayFor(modelItem => item.Address)" disabled="disabled" />
-                        <a href="#"><img src="~/images/circle_edit_line_pen_design_icon.png" /></a>
                     </div> <!-- form-group// -->
-        
-                    <br />
 
-                    <div class="form-group" style="padding-left:300px">
-                        <button type="submit" class="btn">訂單管理</button>
-                    </div> <!-- form-group// -->
                 </form>
             </article>
         </div> <!-- card.// -->
         }
     </div>
 </div>
+
+<script>
+    var real = document.getElementById("btnRealName")
+    real.addEventListener("click", function{
+        alert("123")
+    })
+
+</script>
 
             <style>
                 .divider-text {
