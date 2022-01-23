@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -196,7 +197,6 @@ namespace TwenGo.Controllers
             await httpContextAccessor.HttpContext.Response.WriteAsync(s.ToString());
             await httpContextAccessor.HttpContext.Response.CompleteAsync();
             return Content(string.Empty);
-
         }
 
         /// <summary>
@@ -230,11 +230,16 @@ namespace TwenGo.Controllers
                 var changeOId = _context.Orders.FirstOrDefault(x => (x.Id.ToString() == convertModel.MerchantOrderNo) && (!x.isPaid)).isPaid=true;
                 _context.SaveChanges();
 
-
-                return View(convertModel);
+                return RedirectToAction("SpgatewayReturnView", convertModel);
             }
 
             return Content("交易失敗! 請重新嘗試付款!");
+        }
+
+
+        public ActionResult SpgatewayReturnView(SpgatewayOutputDataModel data)
+        {
+            return View(data);        
         }
     }
 
