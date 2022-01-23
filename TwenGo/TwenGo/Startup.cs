@@ -33,10 +33,8 @@ namespace TwenGo
             services.AddDbContext<TwenGoContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
-
+                       
            
-            services.AddControllersWithViews();
-
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
                
