@@ -1,5 +1,7 @@
 ﻿@page
 @model TwenGo.Areas.Identity.Pages.Account.LoginModel
+@using Microsoft.Extensions.Options
+@*@using GoogleRecaptchaMvc*@
 
 <style>
 
@@ -126,7 +128,7 @@
     }
 </style>
 
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <body id="LoginForm">
     <div class="container">
@@ -147,15 +149,11 @@
                         <input name="Password" type="password" class="form-control" id="inputPassword" placeholder="請輸入密碼">
                     </div>
 
-                    @*<div class="form-group" id="Left">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        @Html.DisplayNameFor(m => m.RememberMe)
-                    </label>
-                </div>
-            </div>*@
 
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LdNAy4eAAAAAGZhLjicx_8rZqhWeRaPhhFMgCAa"></div>
+
+                    </div>
 
                     <button type="submit" class="btn btn-primary">登入</button>
                     <br />
@@ -165,13 +163,18 @@
                         </div>
                     </div>
 
+
+
                 </form>
+
+
+
                 <p class="divider-text">
                     <span class="bg-white">OR</span>
                 </p>
-              
-                    
-                <form  asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" }) " method="post">
+
+
+                <form asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" }) " method="post">
                     <button type="submit" class="btn btn-block btn-facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="fab fa-facebook-f"></i>Login in facebook</button>
                 </form>
 
@@ -183,4 +186,10 @@
 
 
 </body>
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
 

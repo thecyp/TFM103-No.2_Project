@@ -12,7 +12,7 @@
 
 <div class="dropdown">
     <div class="topbar-menu">
-        @if (principal.IsInRole("Customer"))
+        @if (User.IsInRole("Customer"))
         {
                                 <ul>
                                     <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
@@ -26,7 +26,7 @@
                                 </ul>
               
         }
-        else if (principal.IsInRole("Administrator"))
+        else if (User.IsInRole("Administrator"))
         {
                             <ul>
                                 <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Home/Index" title="Manage">Hello @User.Identity.Name!</a></li>
@@ -53,16 +53,5 @@
 
 
 
-<script>
-    var down = document.getElementById("accordion_A")
-    down.addEventListener('click', function () {
-        $("#flush-collapse_A").toggle("show")
-    })
-</script>
-<script>
-    var down2 = document.getElementById("accordion_M")
-    down2.addEventListener('click', function () {
-        $("#flush-collapse_M").toggle("show")
-    })
-</script>
+
 

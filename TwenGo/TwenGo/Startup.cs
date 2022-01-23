@@ -34,8 +34,9 @@ namespace TwenGo
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TwenGoConnection")));
 
-
            
+            services.AddControllersWithViews();
+
             services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
                 
                
@@ -76,6 +77,8 @@ namespace TwenGo
                 .AddEntityFrameworkStores<TwenGoContext>()
                 .AddDefaultTokenProviders();
 
+            
+
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddControllersWithViews();
@@ -87,7 +90,7 @@ namespace TwenGo
                 //other properties
             });
             services.AddHttpContextAccessor();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

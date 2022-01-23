@@ -36,6 +36,6 @@ namespace TwenGo.Models.Repository
 
         public DbSet<SpgatewayOutputDataModel> SpgatewayOutputDataModels { get; set; }
 
-
+        
     }
 }
