@@ -65,7 +65,7 @@ namespace TwenGo.Areas.Identity.Pages.Account
             await _emailSender.SendEmailAsync(
                 Input.Email,
                 "驗證你的email",
-                $"開通ServerGo的帳號請按 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>此處</a>.");
+                $"開通ServeGo的帳號請按 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>此處</a>.");
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

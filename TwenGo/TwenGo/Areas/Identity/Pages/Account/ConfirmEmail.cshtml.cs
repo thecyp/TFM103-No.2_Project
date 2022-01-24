@@ -40,7 +40,7 @@ namespace TwenGo.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "您的ServerGo帳號已開通" : "信箱驗證失敗";
+            StatusMessage = result.Succeeded ? "您的ServeGo帳號已開通" : "信箱驗證失敗";
             return Page();
         }
     }

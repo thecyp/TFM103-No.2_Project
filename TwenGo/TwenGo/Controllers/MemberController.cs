@@ -91,7 +91,7 @@ namespace TwenGo.Controllers
                 var userId = await _userManager.GetUserIdAsync(data);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(data);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = "https://servego.azurewebsites.net/Identity/Account/ConfirmEmail?userId=" + userId + "&code=" + code;
+                var callbackUrl = "https://localhost:44390/Identity/Account/ConfirmEmail?userId=" + userId + "&code=" + code;
                 await _emailSender.SendEmailAsync(
                     data.Email,
                     "Email驗證",

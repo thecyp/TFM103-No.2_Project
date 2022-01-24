@@ -60,7 +60,7 @@ namespace TwenGo.Areas.Identity.Pages.Account
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "重設密碼",
-                    $"重設ServerGo密碼請按 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>此處</a>.");
+                    $"重設ServeGo密碼請按 <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>此處</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
